@@ -1,0 +1,142 @@
+ONTOLOGY_VERSION 0.1.0
+
+STATUS DRAFT
+
+OWNER President Cley Duarte
+
+PURPOSE
+
+Define the fundamental categories PACE reasons about, before any physical
+representation exists. Four categories, deliberately kept separate:
+
+Entities have identity independent of any single claim about them, persist
+across time, and can be the subject or object of many independent relations
+and assertions.
+
+Relations connect two entities and carry no content of their own beyond the
+connection and its type.
+
+Assertions are claims of the form (subject, predicate, value, asserted_by,
+as_of, version) attached to exactly one subject entity. An assertion has no
+identity of its own — it is read, not cited.
+
+Representation (file format, folder, naming convention) is excluded from
+this document entirely. See contracts/ for how a given Contract version
+chooses to represent these entities, relations and assertions physically.
+A future representation change must never require changing this ontology.
+
+ENTITY_TYPES
+
+GOVERNED_UNIT
+
+  A project or an organization — the same fundamental type. An
+  organization is simply the root of a hierarchy of governed units, not a
+  separate kind of thing.
+
+  IDENTITY_FIELDS: NAME, SLUG, CREATED_AT
+
+ACTOR
+
+  Whoever asserts, decides, requests or approves — a person or an AI.
+  Persists across many assertions and decisions; referenced by ID, never
+  redefined per statement.
+
+  IDENTITY_FIELDS: NAME, ROLE
+
+  SCOPE: Defined once at the organization's own governed unit, referenced
+  by ID from any project instance. Never duplicated per project.
+
+DECISION
+
+  An atomic recorded judgment. Citable — other entities point at a
+  specific decision (a Release can say it implements Decision X; a later
+  Decision can say it supersedes Decision Y).
+
+  IDENTITY_FIELDS: ID, DATE
+
+RELEASE
+
+  An atomic record of a shipped artifact. Citable.
+
+  IDENTITY_FIELDS: ID, DATE
+
+REQUEST
+
+  A pending, not-yet-crystallized ask, preference or rule. Has its own
+  lifecycle (PENDING, PROMOTED, REJECTED, DEFERRED) and is referenced by
+  whatever it becomes once resolved. The entry point of the future
+  Engineering Requests Matrix / Knowledge Intake.
+
+  IDENTITY_FIELDS: ID, DATE, STATUS
+
+HISTORY_ENTRY
+
+  A narrative record bundling several Decisions/Releases with
+  interpretive context (why, alternatives discarded) that exists nowhere
+  else. Citable, and itself cites other entities.
+
+  IDENTITY_FIELDS: ID, DATE
+
+RELATION_TYPES
+
+BELONGS_TO
+  BETWEEN GOVERNED_UNIT -> GOVERNED_UNIT
+  MEANING A project belongs to an organization.
+
+SUPERSEDES
+  BETWEEN (a versioned assertion) -> (its previous version)
+  MEANING Marks the chain of supersession without erasing history.
+
+IS_CURRENTLY_ACTIVE
+  BETWEEN GOVERNED_UNIT -> a specific version of an assertion sequence
+  MEANING Which version is authoritative right now. Changing this is
+  itself noteworthy enough to usually warrant a HISTORY_ENTRY.
+
+DEPENDS_ON
+  BETWEEN Component -> Component
+  MEANING One component cannot be built or considered valid before
+  another. Used at the PACE repository's own component level (see the
+  separately-maintained Dependency Graph), not inside a project instance.
+
+RESULTS_FROM
+  BETWEEN RELEASE -> DECISION
+  MEANING A shipped artifact traces back to the decision(s) that caused it.
+
+PROMOTED_FROM
+  BETWEEN DECISION | POLICY | PROTOCOL | STANDARD -> REQUEST
+  MEANING Marks that a formal artifact originated from a specific,
+  previously pending request.
+
+CITES
+  BETWEEN HISTORY_ENTRY -> DECISION | RELEASE
+  MEANING A history entry narrates or references specific atomic records.
+
+ASSERTED_BY / APPROVED_BY
+  BETWEEN (any assertion or decision) -> ACTOR
+  MEANING Who made the claim or approved the decision. Never a free-text
+  label — always a reference to an ACTOR entity.
+
+ASSERTION_TYPES
+
+HAS_MISSION, HAS_VISION, HAS_ROADMAP, HAS_CURRENT_SPRINT
+  SUBJECT GOVERNED_UNIT
+  VALUE text content
+  MUTABILITY superseded, never edited in place — every prior value stays
+  NOTE Same assertion type at different points on one volatility
+  spectrum: HAS_MISSION/HAS_VISION change rarely, HAS_ROADMAP
+  occasionally, HAS_CURRENT_SPRINT often. Not four different kinds of
+  knowledge — one kind, four subjects of attention, different churn rates.
+
+HAS_NAME, HAS_SLUG, HAS_SCHEMA_VERSION, HAS_CREATED_AT
+  SUBJECT GOVERNED_UNIT
+  VALUE identity metadata
+  MUTABILITY HAS_SCHEMA_VERSION changes as the instance migrates forward;
+  the rest are permanent once set.
+
+HAS_CONTINUITY_NOTE
+  SUBJECT GOVERNED_UNIT or ACTOR
+  VALUE informal accumulated fact or preference
+  MUTABILITY refined in place, not versioned by discrete jumps — the one
+  assertion type deliberately exempt from the supersession pattern above.
+
+END

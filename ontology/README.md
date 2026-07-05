@@ -1,5 +1,5 @@
 # Ontology
 
-The "nouns" of PACE: the Object Model, object types, and the PDL object graph — what kinds of things exist in PACE (engines, tools, protocols, policies, standards, decisions...).
+The fundamental categories PACE reasons about, independent of any physical representation: Entities, Relations, Assertions.
 
-Nothing implemented yet.
+See [`PACE_ONTOLOGY_0.1.0.pdl`](./PACE_ONTOLOGY_0.1.0.pdl) — status DRAFT.

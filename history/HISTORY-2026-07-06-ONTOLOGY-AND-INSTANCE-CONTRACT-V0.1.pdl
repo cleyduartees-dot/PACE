@@ -1,0 +1,78 @@
+HISTORY_VERSION 1.0.0
+
+TYPE Foundation
+
+STATUS APPROVED
+
+DATE 2026-07-06
+
+TITLE
+
+Ontology 0.1.0 and Instance Contract 0.1.0 defined and written.
+
+WHY
+
+The revised founding roadmap (see the President's 2026-07-06 reorder)
+required the .pace/ instance contract to exist before the Kernel, since
+the Kernel's job — locate and validate an instance — is meaningless
+without an official definition of what a valid instance is. Working
+through that definition surfaced a deeper question first: was the
+contract about to describe a physical folder structure, or the nature of
+the knowledge PACE actually manages? A multi-pass analysis (knowledge
+classes, then entities vs. relations vs. assertions vs. representation)
+concluded the ontological layer must be defined and written down before
+the physical contract, and kept as a separate, more stable artifact that
+the physical contract depends on rather than reinvents.
+
+DECISION
+
+Wrote ontology/PACE_ONTOLOGY_0.1.0.pdl, defining PACE's fundamental
+categories: ENTITY_TYPES (GOVERNED_UNIT — the same type for a project or
+an organization; ACTOR; DECISION; RELEASE; REQUEST; HISTORY_ENTRY),
+RELATION_TYPES (BELONGS_TO, SUPERSEDES, IS_CURRENTLY_ACTIVE, DEPENDS_ON,
+RESULTS_FROM, PROMOTED_FROM, CITES, ASSERTED_BY/APPROVED_BY), and
+ASSERTION_TYPES (HAS_MISSION/HAS_VISION/HAS_ROADMAP/HAS_CURRENT_SPRINT as
+one assertion kind at different churn rates, not four; HAS_NAME/HAS_SLUG/
+HAS_SCHEMA_VERSION/HAS_CREATED_AT; HAS_CONTINUITY_NOTE as the one
+assertion kind that is refined in place rather than superseded).
+
+Wrote contracts/INSTANCE_CONTRACT_0.1.0.pdl on top of that ontology,
+defining the physical .pace/ shape: a root INSTANCE.pdl (the GOVERNED_UNIT
+entity's identity) and ACTIVE_VERSIONS.pdl (the IS_CURRENTLY_ACTIVE
+relation), plus ten sections (mission, vision, roadmap, sprint, history,
+releases, decisions, requests, handoff, memory/generated, memory/
+persistent) each mapped explicitly to the entity/relation/assertion it
+represents, its format, its mutability class, and whether it's required
+at v0.1. Per the President's explicit adjustments this same day: sprint
+is versioned with an active pointer like mission/vision/roadmap, not
+merely mutable; memory is split into generated (regenerable) and
+persistent (protected); requests is a new section for the future
+Engineering Requests Matrix / Knowledge Intake; handoff stays a mandatory
+but empty folder until the Bootstrap/Handoff engine exists; decisions
+stays PDL for consistency.
+
+Two mutability classes ended up covering nearly everything (PROTECTED vs
+REGENERABLE), with requests/ as the one deliberate exception (protected
+core content, but an updatable STATUS/PROMOTED_TO lifecycle field) —
+recorded explicitly in the contract rather than left implicit.
+
+IMPACT
+
+PACE now has a written, versioned definition of what a valid .pace/
+instance is, grounded in an explicit ontology rather than an ad hoc folder
+list. Kernel (the next roadmap step) can be built against this contract
+instead of guessing instance shape as it goes.
+
+NEXT_STEPS
+
+Per the revised roadmap: implement a minimal Kernel capable of locating a
+.pace/ instance and validating it structurally against
+INSTANCE_CONTRACT_0.1.0 (deferring deep/semantic validation to a future
+Doctor engine), then a minimal CLI, then pace init, then adopt TuPeríMetro
+as the first governed project.
+
+APPROVED_BY
+
+President Cley Duarte
+
+END
