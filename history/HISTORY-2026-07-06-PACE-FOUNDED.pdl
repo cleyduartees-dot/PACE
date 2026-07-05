@@ -1,0 +1,33 @@
+HISTORY_VERSION 1.0.0
+
+TYPE Founding
+
+STATUS APPROVED
+
+DATE 2026-07-06
+
+TITLE
+
+PACE founded as an independent product.
+
+WHY
+
+PACE began as an internal experiment living inside TuPeríMetro's own repository (src/core/pace/), but grew into a general-purpose engineering operating system capable of governing many independent projects, not just one. Keeping it embedded inside a single product's codebase meant every improvement to PACE was entangled with that product's own history and build, and any future project adopting PACE would have required copying files instead of installing a shared engine. The President decided to found PACE as its own product: a versioned, installable engine, where each governed project carries only its own .pace/ memory, never a copy of PACE itself.
+
+DECISION
+
+Created the official PACE repository at a location fully separate from any product it will govern (local-only for now, no remote). Founding commit ad401b5 (2026-07-06) established the product's identity: a README stating what PACE is and its 4-level model (PACE / Organización / Instancia / Proyecto), plus the founding roadmap. This entry records the second step of that roadmap: the minimal day-1 skeleton (kernel, services, engines, ontology, protocols, governance, policies, standards, contracts, cli, history, docs), each folder holding only a purpose-statement README — no engine logic, no contract content, no code — deliberately empty until built in dependency order.
+
+IMPACT
+
+PACE now exists as an independent repository, structurally decoupled from any single project's codebase or history. No project has been migrated or attached yet.
+
+NEXT_STEPS
+
+Per the founding roadmap: implement pace init (step 3), then adopt TuPeríMetro as the first project governed by PACE (step 4), then implement pace create (step 5), then create "Plataforma de Mantenimiento" as the first new project born from PACE (step 6).
+
+APPROVED_BY
+
+President Cley Duarte
+
+END
