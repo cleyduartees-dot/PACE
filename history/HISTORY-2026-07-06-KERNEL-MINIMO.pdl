@@ -1,0 +1,74 @@
+HISTORY_VERSION 1.0.0
+
+TYPE Foundation
+
+STATUS APPROVED
+
+DATE 2026-07-06
+
+TITLE
+
+Governance, Protocols and Services filled in for real; minimal Kernel implemented and tested.
+
+WHY
+
+Validating the repository before building the Kernel surfaced two real
+gaps against the Dependency Graph the project itself uses to order its
+own construction: Kernel depends on `contracts` and `services`, but
+`services/` still held only a purpose README. Separately, `ontology` and
+`contracts` had already been written against `governance` and `protocols`
+while those two also still held only purpose READMEs — a retroactive
+dependency gap. Both needed closing before Kernel could honestly be
+called unblocked.
+
+DECISION
+
+Wrote governance/GOVERNANCE_PROTOCOL_0.1.0.pdl (abstract, name-free:
+a root authority role exists, decisions must be traceable, history is
+permanent, every artifact is a versioned object, a request only binds
+once promoted) and protocols/PDL_SPECIFICATION_0.1.0.pdl (the minimal
+flat KEY-VALUE-per-line grammar sufficient to read/write a .pace/
+instance's root manifest files — deliberately scoped to that, not the
+richer nested prose style this repository's own governance/ontology/
+contracts documents use).
+
+Implemented services/pdl.py (parses that grammar) and services/fs.py
+(generic upward directory search, the mechanism Kernel uses to locate
+.pace/ the way Git locates .git/).
+
+Implemented kernel/kernel.py: locate_instance() walks upward for a
+.pace/ directory; validate_instance() checks it structurally against
+contracts/INSTANCE_CONTRACT_0.1.0.pdl — required fields in INSTANCE.pdl
+and ACTIVE_VERSIONS.pdl, ORG_REF required when KIND=PROJECT, SCHEMA_VERSION
+against a supported set, all 11 required sections present, history/
+non-empty, and no code/script file anywhere inside .pace/. Deliberately
+does not attempt semantic validation — that stays the future Doctor
+engine's job.
+
+Built a fixture minimal valid instance under kernel/tests/fixtures/
+example_instance/.pace/ and a smoke test (kernel/tests/test_kernel.py,
+no external test framework dependency) covering: locate from inside the
+instance, locate from a nested subdirectory, a valid fixture reporting
+zero violations, a missing INSTANCE.pdl being caught, and an unsupported
+SCHEMA_VERSION being caught. All 5 assertions verified passing before
+this commit, plus a manual end-to-end run of kernel.py's own entrypoint
+against the fixture.
+
+IMPACT
+
+The Dependency Graph's own rule ("consult it before building any
+component, confirm dependencies have real content, not just a README")
+was actually followed here, not skipped for momentum's sake. Kernel is
+now real, tested code — not a design document — and is the first PACE
+component with actual behavior.
+
+NEXT_STEPS
+
+Per the roadmap: a minimal CLI wrapping the Kernel, then pace init, then
+adopting TuPeríMetro as the first governed project.
+
+APPROVED_BY
+
+President Cley Duarte
+
+END

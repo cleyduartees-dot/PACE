@@ -1,0 +1,32 @@
+GOVERNANCE_PROTOCOL_VERSION 0.1.0
+
+STATUS DRAFT
+
+PURPOSE
+
+Define the minimal, abstract rules of authority and permanence every
+PACE-governed unit follows, independent of who specifically holds any
+role. No organization or person is named here — see that organization's
+own governed-unit instance (its ACTOR entities) for who actually holds
+these roles.
+
+RULES
+
+1  A highest-authority role (ROOT_AUTHORITY) exists for every governed
+   unit's own line of authority. It has final say; PACE agents (AI or
+   otherwise) advise and audit, they never override it.
+
+2  Every significant decision must be traceable to a DECISION or
+   HISTORY_ENTRY entity. No undocumented authority.
+
+3  History is never rewritten. The past is preserved; the future is
+   versioned.
+
+4  Every meaningful artifact PACE manages is a versioned object with its
+   own identity, contract and lifecycle — never an anonymous blob.
+
+5  A request only becomes binding once explicitly promoted (see
+   PROMOTED_FROM in the Ontology). Nothing is binding merely by having
+   been said.
+
+END

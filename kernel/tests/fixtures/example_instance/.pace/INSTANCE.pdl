@@ -1,0 +1,7 @@
+KIND PROJECT
+NAME Example Project
+SLUG example-project
+SCHEMA_VERSION 0.1.0
+ORG_REF example-org
+CREATED_AT 2026-07-06T00:00:00Z
+END

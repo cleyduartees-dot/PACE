@@ -4,4 +4,4 @@ The abstract governance framework of PACE itself: a highest-authority role exist
 
 This folder deliberately names no organization and no person. Who actually holds those roles, and any organization-specific policy, belongs to that organization's own governance instance — never hardcoded here.
 
-Nothing implemented yet.
+See [`GOVERNANCE_PROTOCOL_0.1.0.pdl`](./GOVERNANCE_PROTOCOL_0.1.0.pdl) — status DRAFT.

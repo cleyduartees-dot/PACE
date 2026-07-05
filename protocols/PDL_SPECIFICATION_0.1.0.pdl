@@ -1,0 +1,37 @@
+PDL_SPECIFICATION_VERSION 0.1.0
+
+STATUS DRAFT
+
+SCOPE
+
+This version defines only the minimal flat grammar needed to read and
+write a .pace/ instance's root manifest files (INSTANCE.pdl,
+ACTIVE_VERSIONS.pdl) and similarly flat section files. It does not yet
+formally define the richer nested prose style used by this repository's
+own governance/ontology/contracts documents — those remain human- and
+AI-readable, not machine-parsed, until a future version of this
+specification covers them.
+
+GRAMMAR
+
+A PDL document is a sequence of lines.
+
+A blank line is ignored.
+
+A line that is exactly END marks the end of the document; anything after
+it is ignored.
+
+Any other line is a field: the first space separates KEY from VALUE. KEY
+is everything before the first space; VALUE is everything after, with
+surrounding whitespace trimmed. A line with no space is a field with an
+empty value.
+
+Field order is not significant. If a key repeats, the last occurrence
+wins.
+
+ENCODING
+
+UTF-8. Line endings are not significant — a parser must accept both LF
+and CRLF.
+
+END
