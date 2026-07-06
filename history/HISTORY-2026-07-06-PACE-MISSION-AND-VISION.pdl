@@ -1,0 +1,64 @@
+HISTORY_VERSION 1.0.0
+
+TYPE Foundation
+
+STATUS APPROVED
+
+DATE 2026-07-06
+
+TITLE
+
+PACE's own Mission and Vision written down as versioned artifacts.
+
+WHY
+
+PACE had evolved a mature, clear sense of its own purpose across this
+session's conversation — what problem it solves, who it's for, what it
+governs, what's expected of it — but none of that lived anywhere durable.
+It existed only in chat, which is precisely the failure mode PACE itself
+exists to prevent: knowledge trapped in a conversation, gone the moment
+the conversation is gone.
+
+DECISION
+
+Wrote governance/PACE_MISSION_0.1.0.pdl and governance/PACE_VISION_0.1.0.pdl,
+both STATUS APPROVED. Mission: PACE does for a project's knowledge what
+Git did for its source code — solving engineering knowledge scattered
+across chats, Slack, Notion, documents and people's memory, lost every
+time the team, the AI, or enough time changes. Vision: any AI should be
+able to reconstruct any of PACE's governed projects in minutes, not by
+"remembering" but because the project can explain itself; states six
+concrete expectations (fast AI onboarding, knowledge that never gets
+lost, every AI reconstructing identical context, projects surviving
+decades of team turnover, pace create producing a fully-formed project
+in minutes, and PACE learning continuously).
+
+Updated governance/README.md to clarify that the abstract
+GOVERNANCE_PROTOCOL stays name-free (universal rules), while PACE's own
+Mission/Vision are a different kind of artifact — assertions about
+PACE's own identity — and so, like any Mission/Vision assertion in the
+Ontology, do carry an OWNER.
+
+Noted explicitly in the Vision document: expectation 6 ("PACE learns
+continuously") is not a new capability requirement — it already has a
+home in ontology/PACE_ONTOLOGY_0.1.0.pdl's PROMOTED_FROM relation
+(Decision | Policy | Protocol | Standard <- Request), discovered while
+writing this Vision rather than designed for it. The ontology anticipated
+this before the Vision named it explicitly.
+
+IMPACT
+
+PACE's own purpose is now a durable, versioned artifact instead of
+something that only survives if this conversation is remembered.
+
+NEXT_STEPS
+
+Per the roadmap: a minimal CLI wrapping the Kernel (pace doctor, pace
+context), then pace init, then adopting TuPeríMetro as the first
+governed project.
+
+APPROVED_BY
+
+President Cley Duarte
+
+END

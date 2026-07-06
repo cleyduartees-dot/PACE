@@ -1,0 +1,55 @@
+VISION_VERSION 0.1.0
+
+STATUS APPROVED
+
+OWNER President Cley Duarte
+
+VISION
+
+Five years from now: dozens of independent projects, each with thousands
+of decisions made, thousands of conversations, thousands of documents,
+thousands of changes. With PACE, any AI can arrive tomorrow and
+reconstruct any of them in minutes — not because it "remembers", but
+because the project knows how to explain itself.
+
+WHAT_PACE_GOVERNS
+
+All the engineering knowledge of a project: Mission (why it exists),
+Vision (where it's going), Roadmap (what's missing), Sprint (what's being
+done today), Decisions (why X was decided, why not Y), History (how it
+evolved), Releases (what changed), Requests (what the President asked
+for, what's still pending), Memory (what an AI must remember), Context
+(what someone new needs to know).
+
+EXPECTATIONS
+
+1  Any AI can join a project in minutes, without asking what we're doing,
+   what's missing, or why it was built this way.
+
+2  Knowledge never gets lost again. Every significant discovery becomes
+   official knowledge, not something that stays trapped in a single chat.
+
+3  Every AI works the same way regardless of which one it is — today or
+   in the future — all reconstructing exactly the same context.
+
+4  Projects can last decades, surviving a complete change of the people
+   who started them.
+
+5  New projects get created in minutes: pace create produces a
+   repository, structure, memory, mission, vision, roadmap, contract and
+   governance, all ready to start.
+
+6  PACE learns continuously. Every permanent observation from the
+   President can become, after review and approval, a policy, a
+   protocol, a standard, or a rule of behavior for AIs — see
+   PROMOTED_FROM in ontology/PACE_ONTOLOGY_0.1.0.pdl, which already
+   models exactly this relation.
+
+FINAL_OBJECTIVE
+
+Build an engineering operating system capable of governing the
+knowledge, evolution and collaboration between people and artificial
+intelligences for any project, preserving its memory, its architecture
+and its way of working for its entire life.
+
+END

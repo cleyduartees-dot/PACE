@@ -1,0 +1,24 @@
+MISSION_VERSION 0.1.0
+
+STATUS APPROVED
+
+OWNER President Cley Duarte
+
+MISSION
+
+PACE exists so that people and AIs can work for years across one or
+hundreds of projects without ever losing the knowledge, the context, or
+the correct way of working.
+
+PACE does for a project's knowledge what Git did for its source code.
+
+PROBLEM
+
+Today, engineering knowledge lives scattered across ChatGPT
+conversations, Claude conversations, Slack, Notion, Word documents,
+READMEs, emails, and the architect's own memory. When the AI changes, the
+team changes, or months pass, most of that knowledge disappears — and the
+same question returns every time: "explain the project to me again."
+PACE exists so that never happens again.
+
+END
