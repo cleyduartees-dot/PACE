@@ -1,0 +1,78 @@
+HISTORY_VERSION 1.0.0
+
+TYPE Foundation
+
+STATUS APPROVED
+
+DATE 2026-07-06
+
+TITLE
+
+Minimal CLI implemented: pace init, pace doctor, pace context.
+
+WHY
+
+With Kernel, Services, Protocols and Contracts all real, the Dependency
+Graph unblocked both Engines and CLI. Per the roadmap: a minimal CLI
+wrapping the Kernel, starting with init, doctor and context.
+
+DECISION
+
+Implemented engines/project_creator.py's init_instance(): the Project
+Creator engine's init mode only — attaches a valid, structurally minimal
+.pace/ to an existing project directory. Writes placeholder mission,
+vision, roadmap and sprint content (not just empty folders) precisely
+because contracts/INSTANCE_CONTRACT_0.1.0.pdl's ROOT_MANIFEST requires
+ACTIVE_MISSION/VISION/ROADMAP/SPRINT to be non-empty fields in
+ACTIVE_VERSIONS.pdl — an instance cannot be structurally valid the
+moment it's born unless those pointers already resolve to something
+real.
+
+While testing init_instance() against Doctor, found and fixed a real
+bug: ORG_REF was being treated as unconditionally required (inherited
+straight from the contract loader's flat field list), when the contract
+actually marks it conditionally required — only when KIND=PROJECT,
+absent when KIND=ORGANIZATION. The unconditional check silently
+duplicated and contradicted the already-correct conditional check
+sitting right below it. Caught because
+test_init_organization_kind_does_not_require_org_ref failed on first
+run, not assumed correct.
+
+Implemented cli/pace.py: pace init (wraps init_instance, then runs
+validate_instance and reports if the result isn't clean), pace doctor
+(wraps validate_instance), pace context (reads INSTANCE.pdl and
+ACTIVE_VERSIONS.pdl, prints identity plus the active mission/vision/
+roadmap/sprint content inline). Not yet packaged as a real `pace`
+executable — run as `python cli/pace.py <command>`; packaging is a later
+decision, not part of this minimal CLI.
+
+Verified end-to-end, not just unit-level: ran init -> doctor -> context
+manually against a real temporary directory outside any test fixture,
+confirmed clean output and exit codes. Also replaced a few em dashes in
+CLI/Kernel print statements with plain hyphens after noticing one
+render as a mojibake glyph in this terminal — a small, cheap fix against
+exactly the class of Windows console-encoding bug already known from the
+old system's emoji crashes, applied here proactively instead of waiting
+to be bitten by it again.
+
+Test count: kernel 5, contract loader 4, project creator 4, CLI 3 — 16
+total, all passing before this commit.
+
+IMPACT
+
+PACE can now actually create a governed instance end-to-end from the
+command line and confirm it's valid — the first time any of PACE's own
+tooling has been used through its intended interface rather than called
+as a library function in a test.
+
+NEXT_STEPS
+
+Per the roadmap: adopt TuPeríMetro as the first governed project (step
+7), then implement pace create (step 8), then create the Plataforma de
+Mantenimiento as the first new project born from PACE (step 9).
+
+APPROVED_BY
+
+President Cley Duarte
+
+END

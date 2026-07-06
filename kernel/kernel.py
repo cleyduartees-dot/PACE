@@ -50,7 +50,13 @@ def validate_instance(root: Path) -> list:
         violations.append("missing INSTANCE.pdl")
     else:
         instance = read_pdl(instance_file)
-        required = contract["root_manifest"].get(".pace/INSTANCE.pdl", [])
+        # ORG_REF is excluded here: the contract marks it conditionally
+        # required (only when KIND=PROJECT), not unconditionally like
+        # the other fields — enforced explicitly just below instead.
+        required = [
+            field for field in contract["root_manifest"].get(".pace/INSTANCE.pdl", [])
+            if field != "ORG_REF"
+        ]
         violations += require_fields(instance, required, "INSTANCE.pdl")
         if instance.get("KIND") == "PROJECT" and not instance.get("ORG_REF"):
             violations.append("INSTANCE.pdl KIND=PROJECT requires ORG_REF")
@@ -86,7 +92,7 @@ if __name__ == "__main__":
     print(f"instance located at {root}")
     violations = validate_instance(root)
     if violations:
-        print(f"INVALID — {len(violations)} violation(s):")
+        print(f"INVALID - {len(violations)} violation(s):")
         for v in violations:
             print(f"  - {v}")
         raise SystemExit(1)
