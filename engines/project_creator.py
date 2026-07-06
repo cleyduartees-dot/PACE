@@ -12,6 +12,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from services.contract_loader import load_instance_contract
+from services.version import PACE_VERSION
 
 CONTRACT_PATH = Path(__file__).resolve().parent.parent / "contracts" / "INSTANCE_CONTRACT_0.1.0.pdl"
 CONTRACT_VERSION = "0.1.0"
@@ -59,6 +60,7 @@ def init_instance(
         "NAME": name,
         "SLUG": slug,
         "SCHEMA_VERSION": CONTRACT_VERSION,
+        "PACE_VERSION": PACE_VERSION,
         "CREATED_AT": created_at,
     }
     if org_ref:

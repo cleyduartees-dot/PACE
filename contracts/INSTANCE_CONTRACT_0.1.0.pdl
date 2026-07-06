@@ -31,6 +31,12 @@ ROOT_MANIFEST
     SLUG            (HAS_SLUG)
     SCHEMA_VERSION  (HAS_SCHEMA_VERSION — which Contract version this
                      instance claims to satisfy)
+    PACE_VERSION    (HAS_PACE_VERSION — which PACE engine version
+                     created or last managed this instance. Traceability
+                     only, permanently: the Kernel never decides what it
+                     can open based on this field, only on SCHEMA_VERSION
+                     — the same way a browser interprets HTML by its
+                     declared version, not by which browser authored it)
     ORG_REF         (BELONGS_TO target — required if KIND=PROJECT,
                      absent if KIND=ORGANIZATION)
     CREATED_AT      (HAS_CREATED_AT)

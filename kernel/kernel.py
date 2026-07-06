@@ -23,9 +23,14 @@ from services.validate import (
 
 CONTRACT_PATH = Path(__file__).resolve().parent.parent / "contracts" / "INSTANCE_CONTRACT_0.1.0.pdl"
 
-# Which contract versions THIS Kernel build understands — a property of
-# the installed engine, not something the contract document itself can
-# declare (a v0.1 contract cannot know what future kernels will support).
+# The schema dialects THIS Kernel build knows how to interpret — the way
+# a browser understands a set of HTML versions, not "the one current
+# version, everything else is outdated". Growing this set over time (as
+# PACE adds Contract versions) means the Kernel learns to read more
+# dialects; it does not mean older ones stop being valid. Whether a
+# mismatch means "this instance needs pace migrate" or "this Kernel
+# needs updating" depends on which side is actually behind — the Kernel
+# cannot assume it's always the instance's fault.
 SUPPORTED_SCHEMA_VERSIONS = {"0.1.0"}
 
 # HARD_RULE 2 ("no code, script or executable file") is prose, not a
@@ -63,9 +68,10 @@ def validate_instance(root: Path) -> list:
         schema_version = instance.get("SCHEMA_VERSION")
         if schema_version and schema_version not in SUPPORTED_SCHEMA_VERSIONS:
             violations.append(
-                f"SCHEMA_VERSION {schema_version} not supported by this "
-                f"Kernel (supports {sorted(SUPPORTED_SCHEMA_VERSIONS)}) — "
-                "needs pace migrate, not yet built"
+                f"SCHEMA_VERSION {schema_version} is not understood by "
+                f"this PACE engine (understands: {sorted(SUPPORTED_SCHEMA_VERSIONS)}) "
+                "— either this instance needs pace migrate, or this "
+                "Kernel needs updating; pace migrate is not yet built"
             )
 
     active_versions_file = root / "ACTIVE_VERSIONS.pdl"

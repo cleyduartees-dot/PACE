@@ -1,0 +1,80 @@
+HISTORY_VERSION 1.0.0
+
+TYPE Foundation
+
+STATUS APPROVED
+
+DATE 2026-07-06
+
+TITLE
+
+PACE_VERSION added as traceability metadata; Kernel compatibility model clarified to depend only on SCHEMA_VERSION.
+
+WHY
+
+The President raised the update/compatibility model before it hardened
+into the Contract by accident. Two distinct concerns were at risk of
+being conflated: "which PACE engine version touched this instance"
+(traceability) versus "which Contract shapes can this Kernel correctly
+interpret" (compatibility). Also flagged: a Kernel should behave like a
+browser reading HTML or Git reading old repositories — understanding a
+range of dialects it knows, not treating every non-latest version as
+"outdated" needing forced migration.
+
+DECISION
+
+Added PACE_VERSION (HAS_PACE_VERSION in the Ontology) to
+contracts/INSTANCE_CONTRACT_0.1.0.pdl's ROOT_MANIFEST, explicitly
+documented as traceability only, permanently — the Kernel never gates
+what it can open on this field. Added services/version.py as the single
+source of truth for PACE's own current engine version, consumed by
+engines/project_creator.py when writing a new instance.
+
+Confirmed, by reading the actual code rather than assuming, that the
+Kernel already matched this principle before this session's changes:
+validate_instance() only ever checks that PACE_VERSION is *present*
+(via require_fields), never compares it against anything or uses it to
+decide validity. The only compatibility gate is the SCHEMA_VERSION check
+against SUPPORTED_SCHEMA_VERSIONS. Nothing needed correcting in that
+regard — only the comments and the violation message did, since they
+were written assuming "not supported" always means "the instance is
+outdated," when a mismatch could equally mean the Kernel itself needs
+updating (the same ambiguity a browser has with an unrecognized HTML
+version). Reworded both to be neutral about which side is behind.
+
+Added test_pace_version_mismatch_never_blocks_only_schema_version_does
+to kernel/tests/test_kernel.py — constructs an instance with a
+PACE_VERSION far from the current one but a supported SCHEMA_VERSION,
+and asserts zero violations, proving the principle in code rather than
+only in prose. Updated the existing fixture and the unsupported-version
+test to include PACE_VERSION and to match the reworded message.
+
+"Kernel Version" (the President's term in this discussion) and
+PACE_VERSION are the same concept — no separate field was introduced for
+it. "Instance Version" (a third concept proposed — the instance's own
+version as its memory evolves, distinct from both PACE_VERSION and
+SCHEMA_VERSION) was raised but not encoded: its trigger condition needs
+sharper definition before it becomes a Contract field, and remains open.
+
+All 17 tests (kernel 6, contract loader 4, project creator 4, CLI 3)
+verified passing before this commit.
+
+IMPACT
+
+The Contract now states explicitly, not just by convention, that
+compatibility is decided by SCHEMA_VERSION alone — the same principle a
+future Migrator and a future multi-schema-version Kernel will both rely
+on. PACE_VERSION carries history without ever becoming a second,
+conflicting gate.
+
+NEXT_STEPS
+
+Define "Instance Version" precisely before adding it to the Contract.
+Per the roadmap: adopt TuPeríMetro as the first governed project, then
+implement pace create, then create Plataforma de Mantenimiento.
+
+APPROVED_BY
+
+President Cley Duarte
+
+END

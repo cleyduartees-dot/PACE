@@ -127,11 +127,13 @@ HAS_MISSION, HAS_VISION, HAS_ROADMAP, HAS_CURRENT_SPRINT
   occasionally, HAS_CURRENT_SPRINT often. Not four different kinds of
   knowledge — one kind, four subjects of attention, different churn rates.
 
-HAS_NAME, HAS_SLUG, HAS_SCHEMA_VERSION, HAS_CREATED_AT
+HAS_NAME, HAS_SLUG, HAS_SCHEMA_VERSION, HAS_PACE_VERSION, HAS_CREATED_AT
   SUBJECT GOVERNED_UNIT
   VALUE identity metadata
-  MUTABILITY HAS_SCHEMA_VERSION changes as the instance migrates forward;
-  the rest are permanent once set.
+  MUTABILITY HAS_SCHEMA_VERSION changes when the instance migrates to a
+  new Contract version; HAS_PACE_VERSION changes when a newer PACE
+  engine manages the instance, independently of SCHEMA_VERSION; the
+  rest are permanent once set.
 
 HAS_CONTINUITY_NOTE
   SUBJECT GOVERNED_UNIT or ACTOR

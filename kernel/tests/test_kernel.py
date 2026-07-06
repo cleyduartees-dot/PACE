@@ -1,5 +1,6 @@
 """Smoke test for the Kernel. Run directly: python kernel/tests/test_kernel.py"""
 
+import shutil
 import sys
 import tempfile
 from pathlib import Path
@@ -38,11 +39,27 @@ def test_unsupported_schema_version_is_a_violation():
         broken = Path(tmp) / ".pace"
         broken.mkdir()
         (broken / "INSTANCE.pdl").write_text(
-            "KIND PROJECT\nNAME X\nSLUG x\nSCHEMA_VERSION 9.9.9\n"
+            "KIND PROJECT\nNAME X\nSLUG x\nSCHEMA_VERSION 9.9.9\nPACE_VERSION 0.1.0\n"
             "ORG_REF x\nCREATED_AT now\nEND\n"
         )
         violations = validate_instance(broken)
-        assert any("SCHEMA_VERSION 9.9.9 not supported" in v for v in violations), violations
+        assert any("SCHEMA_VERSION 9.9.9 is not understood" in v for v in violations), violations
+
+
+def test_pace_version_mismatch_never_blocks_only_schema_version_does():
+    """PACE_VERSION is traceability only — an instance created by a very
+    different engine version must still open cleanly as long as its
+    SCHEMA_VERSION is one this Kernel understands."""
+    with tempfile.TemporaryDirectory() as tmp:
+        copy = Path(tmp) / "example_instance"
+        shutil.copytree(FIXTURE, copy)
+        instance_file = copy / ".pace" / "INSTANCE.pdl"
+        text = instance_file.read_text(encoding="utf-8")
+        text = text.replace("PACE_VERSION 0.1.0", "PACE_VERSION 9.9.9")
+        instance_file.write_text(text, encoding="utf-8")
+
+        violations = validate_instance(copy / ".pace")
+        assert violations == [], violations
 
 
 if __name__ == "__main__":

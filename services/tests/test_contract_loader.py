@@ -26,7 +26,10 @@ def test_contract_version_is_read_from_the_file():
 def test_instance_pdl_required_fields_match_the_real_contract_text():
     contract = load_instance_contract(CONTRACT_PATH)
     fields = contract["root_manifest"][".pace/INSTANCE.pdl"]
-    assert fields == ["KIND", "NAME", "SLUG", "SCHEMA_VERSION", "ORG_REF", "CREATED_AT"], fields
+    assert fields == [
+        "KIND", "NAME", "SLUG", "SCHEMA_VERSION", "PACE_VERSION", "ORG_REF", "CREATED_AT",
+    ], fields
+
 
 
 def test_active_versions_pdl_required_fields_match_the_real_contract_text():
