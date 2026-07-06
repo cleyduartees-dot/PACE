@@ -53,6 +53,20 @@ def test_init_twice_fails_on_the_second_call():
         assert "init failed" in out
 
 
+def test_create_then_doctor_on_a_brand_new_project():
+    with tempfile.TemporaryDirectory() as tmp:
+        target = Path(tmp) / "brand-new"
+        create_code, create_out = run([
+            "create", str(target), "--name", "Brand New", "--slug", "brand-new", "--org-ref", "org",
+        ])
+        assert create_code == 0, create_out
+        assert (target / ".git").is_dir()
+
+        doctor_code, doctor_out = run(["doctor", str(target)])
+        assert doctor_code == 0, doctor_out
+        assert "VALID" in doctor_out
+
+
 if __name__ == "__main__":
     tests = [v for k, v in sorted(globals().items()) if k.startswith("test_")]
     for test in tests:

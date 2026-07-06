@@ -10,7 +10,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from kernel.kernel import locate_instance, validate_instance
 from services.pdl import read_pdl
-from engines.project_creator import init_instance
+from engines.project_creator import init_instance, create_project
 
 ACTIVE_SECTIONS = [
     ("MISSION", "ACTIVE_MISSION"),
@@ -88,6 +88,27 @@ def cmd_init(args) -> int:
     return 0
 
 
+def cmd_create(args) -> int:
+    try:
+        root = create_project(
+            Path(args.path),
+            name=args.name,
+            slug=args.slug,
+            org_ref=args.org_ref,
+        )
+    except FileExistsError as error:
+        print(f"create failed: {error}")
+        return 1
+    print(f"created project at {root.parent}")
+    violations = validate_instance(root)
+    if violations:
+        print("WARNING - the new instance is not structurally valid:")
+        for v in violations:
+            print(f"  - {v}")
+        return 1
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="pace")
     subparsers = parser.add_subparsers(dest="command", required=True)
@@ -107,6 +128,13 @@ def build_parser() -> argparse.ArgumentParser:
     init.add_argument("--slug", required=True)
     init.add_argument("--org-ref", dest="org_ref", default=None)
     init.set_defaults(func=cmd_init)
+
+    create = subparsers.add_parser("create", help="generate a brand-new project governed by PACE from scratch")
+    create.add_argument("path")
+    create.add_argument("--name", required=True)
+    create.add_argument("--slug", required=True)
+    create.add_argument("--org-ref", dest="org_ref", required=True)
+    create.set_defaults(func=cmd_create)
 
     return parser
 

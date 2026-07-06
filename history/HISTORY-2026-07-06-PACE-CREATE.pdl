@@ -1,0 +1,62 @@
+HISTORY_VERSION 1.0.0
+
+TYPE Foundation
+
+STATUS APPROVED
+
+DATE 2026-07-06
+
+TITLE
+
+pace create implemented: PACE can now generate a brand-new project from scratch.
+
+WHY
+
+The President asked to be notified once PACE was ready to use for a new
+project, naming Plataforma de Mantenimiento as the reason. Per the
+roadmap, that is step 8 (pace create), which requires a real create
+mode in Project Creator — until now the engine only had init mode
+(attaching .pace/ to a project that already exists elsewhere).
+
+DECISION
+
+Added create_project() to engines/project_creator.py: creates the
+target directory (refuses if it exists and is non-empty), runs
+`git init` inside it, writes a minimal README.md, then calls
+init_instance() to attach a valid .pace/. Deliberately does not generate
+any stack-specific scaffolding (no framework files, no package.json) —
+that remains a separate, later templates/ capability, not part of this
+minimal create mode.
+
+Added `pace create <path> --name --slug --org-ref` to cli/pace.py,
+mirroring pace init's structure (reports the result, runs
+validate_instance, warns if not clean).
+
+Verified with 2 new engine tests (fresh project has .git/, README.md,
+and a structurally valid .pace/; refuses a non-empty existing directory)
+and 1 new CLI end-to-end test (create then doctor on a real temp path),
+plus a manual run against a real temporary directory outside any test
+fixture, confirming clean doctor/context output.
+
+Test count: kernel 6, contract loader 4, project creator 8, CLI 4 — 22
+total, all passing before this commit.
+
+IMPACT
+
+PACE can now originate a governed project from nothing, not just adopt
+an existing one. This is what step 9 (creating Plataforma de
+Mantenimiento) will use once the President is ready to run it for real.
+
+NEXT_STEPS
+
+Per the roadmap: adopt TuPeríMetro as the first governed *existing*
+project (step 7, via pace init, still not done), and/or create
+Plataforma de Mantenimiento as the first new project born from PACE
+(step 9, via pace create, now ready) — order between these two is the
+President's call, not fixed by dependency.
+
+APPROVED_BY
+
+President Cley Duarte
+
+END

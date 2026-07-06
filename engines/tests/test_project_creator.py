@@ -8,7 +8,7 @@ import tempfile
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
-from engines.project_creator import init_instance
+from engines.project_creator import init_instance, create_project
 from kernel.kernel import locate_instance, validate_instance
 
 
@@ -48,6 +48,30 @@ def test_init_organization_kind_does_not_require_org_ref():
         root = init_instance(Path(tmp), kind="ORGANIZATION", name="Org", slug="org")
         violations = validate_instance(root)
         assert violations == [], violations
+
+
+def test_create_generates_a_fresh_project_with_git_and_a_valid_instance():
+    with tempfile.TemporaryDirectory() as tmp:
+        target = Path(tmp) / "new-project"
+        root = create_project(target, name="New Project", slug="new-project", org_ref="test-org")
+
+        assert (target / ".git").is_dir()
+        assert (target / "README.md").is_file()
+        assert root == target / ".pace"
+        violations = validate_instance(root)
+        assert violations == [], violations
+
+
+def test_create_refuses_a_non_empty_existing_directory():
+    with tempfile.TemporaryDirectory() as tmp:
+        target = Path(tmp) / "occupied"
+        target.mkdir()
+        (target / "something.txt").write_text("already here", encoding="utf-8")
+        try:
+            create_project(target, name="X", slug="x", org_ref="org")
+            assert False, "expected FileExistsError"
+        except FileExistsError:
+            pass
 
 
 if __name__ == "__main__":

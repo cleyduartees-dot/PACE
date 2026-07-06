@@ -1,11 +1,17 @@
-"""Project Creator engine — init mode only.
+"""Project Creator engine — init and create modes.
 
-Attaches a valid, structurally minimal .pace/ instance to an existing
-project directory. Generating a brand-new project from scratch
-(pace create) is a separate, later capability of this same engine —
-out of scope here.
+init_instance() attaches a valid, structurally minimal .pace/ instance to
+a project directory that already exists (its own code lives elsewhere,
+untouched).
+
+create_project() generates a brand-new project from scratch: a fresh
+directory, a git repository, a minimal README, and a .pace/ instance —
+nothing stack-specific (no framework, no language scaffolding). That is
+a separate, later capability (templates/, not yet built), not part of
+this minimal create mode.
 """
 
+import subprocess
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
@@ -95,3 +101,38 @@ def init_instance(
     })
 
     return root
+
+
+def create_project(
+    target_dir: Path,
+    name: str,
+    slug: str,
+    org_ref: str,
+    mission: str = PLACEHOLDER,
+    vision: str = PLACEHOLDER,
+    roadmap: str = PLACEHOLDER,
+    sprint: str = PLACEHOLDER,
+) -> Path:
+    """Generate a brand-new project from scratch: creates `target_dir`
+    (must not already exist or must be empty), initializes a git
+    repository, writes a minimal README, and attaches a .pace/ instance.
+    Stack-specific scaffolding is deliberately out of scope."""
+    target_dir = Path(target_dir)
+    if target_dir.exists() and any(target_dir.iterdir()):
+        raise FileExistsError(f"{target_dir} already exists and is not empty")
+    target_dir.mkdir(parents=True, exist_ok=True)
+
+    subprocess.run(
+        ["git", "init"], cwd=target_dir, check=True,
+        capture_output=True, text=True,
+    )
+
+    (target_dir / "README.md").write_text(
+        f"# {name}\n\nGoverned by PACE. See .pace/ for its mission, vision, roadmap and history.\n",
+        encoding="utf-8",
+    )
+
+    return init_instance(
+        target_dir, kind="PROJECT", name=name, slug=slug, org_ref=org_ref,
+        mission=mission, vision=vision, roadmap=roadmap, sprint=sprint,
+    )
