@@ -1,0 +1,74 @@
+HISTORY_VERSION 1.0.0
+
+TYPE Foundation
+
+STATUS APPROVED
+
+DATE 2026-07-06
+
+TITLE
+
+Validation factored into Services; Kernel now loads the Instance Contract from the real file instead of a hand transcription.
+
+WHY
+
+Reviewing the Kernel implementation surfaced two honest gaps: validation
+logic (required-field checks, required-folder checks) lived inline
+inside kernel.py rather than in services/, contradicting the project's
+own layering (Services = shared infrastructure Kernel and future engines
+depend on). And "loading the contract" was, in truth, a set of Python
+constants transcribed by hand from contracts/INSTANCE_CONTRACT_0.1.0.pdl
+— the Kernel never actually read that file at runtime, so the two could
+silently drift apart. Both were named explicitly rather than let ride.
+
+DECISION
+
+Added services/validate.py: require_fields, require_dirs,
+require_non_empty_dir, forbid_file_suffixes — small, reusable checks, not
+owned by Kernel alone.
+
+Added services/pdl_nested.py: nested-section extraction on top of the
+flat PDL grammar, documented in the new protocols/PDL_SPECIFICATION_0.2.0.pdl
+(supersedes nothing — adds to 0.1.0). Deliberately does not attempt a
+fully generic indentation-based parser: these documents mix structural
+indentation with hand-wrapped prose indentation, which cannot be told
+apart without guessing. Instead, the caller supplies a known, fixed
+vocabulary of top-level section names — the same technique the old
+system's own BOOTSTRAP_CONTEXT.pdl already used via its READ_ORDER list.
+
+Added services/contract_loader.py, built on pdl_nested.py, that actually
+parses contracts/INSTANCE_CONTRACT_0.1.0.pdl at runtime and extracts the
+real ROOT_MANIFEST required fields and the real SECTIONS list. Verified
+directly against the live file (not a synthetic example) via
+services/tests/test_contract_loader.py — all 4 assertions passing,
+matching the file's actual content exactly.
+
+Rewrote kernel/kernel.py to call these services instead of holding its
+own copies. SUPPORTED_SCHEMA_VERSIONS and the forbidden-suffix list stay
+Kernel-owned deliberately: neither can honestly be extracted from the
+contract document (the former is a property of which contract versions
+this installed Kernel understands, not something the contract can
+declare about itself; the latter is Kernel's own codified reading of
+HARD_RULE 2's prose, not enumerable data).
+
+Re-ran the existing kernel/tests/test_kernel.py suite unchanged after the
+refactor — all 5 assertions still passing, confirming no regression.
+
+IMPACT
+
+The Kernel now genuinely depends on the Instance Contract file at
+runtime, not a copy of it. A future change to the contract's required
+fields or sections is picked up automatically, with no separate manual
+update needed in Kernel code.
+
+NEXT_STEPS
+
+Per the roadmap: a minimal CLI wrapping the Kernel (pace doctor, pace
+context), then pace init, then adopting TuPeríMetro as the first
+governed project.
+
+APPROVED_BY
+
+President Cley Duarte
+
+END

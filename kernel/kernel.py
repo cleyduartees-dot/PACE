@@ -1,5 +1,6 @@
 """PACE Kernel — locates a .pace/ instance and validates it structurally
-against contracts/INSTANCE_CONTRACT_0.1.0.pdl.
+against contracts/INSTANCE_CONTRACT_0.1.0.pdl, loaded at runtime from the
+actual file, not a hand transcription of its rules.
 
 Deliberately minimal: this is structural validation only (does the
 required shape exist, is SCHEMA_VERSION supported). Deeper, semantic
@@ -12,15 +13,24 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from services.fs import find_upward
 from services.pdl import read_pdl
+from services.contract_loader import load_instance_contract
+from services.validate import (
+    require_fields,
+    require_dirs,
+    require_non_empty_dir,
+    forbid_file_suffixes,
+)
 
+CONTRACT_PATH = Path(__file__).resolve().parent.parent / "contracts" / "INSTANCE_CONTRACT_0.1.0.pdl"
+
+# Which contract versions THIS Kernel build understands — a property of
+# the installed engine, not something the contract document itself can
+# declare (a v0.1 contract cannot know what future kernels will support).
 SUPPORTED_SCHEMA_VERSIONS = {"0.1.0"}
 
-REQUIRED_SECTIONS = [
-    "mission", "vision", "roadmap", "sprint", "handoff",
-    "history", "releases", "decisions", "requests",
-    "memory/generated", "memory/persistent",
-]
-
+# HARD_RULE 2 ("no code, script or executable file") is prose, not a
+# machine-enumerable list — this is the Kernel's own codified reading of
+# that rule, not something extracted from the contract text.
 FORBIDDEN_SUFFIXES = {".py", ".ts", ".js", ".sh", ".exe", ".ps1", ".bat"}
 
 
@@ -33,17 +43,15 @@ def validate_instance(root: Path) -> list:
     """Structural validation only. Returns a list of violations; an
     empty list means the instance is structurally valid."""
     violations = []
+    contract = load_instance_contract(CONTRACT_PATH)
 
     instance_file = root / "INSTANCE.pdl"
-    active_versions_file = root / "ACTIVE_VERSIONS.pdl"
-
     if not instance_file.is_file():
         violations.append("missing INSTANCE.pdl")
     else:
         instance = read_pdl(instance_file)
-        for field in ("KIND", "NAME", "SLUG", "SCHEMA_VERSION", "CREATED_AT"):
-            if not instance.get(field):
-                violations.append(f"INSTANCE.pdl missing required field {field}")
+        required = contract["root_manifest"].get(".pace/INSTANCE.pdl", [])
+        violations += require_fields(instance, required, "INSTANCE.pdl")
         if instance.get("KIND") == "PROJECT" and not instance.get("ORG_REF"):
             violations.append("INSTANCE.pdl KIND=PROJECT requires ORG_REF")
         schema_version = instance.get("SCHEMA_VERSION")
@@ -54,25 +62,17 @@ def validate_instance(root: Path) -> list:
                 "needs pace migrate, not yet built"
             )
 
+    active_versions_file = root / "ACTIVE_VERSIONS.pdl"
     if not active_versions_file.is_file():
         violations.append("missing ACTIVE_VERSIONS.pdl")
     else:
         active_versions = read_pdl(active_versions_file)
-        for field in ("ACTIVE_MISSION", "ACTIVE_VISION", "ACTIVE_ROADMAP", "ACTIVE_SPRINT"):
-            if not active_versions.get(field):
-                violations.append(f"ACTIVE_VERSIONS.pdl missing required field {field}")
+        required = contract["root_manifest"].get(".pace/ACTIVE_VERSIONS.pdl", [])
+        violations += require_fields(active_versions, required, "ACTIVE_VERSIONS.pdl")
 
-    for section in REQUIRED_SECTIONS:
-        if not (root / section).is_dir():
-            violations.append(f"missing required section {section}/")
-
-    history_dir = root / "history"
-    if history_dir.is_dir() and not any(history_dir.iterdir()):
-        violations.append("history/ exists but has no founding entry")
-
-    for path in root.rglob("*"):
-        if path.is_file() and path.suffix in FORBIDDEN_SUFFIXES:
-            violations.append(f"forbidden code/script file inside .pace/: {path.relative_to(root)}")
+    violations += require_dirs(root, sorted(contract["sections"]))
+    violations += require_non_empty_dir(root, "history")
+    violations += forbid_file_suffixes(root, FORBIDDEN_SUFFIXES)
 
     return violations
 

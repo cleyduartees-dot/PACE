@@ -1,0 +1,43 @@
+PDL_SPECIFICATION_VERSION 0.2.0
+
+STATUS DRAFT
+
+SUPERSEDES PDL_SPECIFICATION_VERSION 0.1.0
+
+SCOPE
+
+Adds nested-section extraction on top of 0.1.0's flat grammar, for
+documents like the Instance Contract that mix structural fields with
+hand-wrapped prose. Does not replace 0.1.0 — flat key-value fields
+(CONTRACT_VERSION, STATUS, OWNER, and similar top-of-file metadata)
+still follow that grammar exactly.
+
+WHY_NOT_FULLY_GENERIC
+
+A fully generic indentation-based grammar cannot reliably tell a new
+nested field apart from a wrapped continuation of the previous line's
+value, when both use indentation for different purposes — one for
+structure, one for visual line-wrap alignment. Rather than guess, this
+version requires the reader to know the document's own small, fixed
+vocabulary of top-level section names in advance — the same technique
+the old system's BOOTSTRAP_CONTEXT.pdl already used via its own
+READ_ORDER list.
+
+TOP_LEVEL_SECTION_SPLITTING
+
+Given a known list of section names, split the document into the
+metadata before the first known name (flat key-value, per 0.1.0) and one
+raw text block per named section, ending at the next known name or END.
+The same technique applies recursively — a section's own raw body can be
+split again by a known list of its own sub-entry names.
+
+INNER_FIELD_EXTRACTION
+
+Within a section's raw text, a field is a line whose indentation matches
+that list's own established base indentation (e.g. every entry under
+REQUIRED_FIELDS starts at the same column). Any line indented deeper
+than that base is a continuation of the previous field's wrapped value,
+not a new field — this is what makes hand-wrapped prose safe to mix with
+structured fields without misparsing it.
+
+END
