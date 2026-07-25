@@ -14,6 +14,7 @@ from kernel.kernel import locate_instance, validate_instance
 from services.pdl import read_pdl
 from engines.project_creator import init_instance, create_project
 from engines.handoff import generate_handoff
+from engines.memory import remember, recall
 
 ACTIVE_SECTIONS = [
     ("MISSION", "ACTIVE_MISSION"),
@@ -178,6 +179,25 @@ def cmd_handoff(args) -> int:
     return 0
 
 
+def cmd_remember(args) -> int:
+    root = locate_instance(Path(args.path) if args.path else None)
+    if root is None:
+        print("no .pace/ instance found")
+        return 1
+    out = remember(root, args.text)
+    print(f"remembered in {out}")
+    return 0
+
+
+def cmd_recall(args) -> int:
+    root = locate_instance(Path(args.path) if args.path else None)
+    if root is None:
+        print("no .pace/ instance found")
+        return 1
+    print(recall(root))
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="pace")
     subparsers = parser.add_subparsers(dest="command", required=True)
@@ -203,6 +223,15 @@ def build_parser() -> argparse.ArgumentParser:
     handoff = subparsers.add_parser("handoff", help="regenerate the AI-onboarding handoff for a .pace/ instance")
     handoff.add_argument("path", nargs="?", default=None)
     handoff.set_defaults(func=cmd_handoff)
+
+    remember = subparsers.add_parser("remember", help="append a continuity note to the project's working memory")
+    remember.add_argument("text")
+    remember.add_argument("path", nargs="?", default=None)
+    remember.set_defaults(func=cmd_remember)
+
+    recall = subparsers.add_parser("recall", help="print the project's working/continuity memory")
+    recall.add_argument("path", nargs="?", default=None)
+    recall.set_defaults(func=cmd_recall)
 
     create = subparsers.add_parser("create", help="generate a brand-new project governed by PACE from scratch")
     create.add_argument("path")

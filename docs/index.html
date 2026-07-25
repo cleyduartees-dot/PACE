@@ -147,10 +147,12 @@
   </div>
   <div class="tabpanel active" id="tab-cli">
     <p>Para desarrolladores. Corres los comandos tú mismo:</p>
-    <pre class="mono">pace init         # crea la memoria del proyecto
-pace context      # imprime todo el contexto
-pace doctor       # valida que la memoria es correcta
-pace create nuevo # crea un proyecto nuevo gobernado por PACE</pre>
+    <pre class="mono">pace init --guided   # te entrevista y crea la memoria
+pace context         # imprime todo el contexto del proyecto
+pace handoff         # genera el resumen que la IA lee al empezar
+pace remember "..."  # anota un acuerdo o el estado actual
+pace recall          # relee la memoria para no perder el hilo
+pace doctor          # valida que la memoria es correcta</pre>
   </div>
   <div class="tabpanel" id="tab-ia">
     <p>La forma recomendada. Tu IA (Cursor, Claude, Copilot) lee la carpeta <code>.pace/</code> al empezar y ya sabe el proyecto — le hablas normal, sin repetir nada. Tú casi no tocas la terminal.</p>
