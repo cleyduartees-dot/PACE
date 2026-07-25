@@ -11,10 +11,10 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-from services.fs import find_upward
-from services.pdl import read_pdl
-from services.contract_loader import load_instance_contract
-from services.validate import (
+from pace.services.fs import find_upward
+from pace.services.pdl import read_pdl
+from pace.services.contract_loader import load_instance_contract
+from pace.services.validate import (
     require_fields,
     require_dirs,
     require_non_empty_dir,

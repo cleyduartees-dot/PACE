@@ -6,7 +6,7 @@ import tempfile
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
-from kernel.kernel import locate_instance, validate_instance
+from pace.kernel.kernel import locate_instance, validate_instance
 
 FIXTURE = Path(__file__).resolve().parent / "fixtures" / "example_instance"
 

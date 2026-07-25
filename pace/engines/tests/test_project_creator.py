@@ -8,8 +8,8 @@ import tempfile
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
-from engines.project_creator import init_instance, create_project
-from kernel.kernel import locate_instance, validate_instance
+from pace.engines.project_creator import init_instance, create_project
+from pace.kernel.kernel import locate_instance, validate_instance
 
 
 def test_init_produces_a_structurally_valid_instance():

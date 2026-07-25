@@ -6,7 +6,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
-from services.contract_loader import load_instance_contract
+from pace.services.contract_loader import load_instance_contract
 
 CONTRACT_PATH = (
     Path(__file__).resolve().parents[2] / "contracts" / "INSTANCE_CONTRACT_0.1.0.pdl"

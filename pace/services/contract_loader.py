@@ -7,7 +7,7 @@ fully general PDL engine — see protocols/PDL_SPECIFICATION_0.2.0.pdl.
 
 from pathlib import Path
 
-from services.pdl_nested import split_top_level_sections, indented_field_names
+from pace.services.pdl_nested import split_top_level_sections, indented_field_names
 
 TOP_LEVEL_SECTIONS = [
     "DEPENDS_ON", "PURPOSE", "ROOT_MANIFEST", "SECTIONS",

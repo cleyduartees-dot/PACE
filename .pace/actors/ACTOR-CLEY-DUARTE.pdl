@@ -1,0 +1,11 @@
+ACTOR_VERSION 1.0.0
+
+ID cley-duarte
+
+NAME Cley Duarte
+
+ROLE President
+
+IS_ROOT_AUTHORITY true
+
+END

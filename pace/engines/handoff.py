@@ -1,17 +1,17 @@
 """Handoff engine - regenerates the AI-onboarding view of a .pace/ instance.
 
 Produces .pace/handoff/HANDOFF.md: the single file an AI reads first. It
-states who governs the project (whom to consult), how to work here, and the
+names who governs the project (whom to consult), how to work here, and the
 current mission / vision / roadmap / sprint, plus pointers to the deeper
-memory. The handoff/ section is REGENERABLE (disposable): this rebuilds it
-from the authoritative sources, never the other way around.
+memory. The handoff/ section is REGENERABLE: this rebuilds it from the
+authoritative sources, never the other way around.
 """
 
 import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-from services.pdl import read_pdl
+from pace.services.pdl import read_pdl
 
 ACTIVE_SECTIONS = [
     ("Mission", "ACTIVE_MISSION"),
@@ -37,6 +37,18 @@ def _count_pdl(root: Path, section: str) -> int:
     return sum(1 for p in d.iterdir() if p.is_file() and p.suffix == ".pdl")
 
 
+def _root_authority(root: Path):
+    actors_dir = Path(root) / "actors"
+    if not actors_dir.is_dir():
+        return None
+    for p in sorted(actors_dir.glob("*.pdl")):
+        data = read_pdl(p)
+        if str(data.get("IS_ROOT_AUTHORITY", "")).strip().lower() == "true":
+            label = f"{data.get('ROLE', '')} {data.get('NAME', '')}".strip()
+            return label or data.get("NAME")
+    return None
+
+
 def generate_handoff(root: Path) -> Path:
     """Rebuild .pace/handoff/HANDOFF.md from the instance. Returns its path."""
     root = Path(root)
@@ -44,6 +56,7 @@ def generate_handoff(root: Path) -> Path:
     active = read_pdl(root / "ACTIVE_VERSIONS.pdl")
     name = instance.get("NAME", "this project")
     kind = instance.get("KIND", "PROJECT")
+    authority = _root_authority(root)
 
     out = []
     out.append(f"# PACE Handoff - {name}")
@@ -54,9 +67,13 @@ def generate_handoff(root: Path) -> Path:
     out.append("")
     out.append("## How to work here")
     out.append("")
-    out.append("- You ADVISE and AUDIT; the project owner (ROOT_AUTHORITY) decides.")
-    out.append("  Propose, never override. Confirm with the owner before anything")
-    out.append("  becomes official.")
+    if authority:
+        out.append(f"- The ROOT_AUTHORITY of this project is **{authority}**.")
+        out.append("  You ADVISE and AUDIT; they decide. Propose to them, never")
+        out.append("  override. Confirm before anything becomes official.")
+    else:
+        out.append("- You ADVISE and AUDIT; the project owner (ROOT_AUTHORITY) decides.")
+        out.append("  Propose, never override. Confirm with the owner first.")
     out.append("- Every permanent correction is logged as a request and, once")
     out.append("  approved, becomes a rule you must follow. Do not re-ask what an")
     out.append("  approved rule already settles.")
@@ -67,6 +84,8 @@ def generate_handoff(root: Path) -> Path:
     out.append(f"- Kind: {kind}")
     if instance.get("ORG_REF"):
         out.append(f"- Belongs to: {instance.get('ORG_REF')}")
+    if authority:
+        out.append(f"- Root authority: {authority}")
     out.append("")
 
     for label, key in ACTIVE_SECTIONS:

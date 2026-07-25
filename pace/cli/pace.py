@@ -10,11 +10,11 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-from kernel.kernel import locate_instance, validate_instance
-from services.pdl import read_pdl
-from engines.project_creator import init_instance, create_project
-from engines.handoff import generate_handoff
-from engines.memory import remember, recall
+from pace.kernel.kernel import locate_instance, validate_instance
+from pace.services.pdl import read_pdl
+from pace.engines.project_creator import init_instance, create_project
+from pace.engines.handoff import generate_handoff
+from pace.engines.memory import remember, recall
 
 ACTIVE_SECTIONS = [
     ("MISSION", "ACTIVE_MISSION"),
