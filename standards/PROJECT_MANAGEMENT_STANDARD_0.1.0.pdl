@@ -1,0 +1,65 @@
+PROJECT_MANAGEMENT_STANDARD_VERSION 0.1.0
+
+STATUS DRAFT
+
+OWNER President Cley Duarte
+
+SCOPE ORGANIZATION
+
+DEPENDS_ON
+
+protocols/LEARNING_PROTOCOL_0.1.0.pdl (this standard was promoted from a
+  REQUEST through that protocol)
+
+PURPOSE
+
+Fix the external, day-to-day management shape every PACE-governed project
+takes in the tracking tool, so a new project is set up the same way every
+time, in seconds, without re-deciding structure. PACE's .pace/ memory
+stays tool-agnostic (the Ontology and Contract forbid tool-specific
+content inside it); this standard lives one level out, at the
+organization, describing how the work is TRACKED — not what the knowledge
+IS.
+
+TOOL
+
+ClickUp, at workspace level. Each governed unit is a FOLDER inside the
+organization's Space; each project's working views are LISTS inside its
+own folder. The same recursive shape as the .pace/ model: the
+organization is the Space, each project a folder within it.
+
+FOLDER_PER_PROJECT
+
+Every governed project gets its own ClickUp FOLDER named after the
+project, a sibling of the other projects' folders — never a set of loose
+lists scattered inside another project's folder.
+
+REQUIRED_LISTS
+
+  Roadmap / Fases   The founding/roadmap sequence and evolution phases.
+                    Seeded from the project's HAS_ROADMAP assertion.
+  Backlog           Ideas and pending work not yet planned.
+  En curso          Active development tasks.
+  Bugs              Errors and fixes.
+  Hecho             Completed work.
+
+SEEDING
+
+On project setup, the Roadmap list is populated from the project's own
+roadmap in .pace/, one task per step, each marked DONE or PENDING against
+the real state of the repository — never an empty board.
+
+CORRESPONDENCE
+
+ClickUp is the volatile, human-facing operational view; .pace/ is the
+durable, AI-facing memory. A task outcome that carries lasting meaning (a
+decision, a shipped release, a lesson) is recorded back into .pace/ as
+the appropriate entity — the board is disposable, the memory is not.
+
+ORIGIN
+
+Promoted from REQUEST-0002 (2026-07-25): the ROOT_AUTHORITY directed that
+this ClickUp way of working itself be part of PACE's structure, created
+without deliberation each time.
+
+END

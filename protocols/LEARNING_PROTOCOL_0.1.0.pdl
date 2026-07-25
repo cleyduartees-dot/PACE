@@ -1,0 +1,96 @@
+LEARNING_PROTOCOL_VERSION 0.1.0
+
+STATUS DRAFT
+
+OWNER President Cley Duarte
+
+DEPENDS_ON
+
+ontology/PACE_ONTOLOGY_0.1.0.pdl (REQUEST entity, PROMOTED_FROM relation,
+  HAS_CONTINUITY_NOTE assertion)
+governance/GOVERNANCE_PROTOCOL_0.1.0.pdl (authority: PACE agents advise
+  and audit, they never override the ROOT_AUTHORITY)
+
+PURPOSE
+
+Define how PACE learns from a correction once and never forces the same
+question again. Every permanent observation from the ROOT_AUTHORITY enters
+as a REQUEST, is classified by SCOPE, and — once approved — is promoted
+into a binding rule that every future AI loads automatically at handoff.
+This is the mechanism behind Vision point 6: an observation becoming a
+policy, a protocol, a standard, or a rule of behaviour for AIs.
+
+PROBLEM
+
+An AI that re-asks a question already answered wastes the ROOT_AUTHORITY's
+time and proves the knowledge was never captured. A correction that lives
+only in one chat is lost the moment the session, the AI, or the month
+changes. PACE must turn each correction into a durable, machine-loaded
+rule so it is answered exactly once, ever.
+
+INTAKE
+
+Every correction, preference or lesson is logged as a REQUEST the moment
+it is stated — before it is acted on. Core fields (WHO, DATE, RAW_TEXT)
+are immutable once logged. No correction is binding merely by having been
+said (Governance rule 5); it becomes binding only when promoted.
+
+SCOPE
+
+Every REQUEST, and every rule promoted from it, carries a mandatory SCOPE
+— one of PACE's three levels of authority:
+
+  PACE          A lesson about the engine itself — the PDL format, the
+                Kernel, the CLI, or how any project is governed. Lives in
+                the PACE repository (policies/, protocols/, standards/)
+                and applies to every governed project.
+
+  ORGANIZATION  A preference of authority or way of working that applies
+                across all of the ROOT_AUTHORITY's projects. Lives in the
+                organization's own governed-unit instance.
+
+  PROJECT       A lesson true only of one product — its domain,
+                architecture or conventions. Lives in that project's
+                .pace/ (decisions/ or memory/persistent/) and applies to
+                it alone.
+
+CLASSIFICATION
+
+The AI never fixes SCOPE on its own. It PROPOSES a SCOPE using this
+heuristic, and the ROOT_AUTHORITY confirms or overrides it at approval:
+
+  - speaks of PDL, the Kernel, the CLI, or how projects are governed
+    -> PROPOSE PACE
+  - speaks of the domain, architecture or conventions of one specific
+    product -> PROPOSE PROJECT
+  - a standing preference of authority or style that applies to
+    everything -> PROPOSE ORGANIZATION
+
+When genuinely ambiguous, the AI states both candidates and asks once —
+that single question is then settled forever by the resulting rule.
+
+PROMOTION
+
+On approval, a REQUEST changes STATUS to PROMOTED and gains PROMOTED_TO,
+pointing at the artifact it became: a POLICY, PROTOCOL, STANDARD, or a
+rule of behaviour for AIs, at its declared SCOPE. History is not
+rewritten: the original REQUEST is kept, and the new artifact cites it
+via PROMOTED_FROM. A REJECTED or DEFERRED request keeps its RAW_TEXT so
+the same idea is not re-litigated from scratch.
+
+HANDOFF_LOADING
+
+This is what stops the re-asking. At the start of every session, the
+Bootstrap/Handoff engine loads all APPROVED rules in force for the
+current unit — PACE-level rules always, plus the active project's own
+PROJECT-level rules, plus the ORGANIZATION-level rules above it — and the
+AI obeys them without asking. A question is only ever put to the
+ROOT_AUTHORITY for something no approved rule already covers.
+
+GUARANTEE
+
+Answered once, binding forever, loaded automatically. The ROOT_AUTHORITY
+decides each rule exactly one time; no AI, present or future, re-asks a
+question an approved rule already settles.
+
+END

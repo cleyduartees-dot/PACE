@@ -1,0 +1,33 @@
+REQUEST_VERSION 1.0.0
+
+ID REQUEST-0002
+
+STATUS PROMOTED
+
+DATE 2026-07-25
+
+WHO President Cley Duarte
+
+SCOPE ORGANIZATION
+
+TITLE
+
+The ClickUp way of working must itself be part of PACE's structure, built
+without deliberation each time.
+
+RAW_TEXT
+
+Even this way of working in ClickUp must be in PACE's structure — create
+the whole structure without wandering or wasting time.
+
+PROPOSED_SCOPE ORGANIZATION
+
+PROMOTED_TO
+
+standards/PROJECT_MANAGEMENT_STANDARD_0.1.0.pdl
+
+APPROVED_BY
+
+President Cley Duarte
+
+END

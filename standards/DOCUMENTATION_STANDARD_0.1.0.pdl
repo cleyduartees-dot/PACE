@@ -1,0 +1,55 @@
+DOCUMENTATION_STANDARD_VERSION 0.1.0
+
+STATUS DRAFT
+
+OWNER President Cley Duarte
+
+SCOPE ORGANIZATION
+
+DEPENDS_ON
+
+protocols/LEARNING_PROTOCOL_0.1.0.pdl (promoted from a REQUEST through
+  that protocol)
+standards/PROJECT_MANAGEMENT_STANDARD_0.1.0.pdl (same tool, ClickUp: that
+  standard governs how work is tracked, this one governs where produced
+  documents live)
+
+PURPOSE
+
+Fix where an AI puts the documentation and presentations it produces for a
+governed project: when the ROOT_AUTHORITY wants them, they are created in
+ClickUp — not left as scattered local files or trapped inside a chat.
+
+TRIGGER
+
+This standard is OPT-IN, at the ROOT_AUTHORITY's choice. The AI does not
+generate ClickUp documentation on its own initiative. It does so when the
+ROOT_AUTHORITY asks for documentation or a presentation, or has given a
+standing instruction to. Absent that, the AI only proposes it.
+
+WHERE
+
+  Documentation  A ClickUp DOC inside the project's own folder (the same
+                 folder defined by the Project-Management Standard).
+                 Multi-part documentation uses pages within that Doc.
+
+  Presentations  A ClickUp DOC as well, structured as a deck (one page or
+                 section per slide), so it lives beside the project's
+                 other views and stays editable in place. If an exported
+                 file (for example a .pptx) is also required, it is
+                 produced in addition, never instead.
+
+CORRESPONDENCE
+
+ClickUp holds the human-facing, editable document. Any lasting knowledge
+inside it (a decision, a policy, a lesson) is still recorded into .pace/
+as the appropriate entity — the Doc is the presentation surface, .pace/ is
+the memory of record.
+
+ORIGIN
+
+Promoted from REQUEST-0003 (2026-07-25): the ROOT_AUTHORITY directed that
+PACE's structure must indicate that the AI, when the user wants it, creates
+documentation and presentations in ClickUp.
+
+END

@@ -1,0 +1,66 @@
+HISTORY_VERSION 1.0.0
+
+TYPE Governance
+
+STATUS APPROVED
+
+DATE 2026-07-25
+
+TITLE
+
+Learning Protocol, Project-Management Standard and the Requests intake
+added: PACE now learns from a correction once and stops re-asking.
+
+WHY
+
+The President stated two standing rules in one session. First: PACE must
+have a place to learn from its errors and not repeat them — the AI should
+not re-ask questions already answered, management patterns must be
+permanently authorizable, and PACE should itself learn whether a lesson is
+general to a project or general to the engine. Second: the ClickUp way of
+working just used to stand up the PACE project must itself be part of
+PACE's structure, created without deliberation each time. Both are exactly
+the kind of permanent observation Vision point 6 anticipated.
+
+DECISION
+
+Created protocols/LEARNING_PROTOCOL_0.1.0.pdl: defines the intake (every
+correction logged as a REQUEST before being acted on), the mandatory SCOPE
+field (PACE / ORGANIZATION / PROJECT), the classification heuristic the AI
+proposes and the ROOT_AUTHORITY confirms, promotion of an approved request
+into a binding rule, and — the part that stops the re-asking — Handoff
+loading of all approved rules at the start of every session.
+
+Created standards/PROJECT_MANAGEMENT_STANDARD_0.1.0.pdl: fixes the ClickUp
+shape every governed project takes (a folder per project; the lists
+Roadmap/Fases, Backlog, En curso, Bugs, Hecho; the Roadmap seeded from the
+project's own .pace/ roadmap), keeping .pace/ tool-agnostic while the
+tracking convention lives at the organization level.
+
+Created the top-level requests/ intake and logged the two founding
+requests as the first real use of the mechanism: REQUEST-0001 (the
+learning rule, SCOPE PACE, promoted to the Learning Protocol) and
+REQUEST-0002 (the ClickUp structure, SCOPE ORGANIZATION, promoted to the
+Project-Management Standard).
+
+IMPACT
+
+PACE now has a working knowledge-intake loop: an observation becomes a
+REQUEST, is classified by scope, and once approved is promoted into a rule
+that future AIs load automatically. This session is itself the first pass
+through that loop. The ClickUp folder for PACE (space Pannotia) was created
+the same session, matching the new standard.
+
+NEXT_STEPS
+
+Build the Bootstrap/Handoff engine that actually loads approved rules at
+session start (the handoff/ folder is still reserved and empty). Wire the
+Project-Management Standard into pace create / pace init so the ClickUp
+folder and seeded Roadmap are produced automatically. Update the stale
+README, which still says only the founding commit exists.
+
+APPROVED_BY
+
+President Cley Duarte
+
+END

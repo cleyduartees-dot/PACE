@@ -1,0 +1,36 @@
+REQUEST_VERSION 1.0.0
+
+ID REQUEST-0001
+
+STATUS PROMOTED
+
+DATE 2026-07-25
+
+WHO President Cley Duarte
+
+SCOPE PACE
+
+TITLE
+
+PACE must learn from corrections once and stop re-asking; management
+patterns must be permanently authorizable and self-classified by scope.
+
+RAW_TEXT
+
+PACE has to have a place to learn from its errors and not repeat them. I
+do not want the AI asking me over and over to correct things it already
+asked before. Management patterns must be establishable so I can authorize
+them permanently, and PACE itself should learn whether a lesson is general
+to the project or general to PACE.
+
+PROPOSED_SCOPE PACE
+
+PROMOTED_TO
+
+protocols/LEARNING_PROTOCOL_0.1.0.pdl
+
+APPROVED_BY
+
+President Cley Duarte
+
+END

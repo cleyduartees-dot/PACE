@@ -1,5 +1,11 @@
 # Protocols
 
-The "verbs" of PACE: process specifications describing how things must happen — the PDL specification itself, the bootstrap protocol, the next-task protocol, the vision protocol.
+The "verbs" of PACE: process specifications describing how things must
+happen — the PDL specification itself, the learning/intake protocol, the
+bootstrap protocol, the next-task protocol, the vision protocol.
 
-See [`PDL_SPECIFICATION_0.1.0.pdl`](./PDL_SPECIFICATION_0.1.0.pdl) (flat grammar) and [`PDL_SPECIFICATION_0.2.0.pdl`](./PDL_SPECIFICATION_0.2.0.pdl) (nested-section extraction, on top of 0.1.0 — not a replacement). Both DRAFT. Bootstrap/next-task/vision protocols not written yet.
+- [`PDL_SPECIFICATION_0.1.0.pdl`](./PDL_SPECIFICATION_0.1.0.pdl) — flat grammar (DRAFT).
+- [`PDL_SPECIFICATION_0.2.0.pdl`](./PDL_SPECIFICATION_0.2.0.pdl) — nested-section extraction on top of 0.1.0, not a replacement (DRAFT).
+- [`LEARNING_PROTOCOL_0.1.0.pdl`](./LEARNING_PROTOCOL_0.1.0.pdl) — how a correction becomes a permanent rule: intake as a REQUEST, SCOPE classification, promotion, and handoff loading so AIs never re-ask (DRAFT).
+
+Bootstrap/next-task/vision protocols not written yet.
