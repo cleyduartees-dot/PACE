@@ -1,0 +1,32 @@
+REQUEST_VERSION 1.0.0
+
+ID REQUEST-0005
+
+STATUS PROMOTED
+
+DATE 2026-07-25
+
+WHO President Cley Duarte
+
+SCOPE PACE
+
+TITLE
+
+PACE should consume its own product: govern itself with a .pace/ instance,
+validated by its own Kernel, as the ultimate proof that the engine works.
+
+RAW_TEXT
+
+I think PACE should consume its own product.
+
+PROPOSED_SCOPE PACE
+
+PROMOTED_TO
+
+history/HISTORY-2026-07-25-PACE-SELF-HOSTS.pdl (this .pace/ instance)
+
+APPROVED_BY
+
+President Cley Duarte
+
+END

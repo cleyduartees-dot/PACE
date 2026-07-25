@@ -1,0 +1,54 @@
+DECISION_VERSION 1.0.0
+
+ID DECISION-0001
+
+DATE 2026-07-25
+
+STATUS APPROVED
+
+OWNER President Cley Duarte
+
+TITLE
+
+PACE's business model: open-core engine, plus PACE Cloud (per-seat SaaS)
+and Enterprise. The engine is free; the layer on top is paid.
+
+CONTEXT
+
+PACE must be monetizable (REQUEST-0007), but the CLI on its own cannot be
+sold: it is free to run, easy to copy, and should be open to drive
+adoption. Revenue must come from the layer above the engine, not the
+engine itself.
+
+DECISION
+
+Open-core with four tiers:
+  - CORE (free, open source): the CLI (init, context, doctor, create) and
+    the local .pace/ memory. AI-agnostic, no account. Drives adoption.
+  - PRO (~9 EUR / month): guided intake, managed per-chat memory, editor
+    integrations (Cursor / Claude / Copilot).
+  - TEAM (~19 EUR / user / month): PACE Cloud -- team sync, visual
+    dashboard, cross-project search, roles and approvals. The main
+    recurring revenue.
+  - ENTERPRISE (custom): SSO, on-premise, audit, compliance, SLA.
+
+PACE stays AI-agnostic (the user brings their own AI) -- no lock-in, a
+selling point. Focus on B2B: teams and companies pay to not lose their
+knowledge; solo developers rarely pay.
+
+RATIONALE
+
+Free core = low barrier and wide adoption; the paid value is team
+collaboration, hosted AI-memory and governance -- exactly what a single
+free CLI cannot provide. Validate demand (waitlist, interviews) before
+building the paid cloud layer.
+
+PROMOTED_FROM
+
+REQUEST-0007
+
+APPROVED_BY
+
+President Cley Duarte
+
+END

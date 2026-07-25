@@ -39,6 +39,23 @@ WHERE
                  file (for example a .pptx) is also required, it is
                  produced in addition, never instead.
 
+LOCATION_AND_DISCOVERABILITY
+
+So documentation and presentations are always found the same way, without
+anyone ever being reminded where they are, their location is fixed by
+convention — not chosen per project:
+
+  - They live in the project's own ClickUp FOLDER, under its Docs.
+  - The project documentation is a single Doc named
+    "PROJECT — Documentacion del Proyecto" (emoji prefix allowed).
+  - Presentations are Docs in the same folder, named
+    "PROJECT — TITLE" with a distinct emoji prefix so they are told
+    apart from the documentation at a glance.
+
+An AI applies this convention automatically for every governed project. It
+does not ask where to put documentation, and it does not ask where to find
+it — the folder and the naming are always the same.
+
 CORRESPONDENCE
 
 ClickUp holds the human-facing, editable document. Any lasting knowledge
@@ -50,6 +67,8 @@ ORIGIN
 
 Promoted from REQUEST-0003 (2026-07-25): the ROOT_AUTHORITY directed that
 PACE's structure must indicate that the AI, when the user wants it, creates
-documentation and presentations in ClickUp.
+documentation and presentations in ClickUp. Refined by REQUEST-0004
+(2026-07-25): the location must be fixed and discoverable so it is applied
+automatically across all projects, without reminding.
 
 END

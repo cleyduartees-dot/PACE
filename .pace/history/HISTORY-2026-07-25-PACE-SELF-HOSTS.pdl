@@ -1,0 +1,54 @@
+HISTORY_VERSION 1.0.0
+
+TYPE Foundation
+
+STATUS APPROVED
+
+DATE 2026-07-25
+
+TITLE
+
+PACE consumes its own product: adopted as its own independent, self-governed
+root.
+
+WHY
+
+The President directed that PACE must consume its own product — govern itself
+with a .pace/ instance validated by its own Kernel — and clarified that PACE
+is fully independent: it depends on no consumer. TuPerimetro and any other
+adopter are only consumers of PACE. This adoption is roadmap step 4 ("adopt
+the first project governed by PACE"); fittingly, the first adopted unit is
+PACE itself.
+
+DECISION
+
+Created a .pace/ instance at the PACE repository root, KIND=ORGANIZATION —
+the structural root of its own line of authority, since PACE depends on no
+parent. (Provisional modeling choice: a dedicated KIND for a standalone
+product may be introduced later.) Migrated PACE's own memory into it: mission
+and vision (moved out of governance/), a real roadmap and current sprint, the
+narrative history entries, and the requests intake (REQUEST-0001..0008). The
+engine's source (kernel, services, engines, cli, ontology, contracts,
+protocols, standards, policies, the abstract governance protocol, docs) stays
+at the repository root as the product itself. Validated with the real engine:
+pace doctor and pace context run against this instance.
+
+IMPACT
+
+PACE is now the first project that knows how to explain itself through PACE.
+Any AI can run `pace context` on the repository and reconstruct PACE in
+seconds — the promise made real on PACE itself.
+
+NEXT_STEPS
+
+Promote the pending requests: the upstream-contribution rule (0006), the
+sellable-product structure (0007), and the explainer page (0008). Design
+PACE's distributable structure and a public landing page. Build the
+Bootstrap/Handoff engine so approved rules load automatically at session
+start.
+
+APPROVED_BY
+
+President Cley Duarte
+
+END

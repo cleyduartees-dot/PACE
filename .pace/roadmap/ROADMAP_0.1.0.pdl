@@ -1,0 +1,29 @@
+ROADMAP_VERSION 0.1.0
+
+STATUS APPROVED
+
+OWNER President Cley Duarte
+
+ROADMAP
+
+FOUNDING_SEQUENCE
+1  Create the official PACE repository. — DONE
+2  Implement the minimal skeleton. — DONE
+3  Implement pace init. — DONE
+4  Adopt the first project governed by PACE. — DONE (PACE adopts itself:
+   this very .pace/ instance is the first adopted governed unit).
+5  Implement pace create. — DONE
+6  Create the first new project born from PACE. — PENDING
+
+PHASE_2_SELF_GOVERNANCE_AND_LEARNING
+- Learning Protocol (intake -> scope -> promotion -> handoff). — DONE
+- Requests intake and first requests logged (0001-0008). — DONE
+- PACE self-hosts as its own independent root. — DONE
+
+PHASE_3_DISTRIBUTION_AND_PRODUCT
+- Structure PACE as an installable, sellable product for many users. — PENDING
+- Public explainer / landing page for PACE. — PENDING
+- Bootstrap/Handoff engine that loads approved rules at session start. — PENDING
+- Wire the ClickUp standards into pace init / pace create. — PENDING
+
+END

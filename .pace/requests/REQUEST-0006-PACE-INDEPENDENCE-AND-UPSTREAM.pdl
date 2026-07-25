@@ -1,0 +1,38 @@
+REQUEST_VERSION 1.0.0
+
+ID REQUEST-0006
+
+STATUS PENDING
+
+DATE 2026-07-25
+
+WHO President Cley Duarte
+
+SCOPE PACE
+
+TITLE
+
+PACE is fully independent and self-governing; consumers depend on PACE, not
+the reverse. A consumer's useful pattern improves PACE only upstream, with
+the project owner's prior authorization.
+
+RAW_TEXT
+
+PACE has its own repository and depends on nothing from TuPerimetro. The
+latter is only a consumer of PACE, and only helps PACE improve when, in
+using it, it creates a structure useful to the project that PACE can then
+use to improve itself — with the prior authorization of the project's owner
+to improve PACE.
+
+PROPOSED_SCOPE PACE
+
+PROMOTED_TO
+
+(pending: refines the Learning Protocol with an UPSTREAM_CONTRIBUTION rule
+and corrects the self-hosting plan to an independent root)
+
+APPROVED_BY
+
+(pending)
+
+END

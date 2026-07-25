@@ -1,6 +1,8 @@
-"""PACE CLI — thin command layer delegating to the Kernel and Engines.
-No logic of its own. Not yet installed as a real `pace` executable — run
-as `python cli/pace.py <command> ...`; packaging is a later decision.
+"""PACE CLI - thin command layer delegating to the Kernel and Engines.
+
+Beyond argument handling, the only logic here is the guided intake: an
+interactive setup that seeds a project's memory from the owner's answers.
+Run as `python cli/pace.py <command> ...`, or install and run `pace ...`.
 """
 
 import argparse
@@ -66,14 +68,69 @@ def cmd_context(args) -> int:
     return 0
 
 
+def _slugify(name: str) -> str:
+    slug = "".join(c if c.isalnum() else "-" for c in name.lower())
+    while "--" in slug:
+        slug = slug.replace("--", "-")
+    return slug.strip("-") or "project"
+
+
+def _prompt(text: str, default: str = "") -> str:
+    suffix = f" [{default}]" if default else ""
+    try:
+        value = input(f"{text}{suffix}\n> ").strip()
+    except EOFError:
+        value = ""
+    return value or default
+
+
+def run_guided_intake(kind, name, slug, org_ref):
+    """Interactive setup: ask a few questions and seed mission / vision /
+    roadmap / sprint. The AI (or the owner) answers; nothing is invented.
+    Returns the resolved identity plus an `extra` dict of seeded content."""
+    print("\nPACE guided setup - a few questions to seed your project's memory.")
+    print("Press Enter to accept a [default] or to skip a question.\n")
+
+    if not name:
+        name = _prompt("Project name") or "Unnamed project"
+    kind_in = _prompt("Kind (PROJECT / ORGANIZATION)", kind or "PROJECT").upper()
+    kind = "ORGANIZATION" if kind_in.startswith("O") else "PROJECT"
+    if kind == "PROJECT" and not org_ref:
+        org_ref = _prompt("Organization it belongs to (org ref)") or "org"
+    if not slug:
+        slug = _prompt("Slug", _slugify(name))
+
+    extra = {}
+    mission = _prompt("Why does this project exist? (mission)")
+    if mission:
+        extra["mission"] = mission
+    vision = _prompt("Where is it going? (vision)")
+    if vision:
+        extra["vision"] = vision
+    roadmap = _prompt("What is pending? (roadmap - main items)")
+    if roadmap:
+        extra["roadmap"] = roadmap
+    sprint = _prompt("What are you working on right now? (current sprint)")
+    if sprint:
+        extra["sprint"] = sprint
+    return kind, name, slug, org_ref, extra
+
+
 def cmd_init(args) -> int:
+    kind, name, slug, org_ref = args.kind, args.name, args.slug, args.org_ref
+    extra = {}
+    if args.guided:
+        kind, name, slug, org_ref, extra = run_guided_intake(kind, name, slug, org_ref)
+
+    if not name:
+        print("init failed: --name is required (or use --guided)")
+        return 1
+    if not slug:
+        slug = _slugify(name)
+
     try:
         root = init_instance(
-            Path(args.path),
-            kind=args.kind,
-            name=args.name,
-            slug=args.slug,
-            org_ref=args.org_ref,
+            Path(args.path), kind=kind, name=name, slug=slug, org_ref=org_ref, **extra
         )
     except (FileExistsError, ValueError) as error:
         print(f"init failed: {error}")
@@ -124,9 +181,11 @@ def build_parser() -> argparse.ArgumentParser:
     init = subparsers.add_parser("init", help="create a new .pace/ instance in an existing project")
     init.add_argument("path")
     init.add_argument("--kind", choices=["PROJECT", "ORGANIZATION"], default="PROJECT")
-    init.add_argument("--name", required=True)
-    init.add_argument("--slug", required=True)
+    init.add_argument("--name", default=None)
+    init.add_argument("--slug", default=None)
     init.add_argument("--org-ref", dest="org_ref", default=None)
+    init.add_argument("--guided", action="store_true",
+                      help="interactive guided setup that seeds mission/vision/roadmap/sprint")
     init.set_defaults(func=cmd_init)
 
     create = subparsers.add_parser("create", help="generate a brand-new project governed by PACE from scratch")

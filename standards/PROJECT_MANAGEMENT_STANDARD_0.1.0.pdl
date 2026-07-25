@@ -16,17 +16,15 @@ PURPOSE
 Fix the external, day-to-day management shape every PACE-governed project
 takes in the tracking tool, so a new project is set up the same way every
 time, in seconds, without re-deciding structure. PACE's .pace/ memory
-stays tool-agnostic (the Ontology and Contract forbid tool-specific
-content inside it); this standard lives one level out, at the
+stays tool-agnostic; this standard lives one level out, at the
 organization, describing how the work is TRACKED — not what the knowledge
 IS.
 
 TOOL
 
 ClickUp, at workspace level. Each governed unit is a FOLDER inside the
-organization's Space; each project's working views are LISTS inside its
-own folder. The same recursive shape as the .pace/ model: the
-organization is the Space, each project a folder within it.
+organization's Space; the project's work lives in ONE list inside its own
+folder.
 
 FOLDER_PER_PROJECT
 
@@ -34,18 +32,32 @@ Every governed project gets its own ClickUp FOLDER named after the
 project, a sibling of the other projects' folders — never a set of loose
 lists scattered inside another project's folder.
 
-REQUIRED_LISTS
+SINGLE_ORDERED_LIST
 
-  Roadmap / Fases   The founding/roadmap sequence and evolution phases.
-                    Seeded from the project's HAS_ROADMAP assertion.
-  Backlog           Ideas and pending work not yet planned.
-  En curso          Active development tasks.
-  Bugs              Errors and fixes.
-  Hecho             Completed work.
+Each governed project has exactly ONE task list, ordered by a PHASE
+methodology with a single continuous correlative — not a spread of lists
+split by state.
+
+  - Every task is named  "FN . NN . Title"  where FN is its phase (F1, F2,
+    ...) and NN is a global correlative that never repeats and never
+    resets across phases (01, 02, 03 ...).
+  - Phases group the work in time; the correlative keeps strict order and
+    prevents drift. A phase label is valid only if every earlier phase
+    also exists (no "F3" without a real F1 and F2).
+  - Completed items come first; task STATE is carried by the status column
+    (to do / in progress / complete), never by a separate list.
+  - A final "someday/maybe" phase (highest FN) at the lowest priority
+    holds future ideas in the same list.
+
+Rationale: for a single owner focused on execution, five lists split by
+state add places to look without adding clarity. One ordered, phased list
+reads top-to-bottom and stays honest. (Supersedes the five-list layout.
+Promoted from REQUEST-0010 and refined with the phase-plus-correlative
+nomenclature the ROOT_AUTHORITY chose.)
 
 SEEDING
 
-On project setup, the Roadmap list is populated from the project's own
+On project setup, the ordered list is populated from the project's own
 roadmap in .pace/, one task per step, each marked DONE or PENDING against
 the real state of the repository — never an empty board.
 
@@ -58,8 +70,8 @@ the appropriate entity — the board is disposable, the memory is not.
 
 ORIGIN
 
-Promoted from REQUEST-0002 (2026-07-25): the ROOT_AUTHORITY directed that
-this ClickUp way of working itself be part of PACE's structure, created
-without deliberation each time.
+Promoted from REQUEST-0002 (ClickUp way of working as PACE structure).
+Refined by REQUEST-0010: one ordered list instead of five, state by
+status, and a single phase-plus-correlative numbering (FN . NN).
 
 END

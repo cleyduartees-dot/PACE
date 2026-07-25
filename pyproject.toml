@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pace"
+version = "0.1.0"
+description = "PACE — an engineering operating system: a versioned, installable engine that preserves and governs a project's knowledge so any AI understands it in seconds."
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [{ name = "Cley Duarte" }]
+keywords = ["ai", "knowledge", "engineering", "governance", "memory", "context"]
+
+[project.scripts]
+pace = "cli.pace:main"
+
+[tool.setuptools]
+packages = ["cli", "kernel", "services", "engines", "contracts"]
+
+[tool.setuptools.package-data]
+contracts = ["*.pdl"]

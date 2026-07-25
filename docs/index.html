@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PACE — La capa de memoria para software con IA</title>
+<meta name="description" content="PACE preserva el conocimiento de tu proyecto en un lenguaje que la IA entiende al instante. Instálalo una vez, gobierna todos tus proyectos. Trae tu propia IA — sin lock-in.">
+<meta property="og:title" content="PACE — La capa de memoria para software con IA">
+<meta property="og:description" content="Hace por el conocimiento de tu proyecto lo que Git hizo por su código. Cualquier IA entiende tu proyecto en 1 segundo.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%235f7bff'/%3E%3Ctext x='16' y='23' font-size='20' font-family='Arial' font-weight='bold' fill='%23061219' text-anchor='middle'%3EP%3C/text%3E%3C/svg%3E">
+<style>
+  :root{--bg:#0b0d12;--bg2:#11141c;--card:#151925;--line:#232838;--txt:#e7eaf1;--mut:#98a1b6;--accent:#5f7bff;--accent2:#18c6b6;--grad:linear-gradient(120deg,#5f7bff 0%,#18c6b6 100%)}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+  code,.mono{font-family:"SF Mono",ui-monospace,"Cascadia Code",Menlo,Consolas,monospace}
+  nav{position:sticky;top:0;z-index:20;backdrop-filter:blur(10px);background:rgba(11,13,18,.72);border-bottom:1px solid var(--line)}
+  .nav-in{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.02em}
+  .logo{width:30px;height:30px;border-radius:8px;background:var(--grad);display:grid;place-items:center;font-weight:800;color:#06121a;font-size:15px}
+  .nav-links{display:flex;gap:24px;font-size:14px;color:var(--mut)}
+  .nav-links a:hover{color:var(--txt)}
+  .btn{display:inline-block;padding:10px 18px;border-radius:10px;background:var(--grad);color:#06121a;font-weight:700;font-size:14px;transition:transform .15s,box-shadow .15s;cursor:pointer;border:none}
+  .btn:hover{transform:translateY(-1px);box-shadow:0 10px 30px -10px rgba(95,123,255,.6)}
+  .btn.ghost{background:transparent;color:var(--txt);border:1px solid var(--line)}
+  @media(max-width:720px){.nav-links{display:none}}
+  .hero{padding:88px 0 60px;text-align:center;position:relative;overflow:hidden}
+  .hero::before{content:"";position:absolute;inset:-40% 0 auto 0;height:600px;background:radial-gradient(600px 300px at 50% 0,rgba(95,123,255,.18),transparent 70%);pointer-events:none}
+  .tag{display:inline-block;font-size:13px;color:var(--accent2);border:1px solid var(--line);border-radius:100px;padding:6px 14px;margin-bottom:24px;background:var(--bg2)}
+  .hero h1{font-size:clamp(34px,6vw,58px);line-height:1.06;letter-spacing:-.02em;font-weight:800;margin-bottom:20px}
+  .hero h1 .g{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .lead{font-size:clamp(17px,2.4vw,21px);color:var(--mut);max-width:680px;margin:0 auto 26px}
+  .cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  .free-note{margin-top:16px;font-size:13px;color:var(--mut)}
+  section{padding:70px 0;border-top:1px solid var(--line)}
+  .kick{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:14px}
+  h2{font-size:clamp(26px,4vw,36px);letter-spacing:-.02em;font-weight:800;margin-bottom:14px}
+  .sub{color:var(--mut);max-width:660px;font-size:17px;margin-bottom:36px}
+  .grid{display:grid;gap:18px}
+  .g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}
+  @media(max-width:820px){.g3,.g4{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:560px){.g3,.g4{grid-template-columns:1fr}}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px}
+  .card h3{font-size:16px;margin-bottom:8px}.card p{color:var(--mut);font-size:14.5px}
+  /* guia */
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  @media(max-width:760px){.steps{grid-template-columns:1fr}}
+  .step{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;display:flex;gap:14px}
+  .stepn{flex:none;width:30px;height:30px;border-radius:8px;background:var(--grad);color:#06121a;font-weight:800;display:grid;place-items:center}
+  .step h4{font-size:15px;margin-bottom:8px}
+  .cmd{display:flex;align-items:center;justify-content:space-between;gap:8px;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px 10px;margin-bottom:8px}
+  .cmd code{font-size:13px;color:var(--accent2)}
+  .copy{background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:11px;border-radius:6px;padding:4px 8px;cursor:pointer;flex:none}
+  .copy:hover{color:var(--txt)}
+  .step p{color:var(--mut);font-size:13.5px}
+  .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+  .tab{background:var(--card);border:1px solid var(--line);color:var(--mut);border-radius:10px;padding:9px 14px;font-size:14px;cursor:pointer}
+  .tab.active{color:var(--txt);border-color:var(--accent);background:var(--bg2)}
+  .tabpanel{display:none;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px}
+  .tabpanel.active{display:block}
+  .tabpanel p{color:var(--mut);font-size:15px;margin-bottom:12px}
+  .tabpanel pre{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:14px;font-size:13px;color:#cdd4e6;overflow-x:auto;white-space:pre-wrap}
+  .flow{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+  .pill{background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:9px 13px;font-size:13.5px}
+  .arrow{color:var(--accent);font-weight:800}
+  .price-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  @media(max-width:920px){.price-grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:520px){.price-grid{grid-template-columns:1fr}}
+  .tier{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px;display:flex;flex-direction:column;position:relative}
+  .tier.pop{border-color:var(--accent);box-shadow:0 20px 60px -30px rgba(95,123,255,.7)}
+  .tier .badge{position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:var(--grad);color:#06121a;font-size:11px;font-weight:800;padding:4px 12px;border-radius:100px}
+  .tier h3{font-size:18px;margin-bottom:4px}
+  .tier .who{color:var(--mut);font-size:13px;min-height:34px}
+  .tier .amt{font-size:30px;font-weight:800;margin:10px 0 2px}
+  .tier .amt small{font-size:14px;color:var(--mut);font-weight:500}
+  .tier ul{list-style:none;margin:16px 0 20px;display:flex;flex-direction:column;gap:9px}
+  .tier li{font-size:13.5px;color:var(--txt);padding-left:22px;position:relative}
+  .tier li::before{content:"✓";position:absolute;left:0;color:var(--accent2);font-weight:800}
+  .tier .btn{margin-top:auto;text-align:center}
+  .price-note{text-align:center;color:var(--mut);font-size:13px;margin-top:20px}
+  .faq{max-width:760px}
+  details{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin-bottom:12px}
+  details summary{cursor:pointer;font-weight:600;font-size:15.5px;list-style:none}
+  details summary::-webkit-details-marker{display:none}
+  details summary::after{content:"+";float:right;color:var(--accent)}
+  details[open] summary::after{content:"–"}
+  details p{color:var(--mut);font-size:14.5px;margin-top:12px}
+  .cta-band{text-align:center;background:linear-gradient(180deg,var(--bg2),var(--bg));border-radius:20px;border:1px solid var(--line);padding:52px 24px}
+  footer{padding:40px 0;border-top:1px solid var(--line);color:var(--mut);font-size:14px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+</style>
+</head>
+<body>
+
+<nav><div class="wrap nav-in">
+  <div class="brand"><span class="logo">P</span> PACE</div>
+  <div class="nav-links">
+    <a href="#empezar">Cómo empezar</a>
+    <a href="#producto">Producto</a>
+    <a href="#precios">Precios</a>
+    <a href="#faq">FAQ</a>
+  </div>
+  <a class="btn" href="#empezar">Empezar</a>
+</div></nav>
+
+<header class="hero"><div class="wrap">
+  <span class="tag">Trae tu propia IA · sin lock-in · corre en local</span>
+  <h1>La <span class="g">capa de memoria</span><br>para software hecho con IA</h1>
+  <p class="lead">PACE preserva el pasado, presente y futuro de tu proyecto en un lenguaje que cualquier IA entiende al instante. Hace por el conocimiento lo que Git hizo por el código.</p>
+  <div class="cta">
+    <a class="btn" href="#empezar">Cómo empezar</a>
+    <a class="btn ghost" href="mailto:cleyduarte.es@gmail.com?subject=PACE%20-%20acceso%20anticipado&body=Quiero%20probar%20PACE%20Cloud.">Lista de espera</a>
+  </div>
+  <p class="free-note">El motor es gratis y de código abierto. Solo necesitas Python — sin cuenta, sin suscripción, sin depender de ninguna IA concreta.</p>
+</div></header>
+
+<section id="empezar" style="background:var(--bg2)"><div class="wrap">
+  <div class="kick">Guía de inicio</div>
+  <h2>Instálalo y úsalo en minutos</h2>
+  <p class="sub">Tres pasos para instalarlo — y tres maneras de usarlo, según cómo trabajes.</p>
+
+  <div class="steps">
+    <div class="step"><span class="stepn">1</span><div>
+      <h4>Instala PACE</h4>
+      <div class="cmd"><code class="mono">pip install pace</code><button class="copy" data-c="pip install pace">Copiar</button></div>
+      <p>Solo necesitas Python. Gratis, en local.</p>
+    </div></div>
+    <div class="step"><span class="stepn">2</span><div>
+      <h4>Ponlo sobre tu proyecto</h4>
+      <div class="cmd"><code class="mono">pace init</code><button class="copy" data-c="pace init">Copiar</button></div>
+      <p>Crea la carpeta <code>.pace/</code> con la memoria del proyecto.</p>
+    </div></div>
+    <div class="step"><span class="stepn">3</span><div>
+      <h4>Compruébalo</h4>
+      <div class="cmd"><code class="mono">pace context</code><button class="copy" data-c="pace context">Copiar</button></div>
+      <p>Cualquier IA entiende tu proyecto al instante.</p>
+    </div></div>
+  </div>
+
+  <h3 style="margin:42px 0 8px;font-size:19px">Tres maneras de usarlo</h3>
+  <div class="tabs">
+    <button class="tab active" data-t="cli">🖥️ Por comando (CLI)</button>
+    <button class="tab" data-t="ia">🤖 Con tu IA en el editor</button>
+    <button class="tab" data-t="team">👥 En equipo (Cloud)</button>
+  </div>
+  <div class="tabpanel active" id="tab-cli">
+    <p>Para desarrolladores. Corres los comandos tú mismo:</p>
+    <pre class="mono">pace init         # crea la memoria del proyecto
+pace context      # imprime todo el contexto
+pace doctor       # valida que la memoria es correcta
+pace create nuevo # crea un proyecto nuevo gobernado por PACE</pre>
+  </div>
+  <div class="tabpanel" id="tab-ia">
+    <p>La forma recomendada. Tu IA (Cursor, Claude, Copilot) lee la carpeta <code>.pace/</code> al empezar y ya sabe el proyecto — le hablas normal, sin repetir nada. Tú casi no tocas la terminal.</p>
+    <pre class="mono">Tú:  "sigamos con el carrito de compra"
+IA:  (consulta .pace/) "Vale — según tu roadmap el paso 2 es
+      Carrito y pago, y tu misión es la entrega el mismo día,
+      así que lo enfoco a eso…"</pre>
+  </div>
+  <div class="tabpanel" id="tab-team">
+    <p>Para equipos. Con <strong>PACE Cloud</strong>, la memoria se sincroniza entre todas las personas e IAs, con panel visual, roles y aprobaciones. Cada persona —y cada IA— arranca con el mismo contexto, sin que nadie tenga que ponerlas al día.</p>
+  </div>
+</div></section>
+
+<section id="como-se-entera"><div class="wrap">
+  <div class="kick">El arranque inteligente</div>
+  <h2>Cómo PACE se entera de tu proyecto</h2>
+  <p class="sub">Al instalarlo, PACE no adivina a ciegas: investiga por varias vías, te propone un borrador y <strong>tú lo confirmas</strong>. Nunca da nada por cierto sin tu visto bueno.</p>
+  <div class="grid g4">
+    <div class="card"><h3>🔍 Revisa tu código</h3><p>Echa un vistazo rápido a tu repo — estructura, README, historial — y deduce de qué va.</p></div>
+    <div class="card"><h3>💬 Te entrevista</h3><p>Te hace unas preguntas clave: qué es, por qué existe, qué falta. ¿Proyecto nuevo? Igual te da contexto preguntando.</p></div>
+    <div class="card"><h3>📄 Lee tus documentos</h3><p>Le pasas specs, notas o docs, los analiza y te confirma lo que dedujo.</p></div>
+    <div class="card"><h3>🔗 Conecta ClickUp / GitHub</h3><p>Tira del roadmap, las tareas, los issues y el historial para enterarse solo.</p></div>
+  </div>
+  <p style="margin-top:24px;color:var(--txt);font-size:16px">Con todo eso <strong>te propone tu misión, visión y roadmap</strong>. Tú confirmas o corriges — y ahí nace la memoria del proyecto.</p>
+</div></section>
+
+<section id="para-quien" style="background:var(--bg2)"><div class="wrap">
+  <div class="kick">Para quién es</div>
+  <h2>Si trabajas con IA, PACE es para ti</h2>
+  <p class="sub">Personas y equipos que construyen software con IA y no quieren volver a explicar el proyecto cada vez que cambia la sesión, el modelo o el equipo.</p>
+  <div class="grid g3">
+    <div class="card"><h3>👩‍💻 Desarrolladores solo</h3><p>Deja de repetirle a la IA en qué trabajas. Ella lee tu <code>.pace/</code> y arranca al día.</p></div>
+    <div class="card"><h3>👥 Equipos</h3><p>Una sola fuente de verdad del proyecto, compartida entre personas e IAs. El conocimiento no se pierde.</p></div>
+    <div class="card"><h3>🏢 Empresas</h3><p>Proyectos que duran años y sobreviven al cambio de equipo. Memoria auditable y gobernada.</p></div>
+  </div>
+</div></section>
+
+<section id="producto" style="background:var(--bg2)"><div class="wrap">
+  <div class="kick">El problema → la promesa</div>
+  <h2>El conocimiento se pierde. PACE lo fija.</h2>
+  <p class="sub">Hoy vive disperso en chats, Slack, Notion y la memoria del arquitecto. Cuando cambia la IA o pasan meses, desaparece. Con PACE, el proyecto <strong>sabe explicarse a sí mismo</strong>: cualquier IA lo entiende en 1 segundo.</p>
+  <div class="flow">
+    <span class="pill">✍️ Corrección</span><span class="arrow">→</span>
+    <span class="pill">✅ Autorizas una vez</span><span class="arrow">→</span>
+    <span class="pill">📜 Regla permanente</span><span class="arrow">→</span>
+    <span class="pill">🤖 Cargada en cada mensaje</span>
+  </div>
+  <p style="margin-top:22px;color:var(--mut);font-size:15px">Corrige una vez; ni entre sesiones ni dentro de un mismo chat vuelve a perder el hilo.</p>
+</div></section>
+
+<section id="precios"><div class="wrap">
+  <div class="kick">Precios</div>
+  <h2>Empieza gratis. Crece cuando tu equipo lo necesite.</h2>
+  <p class="sub">El motor siempre es gratis. Pagas por la nube, la colaboración en equipo y la memoria de IA gestionada.</p>
+  <div class="price-grid">
+    <div class="tier">
+      <h3>Core</h3><div class="who">Para empezar y open source</div><div class="amt">Gratis</div>
+      <ul><li>CLI completo (init, context, doctor, create)</li><li>Memoria <code>.pace/</code> en local</li><li>Compatible con cualquier IA</li><li>Código abierto</li></ul>
+      <a class="btn ghost" href="https://github.com/cleyduartees-dot/PACE" target="_blank" rel="noopener">Descargar</a>
+    </div>
+    <div class="tier">
+      <h3>Pro</h3><div class="who">Para el dev que quiere el modo fácil</div><div class="amt">€9 <small>/ mes</small></div>
+      <ul><li>Todo lo de Core</li><li>Intake guiado (te entrevista)</li><li>Memoria por chat gestionada</li><li>Integración Cursor / Claude / Copilot</li></ul>
+      <a class="btn ghost" href="mailto:cleyduarte.es@gmail.com?subject=PACE%20Pro">Lista de espera</a>
+    </div>
+    <div class="tier pop"><span class="badge">Recomendado</span>
+      <h3>Team</h3><div class="who">Para equipos que comparten proyectos</div><div class="amt">€19 <small>/ usuario·mes</small></div>
+      <ul><li>Todo lo de Pro</li><li>PACE Cloud: sincronización de equipo</li><li>Panel visual + búsqueda entre proyectos</li><li>Gobierno: roles y aprobaciones</li></ul>
+      <a class="btn" href="mailto:cleyduarte.es@gmail.com?subject=PACE%20Team">Lista de espera</a>
+    </div>
+    <div class="tier">
+      <h3>Enterprise</h3><div class="who">Para organizaciones con exigencias</div><div class="amt">A medida</div>
+      <ul><li>Todo lo de Team</li><li>SSO y on-premise</li><li>Auditoría y cumplimiento</li><li>Soporte prioritario y SLA</li></ul>
+      <a class="btn ghost" href="mailto:cleyduarte.es@gmail.com?subject=PACE%20Enterprise">Hablar</a>
+    </div>
+  </div>
+  <p class="price-note">Precios iniciales orientativos, en validación. El plan Core es gratis para siempre.</p>
+</div></section>
+
+<section id="faq" style="background:var(--bg2)"><div class="wrap">
+  <div class="kick">Preguntas frecuentes</div>
+  <h2>Lo que todos preguntan</h2>
+  <div class="faq">
+    <details open><summary>¿Necesito pagar una IA (como Claude) para usar PACE?</summary><p>No. PACE es un motor que corre en local con Python — gratis, sin cuenta ni suscripción. Traes la IA que ya uses (Claude, ChatGPT, Cursor, Copilot) o incluso ninguna: <code>pace context</code> te da el contexto igual. Cero lock-in.</p></details>
+    <details><summary>¿Por qué no dejo que la IA lea mi repo y ya?</summary><p>Porque leer el código dice el <em>qué</em>, no el <em>porqué</em> ni el <em>hacia dónde</em>. Tu repo no guarda por qué se decidió X y no Y, ni la misión, ni el roadmap, ni los caminos que se descartaron — eso no está en ningún archivo. Y meter el repo entero en cada mensaje es lento y desborda a la IA (justo lo que hace que "olvide"). PACE es la memoria compacta, aprobada por ti y con el porqué. Como Git, pero para el conocimiento.</p></details>
+    <details><summary>¿De quién son mis datos?</summary><p>Tuyos. Tu carpeta <code>.pace/</code> vive en tu repositorio, junto a tu código. PACE no envía nada a ningún lado sin tu permiso. En los planes de nube, tú decides qué se sincroniza.</p></details>
+    <details><summary>¿En qué se diferencia de Notion o un wiki?</summary><p>Un wiki lo lee un humano; PACE lo lee una IA al instante y estructurado. Vive con el código (versionado en git), no en otra herramienta que se queda obsoleta. Es memoria ejecutable, no documentación suelta.</p></details>
+    <details><summary>¿Cómo lo uso en mi día a día?</summary><p>La carpeta <code>.pace/</code> se guarda en tu repo. Tu IA en el editor la lee al empezar y ya sabe el proyecto. Lo importante vuelve a <code>.pace/</code>. Un check de <code>pace doctor</code> mantiene la memoria válida.</p></details>
+  </div>
+</div></section>
+
+<section><div class="wrap"><div class="cta-band">
+  <div class="kick" style="justify-content:center">Empieza hoy</div>
+  <h2>Dale a tu proyecto una memoria que no muere</h2>
+  <p class="sub" style="margin:0 auto 26px">Gratis en local con un comando. Y cuando tu equipo crezca, PACE Cloud lo mantiene todo en sincronía.</p>
+  <div class="cta" style="justify-content:center">
+    <a class="btn" href="https://github.com/cleyduartees-dot/PACE" target="_blank" rel="noopener">Empezar gratis</a>
+    <a class="btn ghost" href="mailto:cleyduarte.es@gmail.com?subject=PACE%20-%20acceso%20anticipado">Lista de espera</a>
+  </div>
+</div></div></section>
+
+<footer class="wrap">
+  <div>PACE — La capa de memoria para software con IA. Gobernado por PACE.</div>
+  <div>Pannotia · Cley Duarte · 2026</div>
+</footer>
+
+<script>
+document.querySelectorAll('.tab').forEach(function(t){t.addEventListener('click',function(){
+  document.querySelectorAll('.tab').forEach(function(x){x.classList.remove('active')});
+  document.querySelectorAll('.tabpanel').forEach(function(x){x.classList.remove('active')});
+  t.classList.add('active');
+  var el=document.getElementById('tab-'+t.getAttribute('data-t'));
+  if(el){el.classList.add('active')}
+})});
+document.querySelectorAll('.copy').forEach(function(b){b.addEventListener('click',function(){
+  var c=b.getAttribute('data-c');
+  if(navigator.clipboard){navigator.clipboard.writeText(c)}
+  var o=b.textContent;b.textContent='¡Copiado!';setTimeout(function(){b.textContent=o},1200);
+})});
+</script>
+</body>
+</html>

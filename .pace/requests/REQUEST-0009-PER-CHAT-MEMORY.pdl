@@ -1,0 +1,50 @@
+REQUEST_VERSION 1.0.0
+
+ID REQUEST-0009
+
+STATUS PENDING
+
+DATE 2026-07-25
+
+WHO President Cley Duarte
+
+SCOPE PACE
+
+TITLE
+
+Per-chat memory that stores EVERYTHING shared in a conversation so an AI
+always answers with full lucidity, never just the last thing said ("no
+senile dementia").
+
+RAW_TEXT
+
+Even within an AI's own chat, it ages very early and gets senile dementia.
+On every message it should go and consult PACE, and in PACE there must be a
+structure created for each chat, so it never gets senile dementia. That
+structure has to store everything shared in the chat and always be able to
+answer with lucidity. Today, on long chats it is frustrating because it
+seems the AI only remembers the last thing we talked about.
+
+PROPOSED_SCOPE PACE
+
+DESIGN_NOTE
+
+Extends the Bootstrap/Handoff idea from "load context at session start" to
+"re-ground on every turn". PACE keeps, per chat, a living context capsule
+that stores the WHOLE conversation's substance — objective, every decision
+taken, open threads, relevant history, latest state — not a recency window.
+The AI reads it at the start of every turn and writes it back at the end,
+so lucidity does not decay as the model's context window fills. PACE
+provides the structure and protocol; the AI client wires the per-turn
+read/write (part of the integration story). Candidate home: memory/ or a
+new sessions/ area, governed by a future Session-Continuity protocol.
+
+PROMOTED_TO
+
+(pending)
+
+APPROVED_BY
+
+(pending)
+
+END

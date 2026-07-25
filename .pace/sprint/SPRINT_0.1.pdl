@@ -1,0 +1,17 @@
+SPRINT_VERSION 0.1
+
+STATUS ACTIVE
+
+OWNER President Cley Duarte
+
+SPRINT
+
+FOCUS (session 2026-07-25)
+- Self-governance: PACE now consumes its own product — this .pace/ instance,
+  validated by the PACE Kernel.
+- Shipped: Learning Protocol, Project-Management Standard, Documentation
+  Standard; requests 0001-0008 logged.
+- In progress: design PACE's distributable / sellable structure, and a
+  public explainer page for PACE.
+
+END

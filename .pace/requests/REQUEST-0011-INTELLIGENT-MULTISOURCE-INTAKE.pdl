@@ -1,0 +1,53 @@
+REQUEST_VERSION 1.0.0
+
+ID REQUEST-0011
+
+STATUS PENDING
+
+DATE 2026-07-25
+
+WHO President Cley Duarte
+
+SCOPE PACE
+
+TITLE
+
+Install/intake must be an intelligent, multi-source onboarding: quick code
+review plus the questions it deems fit; greenfield context questions when
+there is no code; document ingestion with confirm-what-was-deduced; and
+optional connection to ClickUp or GitHub -- always confirming deductions
+with the owner before anything becomes official.
+
+RAW_TEXT
+
+PACE must have an instruction, at install time, to do a quick review of the
+code and ask the client whatever questions it deems appropriate. If the
+code is new, have questions that give it context too. It should also be
+able to receive documents to analyze and ask or confirm what it deduced, or
+connect to ClickUp or GitHub to find out.
+
+PROPOSED_SCOPE PACE
+
+DESIGN_NOTE
+
+Expands the guided Intake (pace init --guided) into a multi-source engine:
+  (1) EXISTING CODE -- quick review, propose a first draft of mission /
+      vision / roadmap.
+  (2) GREENFIELD (no code) -- a context questionnaire so it still gets
+      grounded.
+  (3) DOCUMENTS the client provides -- analyze them and confirm what was
+      deduced.
+  (4) CONNECTORS -- optionally pull context from ClickUp (roadmap, tasks)
+      and GitHub (repo, issues, history).
+In every path the AI PROPOSES and the owner (ROOT_AUTHORITY) confirms
+before it is written as official -- Governance rule 1.
+
+PROMOTED_TO
+
+(pending)
+
+APPROVED_BY
+
+(pending)
+
+END

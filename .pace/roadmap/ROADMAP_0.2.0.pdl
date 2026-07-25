@@ -1,0 +1,50 @@
+ROADMAP_VERSION 0.2.0
+
+STATUS APPROVED
+
+SUPERSEDES ROADMAP_VERSION 0.1.0
+
+OWNER President Cley Duarte
+
+ROADMAP
+
+Ordered by execution strategy: each phase first guarantees CONTINUITY (the
+product keeps working and does not forget) before pursuing GROWTH (reaching
+more users and scaling). One single list; phase + continuous correlative
+(FN . NN), no resets, no disorder.
+
+PHASE_1 FOUNDATION -- the engine exists and governs itself   [DONE]
+  01  Create the official PACE repository
+  02  Implement the minimal skeleton
+  03  Implement pace init
+  04  Implement pace create
+  05  Self-governance: PACE adopts itself
+
+PHASE_2 SOLID PRODUCT -- installable, with memory and governance (continuity)
+  06  Package the CLI as an installable `pace`
+  07  Smoke test: install on a clean environment
+  08  Define the ACTOR / ROOT_AUTHORITY in .pace/
+  09  Bootstrap/Handoff engine -- the AI knows to consult the owner
+  10  Guided Intake/Onboarding (pace init --guided)
+  11  Per-chat memory / continuity -- no context "dementia"
+  12  Test suite + CI (pytest + pace doctor)
+  13  Update the README
+
+PHASE_3 LAUNCH AND MONETIZATION -- enter the market (growth)
+  14  Design the sellable structure / business model
+  15  Choose and apply the license
+  16  Make the landing sell (conversion)
+  17  Publish the landing on GitHub Pages
+
+PHASE_4 ADOPTION AND EXPANSION -- more users, sustained growth
+  18  Upstream contribution rule with authorization
+  19  User documentation: quickstart + guide
+  20  Create the first new project born from PACE
+
+PHASE_5 SCALE AND ROBUSTNESS -- grow without breaking continuity
+  21  Semantic Doctor (deep validation)
+  22  pace migrate (schema-version migrations)
+  23  Standalone binary (PyInstaller)
+  24  Stack templates for pace create
+
+END
