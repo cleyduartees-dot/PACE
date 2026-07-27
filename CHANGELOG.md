@@ -5,6 +5,14 @@ All notable changes to PACE are documented here. The format loosely follows
 version lines: the engine (`PACE_VERSION`) and the instance Contract
 (`SCHEMA_VERSION`).
 
+## [Unreleased]
+
+### Added
+- Update notice (REQUEST-0012): the handoff's Health checks now WARN when a
+  newer `pace-engine` exists on PyPI, showing the exact command
+  (`pip install --upgrade pace-engine`). Fail-silent: offline or slow
+  network means no notice, never an error.
+
 ## [0.2.0] — 2026-07-27 · Contract 0.2.0 — "Active Guardian"
 
 ### Added

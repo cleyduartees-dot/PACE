@@ -1,0 +1,16 @@
+SPRINT_VERSION 0.5
+
+STATUS APPROVED
+
+SUPERSEDES SPRINT_0.4.pdl
+
+SPRINT FOCUS (session 2026-07-27, closing)
+- Released 0.2.0 "Active Guardian" to PyPI (tag v0.2.0): supersede, rule,
+  condense, enriched handoff - verified from a clean install.
+- Shipped F6-31 (REQUEST-0012): update notice in the handoff health checks
+  with the exact upgrade command; fail-silent offline. 36 tests green.
+- Phase 6 remaining: 29 (git pre-commit hook), 30 (cloud/agent mode).
+- Debt: demo GIF (F3-16), landing on GitHub Pages (F3-17). F6-31 ships with
+  the next release (0.2.1 or 0.3.0).
+
+END

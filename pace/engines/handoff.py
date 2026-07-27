@@ -10,6 +10,8 @@ handoff/ section is REGENERABLE: rebuilt from the authoritative sources.
 from pathlib import Path
 
 from pace.services.pdl import read_pdl
+from pace.services.version import PACE_VERSION
+from pace.services.update_check import check_for_update
 from pace.engines.rules import load_rules
 
 ACTIVE_SECTIONS = [
@@ -154,6 +156,12 @@ def generate_handoff(root):
         warnings.append(
             f"The continuity log has {len(notes)} notes - run `pace condense` to "
             "archive the old ones (nothing discarded)."
+        )
+    update = check_for_update(PACE_VERSION)
+    if update:
+        warnings.append(
+            f"A newer PACE engine exists: {update['latest']} (you are running "
+            f"{update['current']}). Update with: {update['command']}"
         )
     out.append("## Health checks")
     out.append("")

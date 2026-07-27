@@ -1,0 +1,41 @@
+REQUEST_VERSION 1.0.0
+
+ID REQUEST-0012
+
+STATUS APPROVED
+
+DATE 2026-07-27
+
+WHO President Cley Duarte
+
+SCOPE PACE
+
+TITLE
+
+PACE must warn its users when a newer engine version exists, including the
+exact upgrade command to run -- the user should never have to check PyPI.
+
+RAW_TEXT
+
+Pero deberia haber un aviso de que hay una version nueva en pace y el link
+del comando a ejecutar.
+
+PROPOSED_SCOPE PACE
+
+DESIGN_NOTE
+
+Active Guardian behaviour: an update-check service queries PyPI for the
+latest pace-engine version (short timeout, fail-silent when offline) and,
+when a newer version exists, the handoff's Health checks section WARNs with
+the exact command: pip install --upgrade pace-engine. No network, no error,
+no delay beyond the timeout -- silence is the failure mode, never a crash.
+
+PROMOTED_TO
+
+F6-31 (pace/services/update_check.py + handoff health check)
+
+APPROVED_BY
+
+President Cley Duarte
+
+END

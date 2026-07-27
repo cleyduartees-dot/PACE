@@ -126,11 +126,11 @@ END
 ## Roadmap
 
 ```
-ROADMAP_VERSION 0.2.3
+ROADMAP_VERSION 0.2.4
 
 STATUS APPROVED
 
-SUPERSEDES ROADMAP_0.2.2.pdl
+SUPERSEDES ROADMAP_0.2.3.pdl
 
 ROADMAP Ordered by execution strategy: each phase first guarantees CONTINUITY (the
 product keeps working and does not forget) before pursuing GROWTH (reaching
@@ -180,6 +180,7 @@ PHASE_6 ACTIVE GUARDIAN -- PACE stops being passive and starts enforcing (contin
   28  Log condensation: working memory does not grow unbounded (pace condense)   [DONE]
   29  Git pre-commit hook: block edits that violate the contract
   30  Cloud/agent mode: PACE floating over projects, warning proactively
+  31  Update notice: WARN in the handoff when a newer engine exists, with the exact upgrade command   [DONE]
 
 END
 ```
@@ -187,38 +188,40 @@ END
 ## Current sprint
 
 ```
-SPRINT_VERSION 0.4
+SPRINT_VERSION 0.5
 
 STATUS APPROVED
 
-SUPERSEDES SPRINT_0.3.pdl
+SUPERSEDES SPRINT_0.4.pdl
 
-SPRINT FOCUS (session 2026-07-27, cont.)
-- Shipped F6-28: `pace condense` archives old continuity notes to
-  CONTINUITY_ARCHIVE.md (nothing discarded, idempotent); the handoff health
-  check now points to it. 31 tests green.
-- Phase 6 status: 25, 26, 27, 28 done; 29 (git hook) and 30 (cloud/agent) left.
-- Debt: demo GIF (F3-16); then republish 0.2.0 to PyPI so supersede/rule/
-  condense/enriched-handoff reach existing pace-engine users.
+SPRINT FOCUS (session 2026-07-27, closing)
+- Released 0.2.0 "Active Guardian" to PyPI (tag v0.2.0): supersede, rule,
+  condense, enriched handoff - verified from a clean install.
+- Shipped F6-31 (REQUEST-0012): update notice in the handoff health checks
+  with the exact upgrade command; fail-silent offline. 36 tests green.
+- Phase 6 remaining: 29 (git pre-commit hook), 30 (cloud/agent mode).
+- Debt: demo GIF (F3-16), landing on GitHub Pages (F3-17). F6-31 ships with
+  the next release (0.2.1 or 0.3.0).
 
 END
 ```
 
 ## Recent continuity notes
 
-The working log has 4 notes. Most recent below; read the
+The working log has 5 notes. Most recent below; read the
 full detail in .pace/memory/persistent/CONTINUITY.md:
 
 - [2026-07-27 17:32] F6 Active Guardian underway: shipped pace supersede (25) and enriched handoff with health checks (26). Dogfooded them on PACE itself to add Phase 6 to its own roadmap (0.2.0 -> 0.2.1) and refresh sprint (0.1 -> 0.2) via the tool, not by hand.
 - [2026-07-27 18:35] F6-27 done: added an optional rules/ section (Contract v0.2), the pace rule add/list command, and rules now render at the top of the handoff. Seeded PACE with 7 approved rules (5 PACE-scope, 2 ORG-scope) capturing this session's permanent corrections.
 - [2026-07-27 18:52] F6-28 done: pace condense archives old continuity notes (CONTINUITY_ARCHIVE.md), keeps the working log lean, loses nothing, idempotent. Handoff health check points to it. 31 tests green.
 - [2026-07-27 19:18] Release 0.2.0 Active Guardian published to PyPI (2026-07-27): supersede, rule, condense, enriched handoff now reach every pace-engine user. Verified from a clean install. Tag v0.2.0 on GitHub. Phase 6 remaining: 29 (git hook), 30 (cloud/agent).
+- [2026-07-27 19:26] F6-31 done (REQUEST-0012): update-check service queries PyPI (fail-silent, 2s timeout); handoff health checks now WARN with the exact upgrade command when a newer pace-engine exists. Verified against live PyPI: 0.1.0 user gets the notice, 0.2.0 user gets silence. 36 tests green. Ships with the next release.
 
 ## Where the rest of the memory lives
 
 - Decisions: .pace/decisions/  (1 recorded)
 - History:   .pace/history/    (11 entries)
-- Requests:  .pace/requests/   (11 logged in intake)
+- Requests:  .pace/requests/   (12 logged in intake)
 
 ## Health checks
 
