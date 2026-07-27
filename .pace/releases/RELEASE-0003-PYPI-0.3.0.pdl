@@ -1,0 +1,8 @@
+RELEASE_VERSION 0.3.0
+STATUS RELEASED
+TITLE PACE 0.3.0 - Zero-touch Guardian
+CHANNEL PyPI (pace-engine)
+DATE 2026-07-27
+SUPERSEDES RELEASE-0002-PYPI-0.2.0
+HIGHLIGHTS pace hook install (pre-commit guardian) + update notice with exact command + AGENTS.md auto-pointer (zero-touch AI onboarding) + pace update (one-step self-update)
+END

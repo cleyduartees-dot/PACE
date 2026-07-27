@@ -1,0 +1,47 @@
+REQUEST_VERSION 1.0.0
+
+ID REQUEST-0015
+
+STATUS APPROVED
+
+DATE 2026-07-27
+
+WHO President Cley Duarte
+
+SCOPE PACE
+
+TITLE
+
+The Kingdom Tale must be published on the PACE page (or linked from it),
+polished so it truly sells and explains what PACE is.
+
+RAW_TEXT
+
+En la pagina debe estar el cuento de el reino para entender el uso de
+pace. Luego actualiza este cuento y que venda realmente y explique que es
+PACE. Tiene que estar publicado en la pagina de pace o en un enlace.
+
+PROPOSED_SCOPE PACE
+
+DESIGN_NOTE
+
+Published as docs/cuento-del-reino.html (own page, same visual language
+as the landing) and linked from the landing (nav item "El Cuento" plus a
+teaser section). The tale was polished to sell: the amnesia problem told
+as a fairy tale, and every character mapped to the real shipped command
+("En tu reino: pace init / context / doctor / handoff / remember /
+condense / rule / supersede / hook install / update / AGENTS.md").
+Chapter IV keeps the President's larger vision (reality comprehension,
+Universal Node Model, the Governor, an Organizational Intelligence OS) as
+the chapter being written. Ends with a founding CTA: pip install
+pace-engine + pace init.
+
+PROMOTED_TO
+
+docs/cuento-del-reino.html + landing nav/teaser (under F3-16)
+
+APPROVED_BY
+
+President Cley Duarte
+
+END

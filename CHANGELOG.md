@@ -5,7 +5,7 @@ All notable changes to PACE are documented here. The format loosely follows
 version lines: the engine (`PACE_VERSION`) and the instance Contract
 (`SCHEMA_VERSION`).
 
-## [Unreleased]
+## [0.3.0] — 2026-07-27 — "Zero-touch Guardian"
 
 ### Added
 - `pace hook install` / `uninstall` — a git pre-commit guardian that runs

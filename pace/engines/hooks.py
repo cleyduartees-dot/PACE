@@ -2,25 +2,39 @@
 
 `pace hook install` writes a pre-commit hook that runs `pace doctor` and
 blocks the commit when the .pace/ instance violates its contract, so an
-AI (or a human) physically cannot commit a broken instance. Install is
-idempotent; uninstall neutralizes our hook without touching a hook PACE
-did not write.
+AI (or a human) physically cannot commit a broken instance.
+
+The hook remembers the exact Python interpreter that installed it, so it
+works even when `pace` is not on the shell's PATH. If PACE cannot be
+found at all it warns loudly but lets the commit through - a missing
+tool must never hold the user's commits hostage. Install is idempotent;
+uninstall neutralizes our hook without touching a hook PACE did not
+write.
 """
 
+import sys
 from pathlib import Path
 
 MARKER = "# managed-by: pace (Active Guardian pre-commit hook)"
 
-HOOK_BODY = f"""#!/bin/sh
-{MARKER}
+HOOK_TEMPLATE = """#!/bin/sh
+{marker}
 echo "[pace] pre-commit: validating .pace/ against its contract..."
 if command -v pace >/dev/null 2>&1; then
   exec pace doctor
 fi
-if command -v python >/dev/null 2>&1; then
+if [ -x "{python}" ] && "{python}" -c "import pace" >/dev/null 2>&1; then
+  exec "{python}" -m pace.cli.pace doctor
+fi
+if command -v python >/dev/null 2>&1 && python -c "import pace" >/dev/null 2>&1; then
   exec python -m pace.cli.pace doctor
 fi
-exec python3 -m pace.cli.pace doctor
+if command -v python3 >/dev/null 2>&1 && python3 -c "import pace" >/dev/null 2>&1; then
+  exec python3 -m pace.cli.pace doctor
+fi
+echo "[pace] WARNING: pace not found on this machine - skipping validation."
+echo "[pace] Install it (pip install pace-engine) or re-run: pace hook install"
+exit 0
 """
 
 
@@ -45,7 +59,11 @@ def install_hook(instance_root: Path):
             f"a pre-commit hook already exists at {hook} and PACE did not "
             "write it - merge it manually (add `pace doctor` to it)"
         )
-    hook.write_text(HOOK_BODY, encoding="utf-8", newline="\n")
+    python = Path(sys.executable).as_posix()
+    hook.write_text(
+        HOOK_TEMPLATE.format(marker=MARKER, python=python),
+        encoding="utf-8", newline="\n",
+    )
     hook.chmod(0o755)
     return hook
 

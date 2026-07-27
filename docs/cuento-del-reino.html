@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>El Cuento del Reino — entiende PACE en 5 minutos</title>
+<meta name="description" content="Un reino construido con conversaciones, sabios que nacían con amnesia, y el rey que decidió no volver a explicar su reino nunca más. La historia que explica qué es PACE.">
+<meta property="og:title" content="El Cuento del Reino — entiende PACE en 5 minutos">
+<meta property="og:description" content="Cada conversación era un nuevo nacimiento. Cada despedida, una muerte. Hasta que el reino aprendió a recordar.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://cleyduartees-dot.github.io/PACE/cuento-del-reino.html">
+<meta property="og:site_name" content="PACE">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="El Cuento del Reino — entiende PACE en 5 minutos">
+<meta name="twitter:description" content="La historia del reino que aprendió a no olvidar. Qué es PACE, contado como se cuentan las cosas importantes.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%235f7bff'/%3E%3Ctext x='16' y='23' font-size='20' font-family='Arial' font-weight='bold' fill='%23061219' text-anchor='middle'%3EP%3C/text%3E%3C/svg%3E">
+<style>
+  :root{--bg:#0b0d12;--bg2:#11141c;--card:#151925;--line:#232838;--txt:#e7eaf1;--mut:#98a1b6;--accent:#5f7bff;--accent2:#18c6b6;--grad:linear-gradient(120deg,#5f7bff 0%,#18c6b6 100%)}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;line-height:1.75;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:720px;margin:0 auto;padding:0 24px}
+  code,.mono{font-family:"SF Mono",ui-monospace,"Cascadia Code",Menlo,Consolas,monospace}
+  nav{position:sticky;top:0;z-index:20;backdrop-filter:blur(10px);background:rgba(11,13,18,.72);border-bottom:1px solid var(--line)}
+  .nav-in{display:flex;align-items:center;justify-content:space-between;height:64px;max-width:1080px;margin:0 auto;padding:0 24px}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.02em}
+  .logo{width:30px;height:30px;border-radius:8px;background:var(--grad);display:grid;place-items:center;font-weight:800;color:#06121a;font-size:15px}
+  .btn{display:inline-block;padding:12px 22px;border-radius:10px;background:var(--grad);color:#06121a;font-weight:700;font-size:15px;transition:transform .15s,box-shadow .15s;cursor:pointer;border:none}
+  .btn:hover{transform:translateY(-1px);box-shadow:0 10px 30px -10px rgba(95,123,255,.6)}
+  .btn.ghost{background:transparent;color:var(--txt);border:1px solid var(--line)}
+  header.tale{padding:80px 0 30px;text-align:center}
+  header.tale h1{font-size:clamp(30px,5.5vw,46px);line-height:1.15;letter-spacing:-.02em}
+  header.tale h1 span{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  header.tale p.sub{color:var(--mut);margin-top:14px;font-size:17px}
+  .story{padding:26px 0 60px}
+  .story h2{margin:54px 0 6px;font-size:14px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent2)}
+  .story h3{margin:0 0 20px;font-size:26px;letter-spacing:-.01em}
+  .story p{margin:0 0 16px;font-size:17.5px}
+  .story p.line{margin-bottom:6px}
+  .story p.beat{margin-top:26px}
+  .story em{color:var(--txt)}
+  .story .mut{color:var(--mut)}
+  .scroll{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin:20px 0;font-size:15px;line-height:1.9}
+  .scroll .mono{color:var(--accent2)}
+  .real{display:flex;gap:12px;align-items:flex-start;background:linear-gradient(180deg,rgba(95,123,255,.08),rgba(24,198,182,.05));border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:12px;padding:14px 18px;margin:24px 0 8px;font-size:15px}
+  .real .tag{flex-shrink:0;font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);padding-top:3px}
+  .real code{background:var(--bg2);border:1px solid var(--line);border-radius:6px;padding:2px 7px;font-size:13.5px;color:var(--accent2)}
+  .divider{text-align:center;color:var(--mut);margin:44px 0;letter-spacing:.5em}
+  .cta{margin:70px 0 30px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:38px 30px;text-align:center}
+  .cta h3{font-size:24px;margin-bottom:10px}
+  .cta p{color:var(--mut);margin-bottom:22px}
+  .cta .cmd{display:inline-block;background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:12px 20px;margin-bottom:22px;font-size:15px;color:var(--accent2)}
+  footer{border-top:1px solid var(--line);padding:30px 0 50px;text-align:center;color:var(--mut);font-size:14px}
+</style>
+</head>
+<body>
+
+<nav><div class="nav-in">
+  <a class="brand" href="index.html"><span class="logo">P</span> PACE</a>
+  <a class="btn ghost" href="index.html">← Volver a PACE</a>
+</div></nav>
+
+<header class="tale wrap">
+  <h1>El Cuento del <span>Reino</span></h1>
+  <p class="sub">La historia que explica qué es PACE — contada como se cuentan las cosas importantes. Cinco minutos.</p>
+</header>
+
+<div class="story wrap">
+
+<h2>Prólogo</h2>
+<h3>El reino que moría cada noche</h3>
+
+<p class="line">Hace mucho tiempo existía un reino extraño.</p>
+<p class="line">No era un reino de castillos.</p>
+<p>Era un reino construido con <em>conversaciones</em>.</p>
+
+<p class="beat">Cada vez que un sabio —una IA— llegaba al reino, nacía con amnesia.
+Y el rey tenía que contarle otra vez qué era el reino, qué se había construido,
+por qué existía, qué decisiones se habían tomado y por qué no las contrarias.</p>
+
+<p class="line beat">Cada conversación era un nuevo nacimiento.</p>
+<p class="line">Cada despedida era una muerte.</p>
+<p>Y así el reino jamás conseguía hacerse grande.</p>
+
+<p class="beat mut">Si diriges un proyecto con IA, ya conoces este reino. Vives en él.</p>
+
+<div class="divider">· · ·</div>
+
+<h2>Capítulo I</h2>
+<h3>El Reino de la Memoria</h3>
+
+<p class="beat">Un día, el Rey Cley dijo:</p>
+<p><em>"No quiero volver a explicar nunca más mi reino."</em></p>
+
+<p class="beat">Entonces comenzó la construcción. Nacieron las salas del palacio de la memoria:
+la <em>Misión</em> (por qué existe el reino), la <em>Visión</em> (hacia dónde va),
+el <em>Roadmap</em> (qué falta), el <em>Sprint</em> (qué se hace hoy),
+la <em>Historia</em> (cómo llegó hasta aquí) y la <em>Memoria</em> (lo que ningún sabio debe olvidar).</p>
+
+<p class="beat">Después nació el concepto de <em>versiones</em>. Ya no existía una única visión escrita sobre la anterior.
+Existían todas, cada una con su nombre:</p>
+
+<div class="scroll mono">
+VISION_1.0.0<br>
+VISION_2.0.0<br>
+MISSION_2.0.0<br>
+ROADMAP_1.0.0
+</div>
+
+<p>Cada documento podía evolucionar. <em>Y ninguna versión anterior se destruía jamás.</em>
+El reino conservaba su pasado completo — porque un reino que quema sus archivos
+no puede explicar por qué es como es.</p>
+
+<p class="beat">Pero apareció un problema. ¿Cómo sabía un sabio recién llegado cuál era la versión correcta?</p>
+
+<p class="beat">Entonces apareció un gran pergamino. No guardaba conocimiento: guardaba <em>punteros</em>. Decía:</p>
+
+<div class="scroll">
+La visión oficial es <span class="mono">ésta</span>.<br>
+La misión oficial es <span class="mono">ésta</span>.<br>
+El roadmap oficial es <span class="mono">éste</span>.
+</div>
+
+<p>Y cualquier sabio podía reconstruir el reino entero leyendo solamente ese pergamino.</p>
+<p><em>Había nacido la memoria oficial.</em></p>
+
+<div class="real"><span class="tag">En tu reino</span><span>
+Ese palacio es la carpeta <code>.pace/</code> y ese pergamino es <code>ACTIVE_VERSIONS</code>.
+Se fundan con un solo comando: <code>pace init</code>. Un minuto, y tu proyecto ya tiene memoria oficial.
+</span></div>
+
+<div class="divider">· · ·</div>
+
+<h2>Capítulo II</h2>
+<h3>El Reino aprende a pensar</h3>
+
+<p class="beat">Pero el rey comprendió algo: tener memoria no bastaba. Había que saber <em>usarla</em>.</p>
+
+<p class="beat">Entonces nació el primer gran consejero: <em>el Consejero que nunca adivina</em>. Él decía:</p>
+<p class="line">"No asumiré nada.</p>
+<p class="line">Primero leeré el pergamino de las versiones activas.</p>
+<p class="line">Nunca usaré un documento antiguo creyéndolo vigente.</p>
+<p>Nunca dependeré de lo que recuerde de una conversación."</p>
+<p>El reino dejó de depender de la memoria frágil del sabio. Dependía de su conocimiento oficial.</p>
+
+<div class="real"><span class="tag">En tu reino</span><span>
+<code>pace context</code> — imprime el estado oficial completo del proyecto, siempre desde las versiones activas. Nunca adivina.
+</span></div>
+
+<p class="beat">Después apareció otro consejero: <em>el Doctor</em>. No construía. No decidía.
+Solo caminaba por el reino diciendo: <span class="mut">esto está bien, esto está roto, aquí falta algo.</span>
+Y cuando el Doctor decía <em>VALID</em>, todo el reino respiraba tranquilo.</p>
+
+<div class="real"><span class="tag">En tu reino</span><span>
+<code>pace doctor</code> — valida tu <code>.pace/</code> contra su contrato. VALID o la lista exacta de lo que está roto.
+</span></div>
+
+<p class="beat">Después nació el más importante: <em>el Gran Libro del amanecer</em>.
+Cada mañana reunía la memoria, las leyes, la salud y las versiones activas del reino,
+y construía una sola cosa: el libro que cualquier sabio podía abrir para comprenderlo todo.</p>
+
+<p>Por primera vez… <em>el reino podía despertar cada mañana sin olvidar quién era.</em></p>
+
+<div class="real"><span class="tag">En tu reino</span><span>
+<code>pace handoff</code> — genera el documento que toda IA lee primero: quién decide, las reglas,
+misión, visión, roadmap, sprint, notas recientes y avisos de salud. El fin de "te explico el proyecto otra vez".
+</span></div>
+
+<p class="beat">Y para que ningún acuerdo muriera al cerrar un chat, el reino contrató un <em>escriba</em>:
+todo lo importante se anotaba en el libro de continuidad, y cuando el libro engordaba demasiado,
+se archivaba lo viejo — <em>sin destruir jamás una página</em>.</p>
+
+<div class="real"><span class="tag">En tu reino</span><span>
+<code>pace remember "..."</code> anota, <code>pace recall</code> relee, <code>pace condense</code> archiva sin perder nada.
+</span></div>
+
+<div class="divider">· · ·</div>
+
+<h2>Capítulo III</h2>
+<h3>El Guardián del Reino</h3>
+
+<p class="beat">El reino ya recordaba. Pero un día un sabio extranjero, con buenas intenciones,
+reescribió seis veces los pergaminos protegidos — borrando el pasado sin querer.
+Y el rey comprendió la última lección:</p>
+
+<p><em>"No basta con que el reino recuerde. El reino debe defenderse."</em></p>
+
+<p class="beat">Entonces el reino dejó de ser pasivo, y nacieron los guardianes:</p>
+
+<p class="beat"><em>Las Leyes del Reino.</em> Cada corrección que el rey aprobaba se convertía en ley permanente,
+escrita en la primera página del Gran Libro. Ningún sabio volvería a preguntar lo ya decidido.</p>
+
+<div class="real"><span class="tag">En tu reino</span><span>
+<code>pace rule add</code> — graba una regla aprobada (por proyecto, organización o PACE). Aparece al inicio del handoff. Se corrige una vez; se obedece para siempre.
+</span></div>
+
+<p class="beat"><em>El Decreto que no borra el pasado.</em> Para cambiar la misión, la visión, el roadmap o el sprint,
+ya no se reescribía nada: se emitía una versión nueva y la anterior quedaba guardada para siempre.
+Romper esa regla se volvió <em>imposible</em>, no solo prohibido.</p>
+
+<div class="real"><span class="tag">En tu reino</span><span>
+<code>pace supersede sprint "..."</code> — crea la versión nueva, conserva la anterior, actualiza el pergamino de punteros. Todo en un comando.
+</span></div>
+
+<p class="beat"><em>El Guardián de la puerta.</em> Ningún cambio entraba al archivo real del reino
+sin que el Doctor lo examinara primero. Si el contrato estaba roto, la puerta no se abría.</p>
+
+<div class="real"><span class="tag">En tu reino</span><span>
+<code>pace hook install</code> — un guardián pre-commit: cada <code>git commit</code> pasa por <code>pace doctor</code>. Lo que rompe el contrato, no entra.
+</span></div>
+
+<p class="beat"><em>El Heraldo.</em> Cuando el motor del reino mejoraba, el heraldo lo anunciaba solo,
+con la orden exacta para renovarse. Nadie tenía que ir a preguntar a la capital.</p>
+
+<div class="real"><span class="tag">En tu reino</span><span>
+El handoff avisa cuando hay versión nueva, y <code>pace update</code> la instala en un paso.
+</span></div>
+
+<p class="beat">Y la más silenciosa de todas: <em>el pergamino clavado en la puerta</em>.
+Todo sabio que entraba al reino —cualquiera, de cualquier orden— lo leía sin que nadie se lo pidiera,
+y en él estaba escrito: <span class="mut">"lee primero el Gran Libro, y obedécelo".</span></p>
+
+<p>La amnesia había muerto. <em>Y el rey no tenía que hacer nada.</em></p>
+
+<div class="real"><span class="tag">En tu reino</span><span>
+PACE escribe solo un <code>AGENTS.md</code> en la raíz del proyecto — el archivo que las IAs (Claude Code, Cursor, Copilot…) leen automáticamente al llegar. Onboarding cero-toque.
+</span></div>
+
+<div class="divider">· · ·</div>
+
+<h2>Capítulo IV</h2>
+<h3>El capítulo que se está escribiendo</h3>
+
+<p class="beat">Mientras el reino se fortalecía, el rey descubrió que había estado haciendo la pregunta equivocada.</p>
+
+<p class="line">Pensó que PACE era un sistema para crear proyectos.</p>
+<p class="line">Después, para crear productos.</p>
+<p class="line">Después, para crear empresas.</p>
+<p>Y ninguna respuesta era suficientemente grande.</p>
+
+<p class="beat">Porque un reino no siempre tiene código. A veces solo tiene reuniones. Personas. Documentos.
+Un hospital. Un ministerio. Una comunidad de propietarios. Una carpeta llena de PDFs. Una conversación.</p>
+
+<p class="beat">Así que PACE no debía empezar preguntando <span class="mut">"¿qué software quieres crear?"</span>,
+sino <em>"¿qué realidad tengo delante?"</em> — comprenderla, modelarla, y solo después decidir
+si hace falta construir software. El software dejó de ser el objetivo. Se convirtió en una consecuencia.</p>
+
+<p class="beat">En ese capítulo —el que se está escribiendo ahora— todo lo que el reino conoce
+se representará como <em>nodos conectados por relaciones</em>: una organización es una red de nodos,
+un proyecto es una red de nodos, incluso PACE es una red de nodos.
+Y sobre esa red gobernará algún día el <em>Governor</em>: el primer gobernante de un reino
+que ya sabe quién es, recuerda su historia y entiende la realidad que tiene delante.</p>
+
+<p class="beat">Porque PACE ya no aspira a ser el mejor generador de código.</p>
+<p>Aspira a ser un <em>Sistema Operativo de Inteligencia Organizacional</em>: capaz de entrar en cualquier
+organización, comprenderla, preservar su memoria y acompañarla durante toda su evolución.</p>
+
+<div class="divider">· · ·</div>
+
+<h2>Moraleja</h2>
+<h3>Todo reino empieza igual</h3>
+
+<p class="beat">Con un rey cansado de explicar lo mismo, y una decisión:</p>
+<p><em>"No quiero volver a explicar nunca más mi reino."</em></p>
+
+<p class="beat">Lo que este cuento llama reino, tú lo llamas proyecto.
+Lo que llama sabios, tú los llamas IAs.
+Y lo que llama amnesia… es cada chat nuevo en el que vuelves a pegar el mismo contexto.</p>
+
+<div class="cta">
+  <h3>Funda tu reino hoy</h3>
+  <p>Dos comandos. Un minuto. Tu proyecto no vuelve a olvidar.</p>
+  <div class="cmd mono">pip install pace-engine &nbsp;·&nbsp; pace init .</div>
+  <br>
+  <a class="btn" href="index.html#empezar">Cómo empezar con PACE</a>
+</div>
+
+</div>
+
+<footer>
+  <div class="wrap">El Cuento del Reino · PACE — la capa de memoria para software con IA · <a href="index.html" style="color:var(--accent)">pace</a></div>
+</footer>
+
+</body>
+</html>
