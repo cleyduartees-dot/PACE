@@ -353,6 +353,17 @@ def cmd_hook(args) -> int:
     return 0
 
 
+def cmd_discover(args) -> int:
+    """Auto-read an existing project and PROPOSE a draft .pace/ (read-only)."""
+    from pace.engines.discover import discover, format_proposal
+    root = Path(args.path) if args.path else Path.cwd()
+    if not root.is_dir():
+        print(f"discover failed: {root} is not a directory")
+        return 1
+    print(format_proposal(discover(root)))
+    return 0
+
+
 def cmd_watch(args) -> int:
     root = locate_instance(Path(args.path) if args.path else None)
     if root is None:
@@ -504,6 +515,10 @@ def build_parser() -> argparse.ArgumentParser:
     hook_uninstall = hook_sub.add_parser("uninstall", help="neutralize the PACE pre-commit hook")
     hook_uninstall.add_argument("path", nargs="?", default=None)
     hook_uninstall.set_defaults(func=cmd_hook)
+
+    discover = subparsers.add_parser("discover", help="auto-read an existing project (README, code, git) and PROPOSE a draft .pace/ (writes nothing)")
+    discover.add_argument("path", nargs="?", default=None)
+    discover.set_defaults(func=cmd_discover)
 
     watch = subparsers.add_parser("watch", help="continuously watch the .pace/ instance and warn on drift, breakage or a new engine version")
     watch.add_argument("--interval", type=int, default=5, help="seconds between checks")

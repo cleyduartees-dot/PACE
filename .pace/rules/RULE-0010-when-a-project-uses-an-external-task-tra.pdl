@@ -1,0 +1,9 @@
+RULE_ID RULE-0010
+SCOPE PACE
+STATUS APPROVED
+STATEMENT When a project uses an external task tracker (ClickUp, Jira, etc.), it must stay in sync with the .pace/ roadmap: every roadmap change is mirrored to the tracker in the SAME turn it happens. The user establishes this expectation and it must be complied with - never left to the AI to remember.
+RATIONALE The AI had to be reminded to update ClickUp - the obligation lived only in its diligence. Forgetting tracker sync is PACE failing, like a decision that lives only in the chat.
+PROMOTED_FROM REQUEST-0019
+APPROVED_BY President Cley Duarte
+CREATED_AT 2026-07-27
+END

@@ -27,6 +27,7 @@ already settle:
 - A parent task is not complete while any subtask is open; status must reflect reality.
 - Every decision or confirmation approved in chat is written into .pace/ (decisions/, rules/ or requests/) in the same turn it is approved - never left living only in the conversation. The chat is not memory; PACE is.
 - Release deliberately, not per feature: batch related work and cut a version when there is a meaningful bundle or a real user is blocked. SemVer on the engine line; reserve 1.0.0 as a stability commitment. See policies/VERSIONING_POLICY_0.1.0.pdl.
+- When a project uses an external task tracker (ClickUp, Jira, etc.), it must stay in sync with the .pace/ roadmap: every roadmap change is mirrored to the tracker in the SAME turn it happens. The user establishes this expectation and it must be complied with - never left to the AI to remember.
 **ORGANIZATION**
 - PACE is an independent product; consumers like TuPerimetro are adopters, never dependencies. Improvements flow upstream only with the owner's authorization.
 - Documents and presentations have a defined home (repo docs/ and the ClickUp PACE folder); apply it without being reminded.
@@ -129,11 +130,11 @@ END
 ## Roadmap
 
 ```
-ROADMAP_VERSION 0.2.12
+ROADMAP_VERSION 0.2.13
 
 STATUS APPROVED
 
-SUPERSEDES ROADMAP_0.2.11.pdl
+SUPERSEDES ROADMAP_0.2.12.pdl
 
 ROADMAP Ordered by execution strategy: each phase first guarantees CONTINUITY (the
 product keeps working and does not forget) before pursuing GROWTH (reaching
@@ -158,6 +159,7 @@ PHASE_2 SOLID PRODUCT -- installable, with memory and governance (continuity)
   11  Per-chat memory / continuity -- no context "dementia"
   12  Test suite + CI (pytest + pace doctor)   [DONE]
   13  Update the README   [DONE]
+  40  pace discover: auto-read a project (README, code, git) and PROPOSE a draft .pace/ - first path of the multi-source intake (REQUEST-0011, advances F2-10)   [DONE, unreleased - batched]
 
 PHASE_3 LAUNCH AND MONETIZATION -- enter the market (growth)
   14  Design the sellable structure / business model   [DONE]
@@ -199,32 +201,31 @@ END
 ## Current sprint
 
 ```
-SPRINT_VERSION 0.9
+SPRINT_VERSION 0.10
 
 STATUS APPROVED
 
-SUPERSEDES SPRINT_0.8.pdl
+SUPERSEDES SPRINT_0.9.pdl
 
-SPRINT FOCUS (session 2026-07-27, Phase 6 closed)
-- Built pace watch (F6-39): continuous background guardian that warns on
-  drift, contract break/heal, or a new engine version; excludes regenerable
-  outputs so it never self-triggers. Completes F6-30. PHASE 6 COMPLETE.
-- 55 tests green. NOT released - batched on main toward 0.5.0 with pace
-  capture (F6-38), per DECISION-0003/RULE-0009.
-- Published today: 0.2.0, 0.3.0, 0.3.1, 0.4.0. Site live. Kingdom Tale live.
-- Next release 0.5.0 = pace capture + pace watch as one deliberate bundle.
-- Open elsewhere: F3-16 demo GIF; F2-10 multi-source intake; F4/F5 items.
+SPRINT FOCUS (session 2026-07-27, in order)
+- Resumed the plan in correlative order: back to Phase 2's open intake work.
+- Built pace discover (item 40, REQUEST-0011): reads README/code/git and
+  PROPOSES a draft .pace/ - read-only, writes nothing, owner confirms.
+  Advances F2-10. 59 tests green. Batched (unreleased) toward 0.5.0.
+- Reconciled the tracker in the same turn (RULE-0010): F2-11 complete
+  (per-chat memory delivered by remember/recall/condense/capture + pace
+  check + handoff continuity); auto-discover subtask complete.
+- Phase 6 COMPLETE. Next in order: F2-10 remaining (greenfield questions,
+  document ingestion, ClickUp/GitHub connectors).
 
 END
 ```
 
 ## Recent continuity notes
 
-The working log has 16 notes. Most recent below; read the
+The working log has 18 notes. Most recent below; read the
 full detail in .pace/memory/persistent/CONTINUITY.md:
 
-- [2026-07-27 19:26] F6-31 done (REQUEST-0012): update-check service queries PyPI (fail-silent, 2s timeout); handoff health checks now WARN with the exact upgrade command when a newer pace-engine exists. Verified against live PyPI: 0.1.0 user gets the notice, 0.2.0 user gets silence. 36 tests green. Ships with the next release.
-- [2026-07-27 19:35] F6-29/31/32/33 done: pre-commit guardian (pace hook install, dogfooded on PACE's own repo), update notice, AGENTS.md auto-pointer (REQUEST-0013) and pace update (REQUEST-0014). 42 tests green. Pending: F6-30 design; release 0.3.0 to ship it all.
 - [2026-07-27 19:50] Release 0.3.0 Zero-touch Guardian prepared: hook fix (embedded interpreter, fail-open with warning when pace missing), wheel+sdist verified. REQUEST-0015: Kingdom Tale published as docs/cuento-del-reino.html, polished to sell, every character mapped to a real command; landing links it (nav + teaser). Pending user: commit, tag v0.3.0, twine upload.
 - [2026-07-27 20:02] Release 0.3.0 Zero-touch Guardian LIVE on PyPI (tag v0.3.0): hook guardian, update notice, AGENTS.md auto-pointer, pace update. Update notice verified firing in production for 0.2.0 users. Kingdom Tale live in repo (docs/cuento-del-reino.html + landing link). Phase 6: only 30 (cloud/agent) remains. Next gate: GitHub Pages (F3-17) requires making the repo public.
 - [2026-07-27 20:09] INCIDENT + LEARNING: a chat-confirmed decision (page publishes at first launch) was lost to context compaction and re-litigated. Captured now: DECISION-0002, RULE-0008 (same-turn capture of approved decisions), REQUEST-0016 (evidence case for F2-11 per-chat capsule and F6-30 agent mode). F3-17 on hold.
@@ -235,12 +236,14 @@ full detail in .pace/memory/persistent/CONTINUITY.md:
 - [2026-07-27 22:26] Built pace capture (F6-38): the conversational-capture verb - records an approved decision as DECISION-NNNN in one command (RULE-0008 remedy). AGENTS/cursor/check guidance now tell AIs to capture decisions the instant they happen. 50 tests green. NOT released: batched on main toward a future 0.5.0 per DECISION-0003/RULE-0009.
 - [2026-07-27 22:33] F6-39 pace watch built: continuous guardian (polling, zero-deps), warns on drift/break/heal/new-version, excludes handoff+memory/generated so regenerating handoff does not self-trigger. Completes F6-30. PHASE 6 COMPLETE. 55 tests green. Batched (unreleased) toward 0.5.0 = pace capture + pace watch.
 - [2026-07-27 22:35] GOTCHA fixed: a stray SUPERSEDED_BY line leaked into the roadmap content. Root cause: reading the latest roadmap via sorted(glob(ROADMAP_*)) is WRONG - lexicographic sort puts 0.2.10 before 0.2.9, so it read an old (stamped) file and re-appended its SUPERSEDED_BY stamp. FIX: always read the active file via ACTIVE_VERSIONS.pdl (the source of truth), and write full clean bodies rather than read-append. cmd_supersede itself is correct (it uses ACTIVE_VERSIONS); only ad-hoc glob reads were buggy. Roadmap cleaned to 0.2.12, doctor VALID.
+- [2026-07-27 22:42] RULE-0010 + REQUEST-0019 + DECISION-0005: keeping ClickUp in sync with the roadmap must be an enforced rule, not the AIs memory. Captured after the AI had to be reminded to update ClickUp. Board reconciled this turn: F6-38, F6-39 created+complete, F6-30 honestly scoped to the local guardian, PACE Cloud (paid) split out as future.
+- [2026-07-27 22:47] Built pace discover (item 40, REQUEST-0011 path 1): auto-reads README/stack/languages/git and PROPOSES a draft .pace/, read-only. Advances F2-10. Marked F2-11 complete (per-chat memory delivered). 59 tests green. Batched toward 0.5.0. Working in correlative order now (RULE-0002).
 
 ## Where the rest of the memory lives
 
-- Decisions: .pace/decisions/  (4 recorded)
+- Decisions: .pace/decisions/  (5 recorded)
 - History:   .pace/history/    (11 entries)
-- Requests:  .pace/requests/   (18 logged in intake)
+- Requests:  .pace/requests/   (19 logged in intake)
 
 ## Health checks
 

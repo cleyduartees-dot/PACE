@@ -1,0 +1,43 @@
+REQUEST_VERSION 1.0.0
+
+ID REQUEST-0019
+
+STATUS APPROVED
+
+DATE 2026-07-27
+
+WHO President Cley Duarte
+
+SCOPE PACE
+
+TITLE
+
+Keeping the external task tracker (ClickUp) in sync with the roadmap must
+be an enforced rule the user can establish - not something that depends on
+the AI remembering. Forgetting it is PACE failing.
+
+RAW_TEXT
+
+Sino te acordaste de clickup Pace esta fallando esto lo puede establecer el
+usuario y se debe cumplir.
+
+PROPOSED_SCOPE PACE
+
+DESIGN_NOTE
+
+Same failure class as REQUEST-0016 (chat is not memory): the AI had to be
+reminded to update ClickUp, so the obligation lived only in the AI's
+diligence, not in an enforced rule. Immediate remedy: RULE-0010 (the
+tracker mirrors the roadmap, updated in the same turn a roadmap item
+changes). Product remedy: a real ClickUp/GitHub integration so PACE can
+DETECT and flag tracker drift automatically.
+
+PROMOTED_TO
+
+RULE-0010 (in force) + future ClickUp/GitHub sync integration
+
+APPROVED_BY
+
+President Cley Duarte
+
+END

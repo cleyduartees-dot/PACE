@@ -1,0 +1,18 @@
+SPRINT_VERSION 0.10
+
+STATUS APPROVED
+
+SUPERSEDES SPRINT_0.9.pdl
+
+SPRINT FOCUS (session 2026-07-27, in order)
+- Resumed the plan in correlative order: back to Phase 2's open intake work.
+- Built pace discover (item 40, REQUEST-0011): reads README/code/git and
+  PROPOSES a draft .pace/ - read-only, writes nothing, owner confirms.
+  Advances F2-10. 59 tests green. Batched (unreleased) toward 0.5.0.
+- Reconciled the tracker in the same turn (RULE-0010): F2-11 complete
+  (per-chat memory delivered by remember/recall/condense/capture + pace
+  check + handoff continuity); auto-discover subtask complete.
+- Phase 6 COMPLETE. Next in order: F2-10 remaining (greenfield questions,
+  document ingestion, ClickUp/GitHub connectors).
+
+END

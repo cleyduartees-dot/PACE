@@ -1,0 +1,9 @@
+DECISION_VERSION 1.0.0
+ID DECISION-0005
+STATUS APPROVED
+DATE 2026-07-27
+DECIDED_BY President Cley Duarte
+TITLE The external tracker (ClickUp) must stay in sync with the roadmap, enforced by rule not by memory
+RATIONALE the AI had to be reminded to update ClickUp - same failure class as a decision lost to the chat
+RAW_TEXT The external tracker (ClickUp) must stay in sync with the roadmap, enforced by rule not by memory
+END
