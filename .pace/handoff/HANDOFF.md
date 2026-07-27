@@ -130,11 +130,11 @@ END
 ## Roadmap
 
 ```
-ROADMAP_VERSION 0.2.13
+ROADMAP_VERSION 0.2.14
 
 STATUS APPROVED
 
-SUPERSEDES ROADMAP_0.2.12.pdl
+SUPERSEDES ROADMAP_0.2.13.pdl
 
 ROADMAP Ordered by execution strategy: each phase first guarantees CONTINUITY (the
 product keeps working and does not forget) before pursuing GROWTH (reaching
@@ -160,6 +160,7 @@ PHASE_2 SOLID PRODUCT -- installable, with memory and governance (continuity)
   12  Test suite + CI (pytest + pace doctor)   [DONE]
   13  Update the README   [DONE]
   40  pace discover: auto-read a project (README, code, git) and PROPOSE a draft .pace/ - first path of the multi-source intake (REQUEST-0011, advances F2-10)   [DONE, unreleased - batched]
+  41  pace init --owner: seed the ROOT_AUTHORITY actor at creation (greenfield grounding - a new project knows who decides from minute one, advances F2-10)   [DONE, unreleased - batched]
 
 PHASE_3 LAUNCH AND MONETIZATION -- enter the market (growth)
   14  Design the sellable structure / business model   [DONE]
@@ -201,32 +202,29 @@ END
 ## Current sprint
 
 ```
-SPRINT_VERSION 0.10
+SPRINT_VERSION 0.11
 
 STATUS APPROVED
 
-SUPERSEDES SPRINT_0.9.pdl
+SUPERSEDES SPRINT_0.10.pdl
 
 SPRINT FOCUS (session 2026-07-27, in order)
-- Resumed the plan in correlative order: back to Phase 2's open intake work.
-- Built pace discover (item 40, REQUEST-0011): reads README/code/git and
-  PROPOSES a draft .pace/ - read-only, writes nothing, owner confirms.
-  Advances F2-10. 59 tests green. Batched (unreleased) toward 0.5.0.
-- Reconciled the tracker in the same turn (RULE-0010): F2-11 complete
-  (per-chat memory delivered by remember/recall/condense/capture + pace
-  check + handoff continuity); auto-discover subtask complete.
-- Phase 6 COMPLETE. Next in order: F2-10 remaining (greenfield questions,
-  document ingestion, ClickUp/GitHub connectors).
+- Advancing F2-10 (multi-source intake) in correlative order.
+- item 40 pace discover: read a project and PROPOSE a draft .pace/ (read-only).
+- item 41 pace init --owner/--owner-role: seed the ROOT_AUTHORITY actor at
+  creation so the handoff names who decides from minute one (greenfield).
+  Guided mode asks for it. 60 tests green.
+- Batched (unreleased) toward 0.5.0 with capture + watch + discover.
+- Next in order (F2-10): document ingestion; ClickUp/GitHub connectors.
 
 END
 ```
 
 ## Recent continuity notes
 
-The working log has 18 notes. Most recent below; read the
+The working log has 19 notes. Most recent below; read the
 full detail in .pace/memory/persistent/CONTINUITY.md:
 
-- [2026-07-27 19:50] Release 0.3.0 Zero-touch Guardian prepared: hook fix (embedded interpreter, fail-open with warning when pace missing), wheel+sdist verified. REQUEST-0015: Kingdom Tale published as docs/cuento-del-reino.html, polished to sell, every character mapped to a real command; landing links it (nav + teaser). Pending user: commit, tag v0.3.0, twine upload.
 - [2026-07-27 20:02] Release 0.3.0 Zero-touch Guardian LIVE on PyPI (tag v0.3.0): hook guardian, update notice, AGENTS.md auto-pointer, pace update. Update notice verified firing in production for 0.2.0 users. Kingdom Tale live in repo (docs/cuento-del-reino.html + landing link). Phase 6: only 30 (cloud/agent) remains. Next gate: GitHub Pages (F3-17) requires making the repo public.
 - [2026-07-27 20:09] INCIDENT + LEARNING: a chat-confirmed decision (page publishes at first launch) was lost to context compaction and re-litigated. Captured now: DECISION-0002, RULE-0008 (same-turn capture of approved decisions), REQUEST-0016 (evidence case for F2-11 per-chat capsule and F6-30 agent mode). F3-17 on hold.
 - [2026-07-27 20:14] CORRECTION: the site was ALREADY live - repo public, GitHub Pages on main:/docs, landing + Kingdom Tale serving at cleyduartees-dot.github.io/PACE, verified by fetch. F3-17 DONE. DECISION-0002 corrected before entering git history. The double misreading (new decision, then future gate) shared one root cause: the site-live fact was never captured in .pace/ - RULE-0008 exists for exactly this.
@@ -238,6 +236,7 @@ full detail in .pace/memory/persistent/CONTINUITY.md:
 - [2026-07-27 22:35] GOTCHA fixed: a stray SUPERSEDED_BY line leaked into the roadmap content. Root cause: reading the latest roadmap via sorted(glob(ROADMAP_*)) is WRONG - lexicographic sort puts 0.2.10 before 0.2.9, so it read an old (stamped) file and re-appended its SUPERSEDED_BY stamp. FIX: always read the active file via ACTIVE_VERSIONS.pdl (the source of truth), and write full clean bodies rather than read-append. cmd_supersede itself is correct (it uses ACTIVE_VERSIONS); only ad-hoc glob reads were buggy. Roadmap cleaned to 0.2.12, doctor VALID.
 - [2026-07-27 22:42] RULE-0010 + REQUEST-0019 + DECISION-0005: keeping ClickUp in sync with the roadmap must be an enforced rule, not the AIs memory. Captured after the AI had to be reminded to update ClickUp. Board reconciled this turn: F6-38, F6-39 created+complete, F6-30 honestly scoped to the local guardian, PACE Cloud (paid) split out as future.
 - [2026-07-27 22:47] Built pace discover (item 40, REQUEST-0011 path 1): auto-reads README/stack/languages/git and PROPOSES a draft .pace/, read-only. Advances F2-10. Marked F2-11 complete (per-chat memory delivered). 59 tests green. Batched toward 0.5.0. Working in correlative order now (RULE-0002).
+- [2026-07-27 22:52] item 41: pace init --owner/--owner-role seeds the ROOT_AUTHORITY actor at creation (greenfield grounding - handoff names who decides). Guided mode asks for it. Backward compatible (no owner = no actor, still VALID). 60 tests green. Advances F2-10. Batched toward 0.5.0.
 
 ## Where the rest of the memory lives
 

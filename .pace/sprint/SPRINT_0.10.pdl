@@ -1,6 +1,6 @@
 SPRINT_VERSION 0.10
 
-STATUS APPROVED
+STATUS SUPERSEDED
 
 SUPERSEDES SPRINT_0.9.pdl
 
@@ -15,4 +15,5 @@ SPRINT FOCUS (session 2026-07-27, in order)
 - Phase 6 COMPLETE. Next in order: F2-10 remaining (greenfield questions,
   document ingestion, ClickUp/GitHub connectors).
 
+SUPERSEDED_BY SPRINT_0.11.pdl
 END

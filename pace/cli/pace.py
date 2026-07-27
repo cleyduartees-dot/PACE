@@ -108,6 +108,12 @@ def run_guided_intake(kind, name, slug, org_ref):
         slug = _prompt("Slug", _slugify(name))
 
     extra = {}
+    owner = _prompt("Who is the decision-maker / owner? (ROOT_AUTHORITY)")
+    if owner:
+        extra["owner"] = owner
+        role = _prompt("Their role (e.g. President, Founder, Lead)")
+        if role:
+            extra["owner_role"] = role
     mission = _prompt("Why does this project exist? (mission)")
     if mission:
         extra["mission"] = mission
@@ -126,6 +132,10 @@ def run_guided_intake(kind, name, slug, org_ref):
 def cmd_init(args) -> int:
     kind, name, slug, org_ref = args.kind, args.name, args.slug, args.org_ref
     extra = {}
+    if args.owner:
+        extra["owner"] = args.owner
+    if args.owner_role:
+        extra["owner_role"] = args.owner_role
     if args.guided:
         kind, name, slug, org_ref, extra = run_guided_intake(kind, name, slug, org_ref)
 
@@ -476,6 +486,8 @@ def build_parser() -> argparse.ArgumentParser:
     init.add_argument("--name", default=None)
     init.add_argument("--slug", default=None)
     init.add_argument("--org-ref", dest="org_ref", default=None)
+    init.add_argument("--owner", default=None, help="the decision-maker / ROOT_AUTHORITY to seed as an ACTOR")
+    init.add_argument("--owner-role", dest="owner_role", default=None, help="the owner role label (President, Founder, Lead, ...)")
     init.add_argument("--guided", action="store_true",
                       help="interactive guided setup that seeds mission/vision/roadmap/sprint")
     init.set_defaults(func=cmd_init)

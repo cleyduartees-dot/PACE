@@ -26,6 +26,13 @@ CONTRACT_VERSION = "0.2.0"
 PLACEHOLDER = "Not yet defined."
 
 
+def _owner_slug(text: str) -> str:
+    slug = "".join(c if c.isalnum() else "-" for c in str(text).lower())
+    while "--" in slug:
+        slug = slug.replace("--", "-")
+    return slug.strip("-") or "owner"
+
+
 def _write_pdl(path: Path, fields: dict) -> None:
     lines = [f"{key} {value}".rstrip() for key, value in fields.items()]
     lines.append("END")
@@ -43,6 +50,8 @@ def init_instance(
     vision: str = PLACEHOLDER,
     roadmap: str = PLACEHOLDER,
     sprint: str = PLACEHOLDER,
+    owner: str = None,
+    owner_role: str = None,
 ) -> Path:
     """Create a minimal, structurally valid .pace/ instance inside
     `target_dir`. Raises if one already exists there."""
@@ -100,6 +109,13 @@ def init_instance(
         "TITLE": f"{name} founded as a PACE-governed instance.",
     })
 
+    if owner:
+        actor_fields = {"ACTOR_VERSION": "1.0.0", "ID": _owner_slug(owner), "NAME": owner}
+        if owner_role:
+            actor_fields["ROLE"] = owner_role
+        actor_fields["IS_ROOT_AUTHORITY"] = "true"
+        _write_pdl(root / "actors" / f"ACTOR-{_owner_slug(owner).upper()}.pdl", actor_fields)
+
     return root
 
 
@@ -112,6 +128,8 @@ def create_project(
     vision: str = PLACEHOLDER,
     roadmap: str = PLACEHOLDER,
     sprint: str = PLACEHOLDER,
+    owner: str = None,
+    owner_role: str = None,
 ) -> Path:
     """Generate a brand-new project from scratch: creates `target_dir`
     (must not already exist or must be empty), initializes a git
@@ -135,4 +153,5 @@ def create_project(
     return init_instance(
         target_dir, kind="PROJECT", name=name, slug=slug, org_ref=org_ref,
         mission=mission, vision=vision, roadmap=roadmap, sprint=sprint,
+        owner=owner, owner_role=owner_role,
     )

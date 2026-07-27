@@ -96,6 +96,19 @@ def test_capture_records_a_decision_with_next_correlative():
         assert len(sorted(dec.glob("DECISION-*.pdl"))) == 2
 
 
+def test_init_with_owner_seeds_root_authority_and_handoff_names_them():
+    with tempfile.TemporaryDirectory() as tmp:
+        run(["init", tmp, "--name", "G", "--slug", "g", "--org-ref", "org",
+             "--owner", "Ada Lovelace", "--owner-role", "Founder"])
+        actors = Path(tmp) / ".pace" / "actors"
+        files = list(actors.glob("*.pdl"))
+        assert files, "no actor file created"
+        text = files[0].read_text()
+        assert "IS_ROOT_AUTHORITY true" in text and "Ada Lovelace" in text
+        code, out = run(["handoff", tmp])
+        assert code == 0 and "Ada Lovelace" in out
+
+
 if __name__ == "__main__":
     tests = [v for k, v in sorted(globals().items()) if k.startswith("test_")]
     for test in tests:
