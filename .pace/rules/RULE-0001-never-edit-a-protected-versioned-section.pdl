@@ -1,0 +1,9 @@
+RULE_ID RULE-0001
+SCOPE PACE
+STATUS APPROVED
+STATEMENT Never edit a PROTECTED/versioned section in place; always use pace supersede.
+RATIONALE An external AI hand-edited files and violated this 6 times.
+PROMOTED_FROM F6-25
+APPROVED_BY President Cley Duarte
+CREATED_AT 2026-07-27
+END

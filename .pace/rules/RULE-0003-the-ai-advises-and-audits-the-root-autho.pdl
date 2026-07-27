@@ -1,0 +1,9 @@
+RULE_ID RULE-0003
+SCOPE PACE
+STATUS APPROVED
+STATEMENT The AI advises and audits; the ROOT_AUTHORITY decides. Propose, never override.
+RATIONALE Governance rule #1.
+PROMOTED_FROM GOVERNANCE_PROTOCOL_0.1.0
+APPROVED_BY President Cley Duarte
+CREATED_AT 2026-07-27
+END

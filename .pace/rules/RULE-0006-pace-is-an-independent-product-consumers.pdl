@@ -1,0 +1,9 @@
+RULE_ID RULE-0006
+SCOPE ORGANIZATION
+STATUS APPROVED
+STATEMENT PACE is an independent product; consumers like TuPerimetro are adopters, never dependencies. Improvements flow upstream only with the owner's authorization.
+RATIONALE PACE lives in its own repo and does not depend on any consumer.
+PROMOTED_FROM REQUEST-0006
+APPROVED_BY President Cley Duarte
+CREATED_AT 2026-07-27
+END

@@ -1,0 +1,9 @@
+RULE_ID RULE-0007
+SCOPE ORGANIZATION
+STATUS APPROVED
+STATEMENT Documents and presentations have a defined home (repo docs/ and the ClickUp PACE folder); apply it without being reminded.
+RATIONALE Discoverability of docs and decks.
+PROMOTED_FROM REQUEST-0004
+APPROVED_BY President Cley Duarte
+CREATED_AT 2026-07-27
+END

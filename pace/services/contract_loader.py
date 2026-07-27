@@ -28,18 +28,26 @@ def parse_root_manifest(root_manifest_text: str) -> dict:
 def parse_sections(sections_text: str) -> dict:
     """A SECTIONS entry header is a line at indentation 0, one or more
     comma-separated paths (e.g. 'mission/, vision/, roadmap/, sprint/'
-    or a single 'history/'). Every section in Contract 0.1.0 requires
-    its folder to exist, so this only needs to collect the paths."""
+    or a single 'history/'). A section is required by default; an
+    indented 'PRESENCE OPTIONAL' line under it marks the folder optional
+    (recognized but not mandatory), so newer optional sections don't
+    invalidate older instances that predate them."""
     sections = {}
+    current = []
     for line in sections_text.splitlines():
         if not line.strip():
             continue
         indent = len(line) - len(line.lstrip(" "))
         if indent == 0:
+            current = []
             for raw_path in line.strip().split(","):
                 path = raw_path.strip().rstrip("/")
                 if path:
                     sections[path] = {"required": True}
+                    current.append(path)
+        elif "PRESENCE OPTIONAL" in line.upper():
+            for path in current:
+                sections[path]["required"] = False
     return sections
 
 

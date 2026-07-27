@@ -13,7 +13,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from pace.kernel.kernel import locate_instance, validate_instance
 from pace.services.pdl import read_pdl
 from pace.engines.project_creator import init_instance, create_project
-from pace.engines.handoff import generate_handoff
+from pace.engines.handoff import generate_handoff, _root_authority
+from pace.engines.rules import add_rule, list_rules
 from pace.engines.memory import remember, recall
 
 ACTIVE_SECTIONS = [
@@ -268,6 +269,29 @@ def cmd_supersede(args) -> int:
     return 0
 
 
+def cmd_rule(args) -> int:
+    root = locate_instance(Path(args.path) if args.path else None)
+    if root is None:
+        print("no .pace/ instance found")
+        return 1
+    if args.rule_command == "list":
+        print(list_rules(root))
+        return 0
+    approved_by = _root_authority(root) or ""
+    try:
+        out = add_rule(
+            root, args.scope, args.statement,
+            rationale=args.rationale or "",
+            promoted_from=args.from_ref or "",
+            approved_by=approved_by,
+        )
+    except ValueError as error:
+        print(f"rule add failed: {error}")
+        return 1
+    print(f"recorded {out.name} in {out.parent}")
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="pace")
     subparsers = parser.add_subparsers(dest="command", required=True)
@@ -308,6 +332,20 @@ def build_parser() -> argparse.ArgumentParser:
     supersede.add_argument("content")
     supersede.add_argument("path", nargs="?", default=None)
     supersede.set_defaults(func=cmd_supersede)
+
+    rule = subparsers.add_parser("rule", help="record or list approved governance rules an AI must obey")
+    rule_sub = rule.add_subparsers(dest="rule_command", required=True)
+    rule_add = rule_sub.add_parser("add", help="record a new approved rule (never re-asked once set)")
+    rule_add.add_argument("--scope", required=True, choices=["PACE", "ORGANIZATION", "PROJECT"])
+    rule_add.add_argument("--statement", required=True)
+    rule_add.add_argument("--rationale", default="")
+    rule_add.add_argument("--from", dest="from_ref", default="",
+                          help="what this rule was promoted from (a request or correction)")
+    rule_add.add_argument("path", nargs="?", default=None)
+    rule_add.set_defaults(func=cmd_rule)
+    rule_list = rule_sub.add_parser("list", help="list approved rules grouped by scope")
+    rule_list.add_argument("path", nargs="?", default=None)
+    rule_list.set_defaults(func=cmd_rule)
 
     create = subparsers.add_parser("create", help="generate a brand-new project governed by PACE from scratch")
     create.add_argument("path")

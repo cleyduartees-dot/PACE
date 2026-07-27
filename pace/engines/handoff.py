@@ -10,6 +10,7 @@ handoff/ section is REGENERABLE: rebuilt from the authoritative sources.
 from pathlib import Path
 
 from pace.services.pdl import read_pdl
+from pace.engines.rules import load_rules
 
 ACTIVE_SECTIONS = [
     ("Mission", "ACTIVE_MISSION"),
@@ -84,6 +85,25 @@ def generate_handoff(root):
     out.append("- Every approved correction becomes a rule you must follow. Do not")
     out.append("  re-ask what an approved rule already settles.")
     out.append("")
+    rules = load_rules(root)
+    out.append("## Rules you must follow")
+    out.append("")
+    if rules:
+        out.append("Approved, permanent rules. Do not re-litigate or re-ask what these")
+        out.append("already settle:")
+        out.append("")
+        current = None
+        for r in rules:
+            scope = r.get("SCOPE", "")
+            if scope != current:
+                out.append(f"**{scope}**")
+                current = scope
+            out.append(f"- {r.get('STATEMENT', '')}")
+        out.append("")
+    else:
+        out.append('(no rules recorded yet - add with `pace rule add --scope PACE --statement "..."`)')
+        out.append("")
+
     out.append("## Identity")
     out.append("")
     out.append(f"- Name: {name}")

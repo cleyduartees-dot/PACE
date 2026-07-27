@@ -21,7 +21,7 @@ from pace.services.validate import (
     forbid_file_suffixes,
 )
 
-CONTRACT_PATH = Path(__file__).resolve().parent.parent / "contracts" / "INSTANCE_CONTRACT_0.1.0.pdl"
+CONTRACT_PATH = Path(__file__).resolve().parent.parent / "contracts" / "INSTANCE_CONTRACT_0.2.0.pdl"
 
 # The schema dialects THIS Kernel build knows how to interpret — the way
 # a browser understands a set of HTML versions, not "the one current
@@ -31,7 +31,7 @@ CONTRACT_PATH = Path(__file__).resolve().parent.parent / "contracts" / "INSTANCE
 # mismatch means "this instance needs pace migrate" or "this Kernel
 # needs updating" depends on which side is actually behind — the Kernel
 # cannot assume it's always the instance's fault.
-SUPPORTED_SCHEMA_VERSIONS = {"0.1.0"}
+SUPPORTED_SCHEMA_VERSIONS = {"0.1.0", "0.2.0"}
 
 # HARD_RULE 2 ("no code, script or executable file") is prose, not a
 # machine-enumerable list — this is the Kernel's own codified reading of
@@ -82,7 +82,11 @@ def validate_instance(root: Path) -> list:
         required = contract["root_manifest"].get(".pace/ACTIVE_VERSIONS.pdl", [])
         violations += require_fields(active_versions, required, "ACTIVE_VERSIONS.pdl")
 
-    violations += require_dirs(root, sorted(contract["sections"]))
+    required_sections = sorted(
+        path for path, meta in contract["sections"].items()
+        if meta.get("required", True)
+    )
+    violations += require_dirs(root, required_sections)
     violations += require_non_empty_dir(root, "history")
     violations += forbid_file_suffixes(root, FORBIDDEN_SUFFIXES)
 

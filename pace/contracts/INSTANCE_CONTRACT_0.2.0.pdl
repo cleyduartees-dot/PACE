@@ -1,0 +1,154 @@
+CONTRACT_VERSION 0.2.0
+
+STATUS DRAFT
+
+SUPERSEDES CONTRACT_VERSION 0.1.0
+
+OWNER President Cley Duarte
+
+DEPENDS_ON
+
+ontology/PACE_ONTOLOGY_0.1.0.pdl
+protocols/PDL_SPECIFICATION.pdl (not yet written — referenced for future
+  format validation, not required for this contract to be a valid design
+  artifact today)
+
+PURPOSE
+
+Define the physical, checkable shape any .pace/ instance (a project or an
+organization hub — same KIND distinction, not two different contracts)
+must have to be valid. This is the representation layer for the entities,
+relations and assertions defined in PACE_ONTOLOGY_0.1.0.
+
+ROOT_MANIFEST
+
+.pace/INSTANCE.pdl
+
+  REPRESENTS the GOVERNED_UNIT entity itself and its direct identity
+  assertions and relations.
+
+  REQUIRED_FIELDS
+    KIND            PROJECT | ORGANIZATION
+    NAME            (HAS_NAME)
+    SLUG            (HAS_SLUG)
+    SCHEMA_VERSION  (HAS_SCHEMA_VERSION — which Contract version this
+                     instance claims to satisfy)
+    PACE_VERSION    (HAS_PACE_VERSION — which PACE engine version
+                     created or last managed this instance. Traceability
+                     only, permanently: the Kernel never decides what it
+                     can open based on this field, only on SCHEMA_VERSION
+                     — the same way a browser interprets HTML by its
+                     declared version, not by which browser authored it)
+    ORG_REF         (BELONGS_TO target — required if KIND=PROJECT,
+                     absent if KIND=ORGANIZATION)
+    CREATED_AT      (HAS_CREATED_AT)
+
+.pace/ACTIVE_VERSIONS.pdl
+
+  REPRESENTS the IS_CURRENTLY_ACTIVE relation, one entry per versioned
+  assertion sequence.
+
+  REQUIRED_FIELDS
+    ACTIVE_MISSION
+    ACTIVE_VISION
+    ACTIVE_ROADMAP
+    ACTIVE_SPRINT
+
+SECTIONS
+
+mission/, vision/, roadmap/, sprint/
+  REPRESENTS HAS_MISSION / HAS_VISION / HAS_ROADMAP / HAS_CURRENT_SPRINT
+  FORMAT PDL
+  MUTABILITY PROTECTED — superseded, never edited in place; every prior
+    version file is kept
+  REQUIRED_AT_V0.1 folder must exist; content optional
+
+history/
+  REPRESENTS HISTORY_ENTRY
+  FORMAT PDL
+  MUTABILITY PROTECTED — append-only
+  REQUIRED_AT_V0.1 must exist, with at least one founding entry
+
+releases/
+  REPRESENTS RELEASE
+  FORMAT PDL
+  MUTABILITY PROTECTED — append-only
+  REQUIRED_AT_V0.1 folder must exist; content optional
+
+decisions/
+  REPRESENTS DECISION
+  FORMAT PDL (by explicit decision — consistency over the old system's
+    mixed Markdown/PDL convention for this kind of record)
+  MUTABILITY PROTECTED — append-only
+  REQUIRED_AT_V0.1 folder must exist; content optional
+
+requests/
+  REPRESENTS REQUEST
+  FORMAT PDL
+  MUTABILITY core fields (WHO, DATE, RAW_TEXT) PROTECTED, immutable once
+    logged. STATUS and PROMOTED_TO are the one explicit exception —
+    updatable as the request's lifecycle advances.
+  REQUIRED_AT_V0.1 folder must exist; content optional
+
+handoff/
+  REPRESENTS no new entity, relation or assertion — a pure representation
+    layer: a materialized view over mission/vision/roadmap/sprint and
+    ACTIVE_VERSIONS, built for AI-onboarding consumption.
+  FORMAT PDL
+  MUTABILITY REGENERABLE — fully disposable, rebuilt by the Bootstrap /
+    Handoff engine (not yet built)
+  REQUIRED_AT_V0.1 folder must exist, empty until that engine ships
+
+memory/generated/
+  REPRESENTS computed reports (audits, continuity scores) — a regenerable
+    view, not an entity of its own
+  FORMAT JSON
+  MUTABILITY REGENERABLE — free to overwrite or discard
+  REQUIRED_AT_V0.1 folder must exist; content optional
+
+memory/persistent/
+  REPRESENTS HAS_CONTINUITY_NOTE
+  FORMAT PDL or JSON
+  MUTABILITY PROTECTED — refined in place, never silently discarded
+  REQUIRED_AT_V0.1 folder must exist; content optional
+
+rules/
+  REPRESENTS RULE - an approved, permanent governance rule an AI must obey
+  FORMAT PDL
+  MUTABILITY PROTECTED - append-only; a rule is superseded by a new file,
+    never edited in place
+  PRESENCE OPTIONAL - folder recognized at v0.2; content optional. An
+    absent folder is tolerated so v0.1 instances stay valid without a
+    migration.
+
+NOT_REPRESENTED_HERE
+
+ACTOR entities are not defined per project instance. They live at the
+organization's own governed-unit instance and are referenced by ID from
+any assertion's ASSERTED_BY / APPROVED_BY field — this avoids duplicating
+"who is the President" inside every project instance.
+
+The DEPENDS_ON relation, as used for the PACE repository's own 12-component
+build graph, is not represented inside a project instance. It belongs to
+PACE's own repository, not to any .pace/ instance.
+
+HARD_RULES
+
+1  Every REQUIRED_AT_V0.1 folder must exist structurally, even empty,
+   from the moment pace init runs. Empty is valid; missing is not.
+
+2  No code, script or executable file of any kind may exist anywhere
+   inside .pace/, in any section, ever.
+
+3  PROTECTED sections are never edited in place. Any change to the
+   content of an existing file is a contract violation — only new files
+   or new versions are allowed.
+
+4  REGENERABLE sections (handoff/, memory/generated/) may be freely
+   rewritten or deleted at any time without violating this contract.
+
+5  rules/ is OPTIONAL: an instance without it is valid. When present, it
+   is append-only like the other PROTECTED sections - an approved rule is
+   never edited in place, only superseded by a newer rule file.
+
+END

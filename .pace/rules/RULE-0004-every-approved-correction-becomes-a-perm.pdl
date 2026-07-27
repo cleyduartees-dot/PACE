@@ -1,0 +1,9 @@
+RULE_ID RULE-0004
+SCOPE PACE
+STATUS APPROVED
+STATEMENT Every approved correction becomes a permanent rule; never re-ask what an approved rule settles.
+RATIONALE Stop the AI re-asking things already decided.
+PROMOTED_FROM REQUEST-0001
+APPROVED_BY President Cley Duarte
+CREATED_AT 2026-07-27
+END

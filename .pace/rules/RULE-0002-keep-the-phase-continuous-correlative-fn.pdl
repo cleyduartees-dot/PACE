@@ -1,0 +1,9 @@
+RULE_ID RULE-0002
+SCOPE PACE
+STATUS APPROVED
+STATEMENT Keep the phase + continuous correlative (FN . NN); never reset or renumber.
+RATIONALE Order over time; one single ordered list, no disorder.
+PROMOTED_FROM REQUEST-0010
+APPROVED_BY President Cley Duarte
+CREATED_AT 2026-07-27
+END

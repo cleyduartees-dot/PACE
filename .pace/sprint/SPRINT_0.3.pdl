@@ -1,0 +1,16 @@
+SPRINT_VERSION 0.3
+
+STATUS APPROVED
+
+SUPERSEDES SPRINT_0.2.pdl
+
+SPRINT FOCUS (session 2026-07-27, cont.)
+- Shipped F6-27: rules/ section (Contract v0.2, optional & backward-compatible),
+  `pace rule add`/`list`, and rules now render at the top of the handoff.
+  Seeded PACE with 7 approved rules (5 PACE-scope, 2 ORG-scope).
+- Also: audited the ClickUp board so it stops lying (reopened 2 parents with
+  open subtasks); added CHANGELOG.md and landing OG/twitter tags.
+- Next: F6-28 log condensation, F6-29 git pre-commit hook, F6-30 cloud/agent.
+- Debt: tag v0.1.0 (F2-06) and demo GIF (F3-16); then republish 0.2.0 to PyPI.
+
+END

@@ -1,0 +1,9 @@
+RULE_ID RULE-0005
+SCOPE PACE
+STATUS APPROVED
+STATEMENT A parent task is not complete while any subtask is open; status must reflect reality.
+RATIONALE The board must never lie.
+PROMOTED_FROM session-2026-07-27
+APPROVED_BY President Cley Duarte
+CREATED_AT 2026-07-27
+END

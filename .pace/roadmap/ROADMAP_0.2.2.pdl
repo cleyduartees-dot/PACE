@@ -1,0 +1,56 @@
+ROADMAP_VERSION 0.2.2
+
+STATUS APPROVED
+
+SUPERSEDES ROADMAP_0.2.1.pdl
+
+ROADMAP Ordered by execution strategy: each phase first guarantees CONTINUITY (the
+product keeps working and does not forget) before pursuing GROWTH (reaching
+more users and scaling). One single list; phase + continuous correlative
+(FN . NN), no resets, no disorder.
+
+OWNER President Cley Duarte
+
+PHASE_1 FOUNDATION -- the engine exists and governs itself   [DONE]
+  01  Create the official PACE repository
+  02  Implement the minimal skeleton
+  03  Implement pace init
+  04  Implement pace create
+  05  Self-governance: PACE adopts itself
+
+PHASE_2 SOLID PRODUCT -- installable, with memory and governance (continuity)
+  06  Package the CLI as an installable `pace`   [tags + CHANGELOG pending]
+  07  Smoke test: install on a clean environment   [DONE]
+  08  Define the ACTOR / ROOT_AUTHORITY in .pace/   [DONE]
+  09  Bootstrap/Handoff engine -- the AI knows to consult the owner   [DONE]
+  10  Guided Intake/Onboarding (pace init --guided)
+  11  Per-chat memory / continuity -- no context "dementia"
+  12  Test suite + CI (pytest + pace doctor)   [DONE]
+  13  Update the README   [DONE]
+
+PHASE_3 LAUNCH AND MONETIZATION -- enter the market (growth)
+  14  Design the sellable structure / business model   [DONE]
+  15  Choose and apply the license   [DONE]
+  16  Make the landing sell (conversion)   [demo GIF pending]
+  17  Publish the landing on GitHub Pages
+
+PHASE_4 ADOPTION AND EXPANSION -- more users, sustained growth
+  18  Upstream contribution rule with authorization
+  19  User documentation: quickstart + guide
+  20  Create the first new project born from PACE
+
+PHASE_5 SCALE AND ROBUSTNESS -- grow without breaking continuity
+  21  Semantic Doctor (deep validation)
+  22  pace migrate (schema-version migrations)
+  23  Standalone binary (PyInstaller)
+  24  Stack templates for pace create
+
+PHASE_6 ACTIVE GUARDIAN -- PACE stops being passive and starts enforcing (continuity)
+  25  pace supersede: enforce "never edit in place" for protected sections   [DONE]
+  26  Enriched handoff: continuity notes + health checks that WARN on drift   [DONE]
+  27  Rules section + Contract v0.2: a home for approved governance rules   [DONE]
+  28  Log condensation: working memory does not grow unbounded
+  29  Git pre-commit hook: block edits that violate the contract
+  30  Cloud/agent mode: PACE floating over projects, warning proactively
+
+END
