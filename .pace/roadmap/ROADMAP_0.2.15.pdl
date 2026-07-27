@@ -1,8 +1,8 @@
-ROADMAP_VERSION 0.2.14
+ROADMAP_VERSION 0.2.15
 
-STATUS SUPERSEDED
+STATUS APPROVED
 
-SUPERSEDES ROADMAP_0.2.13.pdl
+SUPERSEDES ROADMAP_0.2.14.pdl
 
 ROADMAP Ordered by execution strategy: each phase first guarantees CONTINUITY (the
 product keeps working and does not forget) before pursuing GROWTH (reaching
@@ -29,6 +29,7 @@ PHASE_2 SOLID PRODUCT -- installable, with memory and governance (continuity)
   13  Update the README   [DONE]
   40  pace discover: auto-read a project (README, code, git) and PROPOSE a draft .pace/ - first path of the multi-source intake (REQUEST-0011, advances F2-10)   [DONE, unreleased - batched]
   41  pace init --owner: seed the ROOT_AUTHORITY actor at creation (greenfield grounding - a new project knows who decides from minute one, advances F2-10)   [DONE, unreleased - batched]
+  42  pace ingest: read client documents (text now, PDFs if pypdf present) and PROPOSE deduced themes/context - third path of the multi-source intake (REQUEST-0011, advances F2-10)   [DONE, unreleased - batched]
 
 PHASE_3 LAUNCH AND MONETIZATION -- enter the market (growth)
   14  Design the sellable structure / business model   [DONE]
@@ -64,5 +65,4 @@ PHASE_6 ACTIVE GUARDIAN -- PACE stops being passive and starts enforcing (contin
   38  pace capture: record an approved decision in one command, so it never lives only in the chat (REQUEST-0016)   [DONE, unreleased - batched]
   39  pace watch: continuous background guardian - warns on drift, breakage or a new version (completes F6-30)   [DONE, unreleased - batched]
 
-SUPERSEDED_BY ROADMAP_0.2.15.pdl
 END

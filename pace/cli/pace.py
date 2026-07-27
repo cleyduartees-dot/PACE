@@ -363,6 +363,17 @@ def cmd_hook(args) -> int:
     return 0
 
 
+def cmd_ingest(args) -> int:
+    """Read documents and PROPOSE what PACE deduced (read-only)."""
+    from pace.engines.ingest import ingest, format_proposal
+    root = Path(args.path) if args.path else Path.cwd()
+    if not root.exists():
+        print(f"ingest failed: {root} does not exist")
+        return 1
+    print(format_proposal(ingest(root)))
+    return 0
+
+
 def cmd_discover(args) -> int:
     """Auto-read an existing project and PROPOSE a draft .pace/ (read-only)."""
     from pace.engines.discover import discover, format_proposal
@@ -527,6 +538,10 @@ def build_parser() -> argparse.ArgumentParser:
     hook_uninstall = hook_sub.add_parser("uninstall", help="neutralize the PACE pre-commit hook")
     hook_uninstall.add_argument("path", nargs="?", default=None)
     hook_uninstall.set_defaults(func=cmd_hook)
+
+    ingest = subparsers.add_parser("ingest", help="read documents (README, notes, specs, PDFs) and PROPOSE what PACE deduced (writes nothing)")
+    ingest.add_argument("path", nargs="?", default=None)
+    ingest.set_defaults(func=cmd_ingest)
 
     discover = subparsers.add_parser("discover", help="auto-read an existing project (README, code, git) and PROPOSE a draft .pace/ (writes nothing)")
     discover.add_argument("path", nargs="?", default=None)

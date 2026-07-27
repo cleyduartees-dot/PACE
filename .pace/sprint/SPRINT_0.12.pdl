@@ -1,0 +1,16 @@
+SPRINT_VERSION 0.12
+
+STATUS APPROVED
+
+SUPERSEDES SPRINT_0.11.pdl
+
+SPRINT FOCUS (session 2026-07-27, in order)
+- Advancing F2-10 (multi-source intake) in correlative order.
+- item 40 pace discover (read project -> propose draft), item 41 pace init
+  --owner (seed ROOT_AUTHORITY), item 42 pace ingest (read docs -> propose
+  deduced themes/context; text zero-dep, PDFs optional via pypdf). 64 tests.
+- All read-only / proposing; owner confirms (Governance rule 1).
+- Batched (unreleased) toward 0.5.0 with capture + watch.
+- Next in order (F2-10): connect ClickUp/GitHub (also the RULE-0010 remedy).
+
+END
