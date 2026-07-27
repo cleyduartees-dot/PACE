@@ -28,9 +28,13 @@ AGENTS_TEMPLATE = """# AI instructions for this project
 
 This project is governed by PACE (pip install pace-engine).
 
-Before doing anything else, run:
+At the START of every session, run:
 
     pace handoff
+
+And on EVERY message, before acting, run:
+
+    pace check
 
 and obey what it prints. It is the project's own memory: who decides,
 the rules you must follow, mission, vision, roadmap, current sprint,

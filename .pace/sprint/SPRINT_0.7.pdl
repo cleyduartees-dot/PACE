@@ -1,6 +1,6 @@
 SPRINT_VERSION 0.7
 
-STATUS APPROVED
+STATUS SUPERSEDED
 
 SUPERSEDES SPRINT_0.6.pdl
 
@@ -15,4 +15,5 @@ SPRINT FOCUS (session 2026-07-27, closing)
   RULE-0008 (same-turn capture), REQUEST-0016 (evidence for F2-11/F6-30).
 - Phase 6 remaining: 30 (cloud/agent mode). Debt: demo GIF (F3-16).
 
+SUPERSEDED_BY SPRINT_0.8.pdl
 END

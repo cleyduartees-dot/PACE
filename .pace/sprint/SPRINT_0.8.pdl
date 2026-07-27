@@ -1,0 +1,17 @@
+SPRINT_VERSION 0.8
+
+STATUS APPROVED
+
+SUPERSEDES SPRINT_0.7.pdl
+
+SPRINT FOCUS (session 2026-07-27, late)
+- 0.4.0 "The Gatekeeper": pace check (fast, cached, per-message-safe) and
+  pace agent install (per-message enforcement wired into Claude Code hook +
+  Cursor rule + AGENTS.md). From REQUEST-0018. 49 tests green.
+- This answers the President's requirement: in any client that CAN be
+  forced (Claude Code), PACE now runs on every message via a real hook;
+  elsewhere it is the strongest instruction available. PACE dogfoods it.
+- Phase 6-30 remaining: continuous background watch (true cloud/agent).
+- Also shipped today: 0.2.0, 0.3.0, 0.3.1; site live; Kingdom Tale live.
+
+END

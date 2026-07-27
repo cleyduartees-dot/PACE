@@ -5,6 +5,19 @@ All notable changes to PACE are documented here. The format loosely follows
 version lines: the engine (`PACE_VERSION`) and the instance Contract
 (`SCHEMA_VERSION`).
 
+## [0.4.0] — 2026-07-27 — "The Gatekeeper" (per-message enforcement)
+
+### Added
+- `pace check` — fast, quiet per-message verification: locates `.pace/`,
+  reports the instance + engine version, and surfaces an update notice.
+  Caches the PyPI check (memory/generated/) so per-message cost is ~0, and
+  is silent when there is no `.pace/` — safe to run on every message.
+- `pace agent install` — wire PACE into every client that can enforce it
+  (REQUEST-0018): a Claude Code `UserPromptSubmit` hook that runs
+  `pace check` on **every** message (real enforcement), a Cursor
+  always-applied rule, and `AGENTS.md` (universal instruction). Idempotent;
+  never clobbers existing settings.
+
 ## [0.3.1] — 2026-07-27 — external-feedback fixes
 
 ### Fixed

@@ -127,11 +127,11 @@ END
 ## Roadmap
 
 ```
-ROADMAP_VERSION 0.2.8
+ROADMAP_VERSION 0.2.9
 
 STATUS APPROVED
 
-SUPERSEDES ROADMAP_0.2.7.pdl
+SUPERSEDES ROADMAP_0.2.8.pdl
 
 ROADMAP Ordered by execution strategy: each phase first guarantees CONTINUITY (the
 product keeps working and does not forget) before pursuing GROWTH (reaching
@@ -180,12 +180,14 @@ PHASE_6 ACTIVE GUARDIAN -- PACE stops being passive and starts enforcing (contin
   27  Rules section + Contract v0.2: a home for approved governance rules   [DONE]
   28  Log condensation: working memory does not grow unbounded (pace condense)   [DONE]
   29  Git pre-commit hook: block edits that violate the contract (pace hook install)   [DONE]
-  30  Cloud/agent mode: PACE floating over projects, warning proactively
+  30  Cloud/agent mode: PACE floating over projects, warning proactively   [partly done via 36-37; remaining: continuous background watch]
   31  Update notice: WARN in the handoff when a newer engine exists, with the exact upgrade command   [DONE]
   32  AGENTS.md auto-pointer: any AI client loads the handoff with zero user action   [DONE]
   33  pace update: one-step self-update, the CLI's press-here   [DONE]
   34  pace update: retry with --break-system-packages on PEP 668 environments (REQUEST-0017)   [DONE]
   35  supersede stamps the prior version file SUPERSEDED + SUPERSEDED_BY (REQUEST-0017)   [DONE]
+  36  pace check: fast cached per-message verification (REQUEST-0018)   [DONE]
+  37  pace agent install: force per-message consult in every capable client - Claude Code hook, Cursor rule, AGENTS.md (REQUEST-0018)   [DONE]
 
 END
 ```
@@ -193,29 +195,28 @@ END
 ## Current sprint
 
 ```
-SPRINT_VERSION 0.7
+SPRINT_VERSION 0.8
 
 STATUS APPROVED
 
-SUPERSEDES SPRINT_0.6.pdl
+SUPERSEDES SPRINT_0.7.pdl
 
-SPRINT FOCUS (session 2026-07-27, closing)
-- Releases 0.2.0 and 0.3.0 published to PyPI the same day; update notice
-  verified firing in production for outdated users.
-- THE SITE IS LIVE: repo public, GitHub Pages serving the landing and El
-  Cuento del Reino at cleyduartees-dot.github.io/PACE (F3-17 DONE;
-  DECISION-0002). Every push to main:/docs redeploys automatically.
-- Incident captured: a chat-confirmed decision and the site-live fact were
-  never written into .pace/ and got lost to context compaction. Remedy:
-  RULE-0008 (same-turn capture), REQUEST-0016 (evidence for F2-11/F6-30).
-- Phase 6 remaining: 30 (cloud/agent mode). Debt: demo GIF (F3-16).
+SPRINT FOCUS (session 2026-07-27, late)
+- 0.4.0 "The Gatekeeper": pace check (fast, cached, per-message-safe) and
+  pace agent install (per-message enforcement wired into Claude Code hook +
+  Cursor rule + AGENTS.md). From REQUEST-0018. 49 tests green.
+- This answers the President's requirement: in any client that CAN be
+  forced (Claude Code), PACE now runs on every message via a real hook;
+  elsewhere it is the strongest instruction available. PACE dogfoods it.
+- Phase 6-30 remaining: continuous background watch (true cloud/agent).
+- Also shipped today: 0.2.0, 0.3.0, 0.3.1; site live; Kingdom Tale live.
 
 END
 ```
 
 ## Recent continuity notes
 
-The working log has 11 notes. Most recent below; read the
+The working log has 12 notes. Most recent below; read the
 full detail in .pace/memory/persistent/CONTINUITY.md:
 
 - [2026-07-27 17:32] F6 Active Guardian underway: shipped pace supersede (25) and enriched handoff with health checks (26). Dogfooded them on PACE itself to add Phase 6 to its own roadmap (0.2.0 -> 0.2.1) and refresh sprint (0.1 -> 0.2) via the tool, not by hand.
@@ -229,12 +230,13 @@ full detail in .pace/memory/persistent/CONTINUITY.md:
 - [2026-07-27 20:09] INCIDENT + LEARNING: a chat-confirmed decision (page publishes at first launch) was lost to context compaction and re-litigated. Captured now: DECISION-0002, RULE-0008 (same-turn capture of approved decisions), REQUEST-0016 (evidence case for F2-11 per-chat capsule and F6-30 agent mode). F3-17 on hold.
 - [2026-07-27 20:14] CORRECTION: the site was ALREADY live - repo public, GitHub Pages on main:/docs, landing + Kingdom Tale serving at cleyduartees-dot.github.io/PACE, verified by fetch. F3-17 DONE. DECISION-0002 corrected before entering git history. The double misreading (new decision, then future gate) shared one root cause: the site-live fact was never captured in .pace/ - RULE-0008 exists for exactly this.
 - [2026-07-27 21:58] REQUEST-0017 (2nd external feedback, tested 0.3.0 on a live project): confirmed the big gap (handoff ignoring CONTINUITY.md) is resolved. Two fixes -> 0.3.1: F6-34 pace update retries with --break-system-packages (PEP 668), F6-35 supersede stamps prior file STATUS SUPERSEDED + SUPERSEDED_BY. 43 tests green.
+- [2026-07-27 22:15] 0.4.0 The Gatekeeper (REQUEST-0018): pace check = fast cached per-message verification (silent without .pace/); pace agent install wires per-message enforcement into Claude Code (real UserPromptSubmit hook), Cursor rule, and AGENTS.md. Idempotent, preserves foreign settings. 49 tests green. F6-36/37 done; F6-30 remaining = continuous background watch.
 
 ## Where the rest of the memory lives
 
 - Decisions: .pace/decisions/  (2 recorded)
 - History:   .pace/history/    (11 entries)
-- Requests:  .pace/requests/   (17 logged in intake)
+- Requests:  .pace/requests/   (18 logged in intake)
 
 ## Health checks
 

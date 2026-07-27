@@ -17,6 +17,8 @@ from pace.engines.handoff import generate_handoff, _root_authority
 from pace.engines.rules import add_rule, list_rules
 from pace.engines.memory import remember, recall, condense
 from pace.engines.hooks import install_hook, uninstall_hook
+from pace.engines.agent_setup import install_all
+from pace.engines.handoff import generate_handoff, _root_authority, _ensure_agents_pointer
 
 ACTIVE_SECTIONS = [
     ("MISSION", "ACTIVE_MISSION"),
@@ -350,6 +352,39 @@ def cmd_hook(args) -> int:
     return 0
 
 
+def cmd_check(args) -> int:
+    """Fast, quiet per-message verification: is PACE here, is it current.
+    Silent when there is no .pace/ (so it is safe as a global hook)."""
+    root = locate_instance(Path(args.path) if args.path else None)
+    if root is None:
+        return 0
+    from pace.services.update_check import latest_version_cached, _parse
+    from pace.services.version import PACE_VERSION
+    instance = read_pdl(root / "INSTANCE.pdl")
+    name = instance.get("NAME", "this project")
+    print(f"PACE active: {name} (engine {PACE_VERSION}). Consult `pace handoff` "
+          "for the project's memory before acting; log decisions with `pace remember`.")
+    latest = latest_version_cached(root)
+    if latest and _parse(latest) > _parse(PACE_VERSION):
+        print(f"WARN: a newer PACE engine ({latest}) is available - run `pace update`.")
+    return 0
+
+
+def cmd_agent(args) -> int:
+    root = locate_instance(Path(args.path) if args.path else None)
+    if root is None:
+        print("no .pace/ instance found")
+        return 1
+    results = install_all(root, _ensure_agents_pointer)
+    print("Wired PACE into every client that can be wired:")
+    for label, path, enforced, created in results:
+        mark = "installed" if created else "already present"
+        print(f"  - {label}: {path} ({mark})")
+    print("\nEnforced per-message only where the client supports a hook "
+          "(Claude Code). Elsewhere PACE relies on the instruction being read.")
+    return 0
+
+
 def cmd_rule(args) -> int:
     root = locate_instance(Path(args.path) if args.path else None)
     if root is None:
@@ -430,6 +465,16 @@ def build_parser() -> argparse.ArgumentParser:
     hook_uninstall = hook_sub.add_parser("uninstall", help="neutralize the PACE pre-commit hook")
     hook_uninstall.add_argument("path", nargs="?", default=None)
     hook_uninstall.set_defaults(func=cmd_hook)
+
+    check = subparsers.add_parser("check", help="fast per-message verification: is PACE here and current (safe to run on every message)")
+    check.add_argument("path", nargs="?", default=None)
+    check.set_defaults(func=cmd_check)
+
+    agent = subparsers.add_parser("agent", help="wire PACE into AI clients (Claude Code hook, Cursor rule, AGENTS.md)")
+    agent_sub = agent.add_subparsers(dest="agent_command", required=True)
+    agent_install = agent_sub.add_parser("install", help="install the per-message hook / rules in every client that supports it")
+    agent_install.add_argument("path", nargs="?", default=None)
+    agent_install.set_defaults(func=cmd_agent)
 
     rule = subparsers.add_parser("rule", help="record or list approved governance rules an AI must obey")
     rule_sub = rule.add_subparsers(dest="rule_command", required=True)

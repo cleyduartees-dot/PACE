@@ -40,3 +40,35 @@ def check_for_update(current: str, fetch=latest_version):
     if _parse(latest) > _parse(current):
         return {"current": current, "latest": latest, "command": UPGRADE_COMMAND}
     return None
+
+
+import json
+from datetime import datetime, timezone
+
+CACHE_REL = "memory/generated/update_check.json"
+
+
+def latest_version_cached(root, ttl_seconds: int = 3600, fetch=latest_version):
+    """Cheap enough to call on every message: only hits PyPI when the
+    cached result is older than ttl_seconds. Caches under the REGENERABLE
+    memory/generated/ section. Fail-silent: returns None if never
+    reachable, and never raises."""
+    from pathlib import Path as _Path
+    cache = _Path(root) / CACHE_REL
+    now = datetime.now(timezone.utc)
+    try:
+        if cache.is_file():
+            data = json.loads(cache.read_text(encoding="utf-8"))
+            ts = datetime.fromisoformat(data["checked_at"])
+            if (now - ts).total_seconds() < ttl_seconds:
+                return data.get("latest")
+    except Exception:
+        pass
+    latest = fetch()
+    try:
+        cache.parent.mkdir(parents=True, exist_ok=True)
+        cache.write_text(json.dumps({"checked_at": now.isoformat(), "latest": latest}),
+                         encoding="utf-8")
+    except OSError:
+        pass
+    return latest

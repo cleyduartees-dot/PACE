@@ -1,0 +1,48 @@
+REQUEST_VERSION 1.0.0
+
+ID REQUEST-0018
+
+STATUS APPROVED
+
+DATE 2026-07-27
+
+WHO President Cley Duarte
+
+SCOPE PACE
+
+TITLE
+
+If a project has PACE (in the code or in the chat), the system must be
+FORCED to verify PACE on every message -- not rely on the AI choosing to.
+
+RAW_TEXT
+
+Pero necesito que si tiene pace en el codigo o en el chat esto obligue a
+verificar en cada mensaje.
+
+PROPOSED_SCOPE PACE
+
+DESIGN_NOTE
+
+Honest feasibility: "forced on every message" requires a hook in the
+client's per-message loop -- something PACE cannot inject from a plain
+.md. Where it IS possible: agent/CLI clients that support prompt hooks
+(e.g. Claude Code UserPromptSubmit hook, Cursor rules) run a command on
+every user message. Where it is NOT possible: plain web chats (claude.ai,
+ChatGPT web) expose no third-party per-message hook; there the strongest
+lever is a mandatory instruction (AGENTS.md / project rules) - convention,
+not enforcement. Design: (1) a fast, quiet `pace check` safe on every
+message - locates .pace/, caches the PyPI version check so per-message
+cost is ~0, prints only what matters; (2) a hook installer that wires
+`pace check` into the client per-message hook (Claude Code first). The
+enforcing core of F6-30.
+
+PROMOTED_TO
+
+F6-30 first slice: pace check + per-message client hook
+
+APPROVED_BY
+
+President Cley Duarte
+
+END
