@@ -67,6 +67,20 @@ def test_create_then_doctor_on_a_brand_new_project():
         assert "VALID" in doctor_out
 
 
+def test_supersede_stamps_the_prior_version_as_superseded():
+    with tempfile.TemporaryDirectory() as tmp:
+        run(["init", tmp, "--name", "S", "--slug", "s", "--org-ref", "org"])
+        run(["supersede", "sprint", "new sprint text", tmp])
+        pace_dir = Path(tmp) / ".pace" / "sprint"
+        old = pace_dir / "SPRINT_1.pdl"
+        new = pace_dir / "SPRINT_2.pdl"
+        assert "STATUS SUPERSEDED" in old.read_text()
+        assert "SUPERSEDED_BY SPRINT_2.pdl" in old.read_text()
+        assert "STATUS APPROVED" in new.read_text()
+        active = (Path(tmp) / ".pace" / "ACTIVE_VERSIONS.pdl").read_text()
+        assert "sprint/SPRINT_2.pdl" in active
+
+
 if __name__ == "__main__":
     tests = [v for k, v in sorted(globals().items()) if k.startswith("test_")]
     for test in tests:

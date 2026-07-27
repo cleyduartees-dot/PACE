@@ -1,0 +1,9 @@
+RULE_ID RULE-0008
+SCOPE PACE
+STATUS APPROVED
+STATEMENT Every decision or confirmation approved in chat is written into .pace/ (decisions/, rules/ or requests/) in the same turn it is approved - never left living only in the conversation. The chat is not memory; PACE is.
+RATIONALE A decision confirmed in chat was lost to context compaction and later treated as new. The President caught it. This must be physically impossible to repeat.
+PROMOTED_FROM REQUEST-0016
+APPROVED_BY President Cley Duarte
+CREATED_AT 2026-07-27
+END

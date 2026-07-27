@@ -1,0 +1,40 @@
+DECISION_VERSION 1.0.1
+
+ID DECISION-0002
+
+STATUS APPROVED
+
+DATE 2026-07-27
+
+DECIDED_BY President Cley Duarte
+
+TITLE
+
+The public page publishes together with the first version launch --
+decided in chat, and EXECUTED: the repository is public and GitHub Pages
+is LIVE at https://cleyduartees-dot.github.io/PACE/ (deploying from
+main:/docs). The Kingdom Tale is live at /cuento-del-reino.html.
+
+RAW_TEXT
+
+La pagina la publicamos cuando lanzamos la primera version.
+
+HISTORY_NOTE
+
+Correction of this record's first draft, before it ever entered git
+history. The President had confirmed and executed this in chat (repo made
+public, Pages enabled at the first version launch), but neither the
+decision nor the "site is live" fact was ever captured into .pace/. After
+context compaction the AI first treated the decision as new and then
+recorded it as a future gate ("on hold until v1.0.0") -- wrong twice,
+same root cause: capture failure, not memory failure. The President
+caught both ("buscalo en el chat / creo que te lo confirme" + a
+screenshot of Pages live). See REQUEST-0016 and RULE-0008.
+
+CONSEQUENCES
+
+F3-17 (GitHub Pages) is DONE, not on hold. The repo is public; BSL 1.1
+is the protection layer. Every push to main:/docs redeploys the site
+automatically -- the landing and the tale are now live products.
+
+END

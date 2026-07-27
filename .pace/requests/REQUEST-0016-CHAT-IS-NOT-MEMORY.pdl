@@ -1,0 +1,47 @@
+REQUEST_VERSION 1.0.0
+
+ID REQUEST-0016
+
+STATUS APPROVED
+
+DATE 2026-07-27
+
+WHO President Cley Duarte
+
+SCOPE PACE
+
+TITLE
+
+Real failure case: PACE's own project lost a decision because it lived
+only in the chat. Decisions must be captured into PACE at the moment they
+happen, and PACE must eventually do this capture itself.
+
+RAW_TEXT
+
+Eso quiere decir que pace falla porque no mantiene el historico del chat,
+pasan estas cosas.
+
+PROPOSED_SCOPE PACE
+
+DESIGN_NOTE
+
+What happened: the President confirmed in chat that the page publishes at
+the first official launch. The confirmation was never written to
+.pace/decisions/. The chat context was later compacted; the AI reread the
+summary, found no trace, and treated the decision as new. Diagnosis: not
+a memory failure of either party - a capture failure. Immediate remedy:
+RULE-0008 (same-turn capture, now in force) + DECISION-0002 (recorded).
+Product remedy: this is the strongest real-world case for F2-11 (per-chat
+continuity capsule, REQUEST-0009) and F6-30 (agent mode): PACE should sit
+inside the conversation loop and capture approved decisions in real time,
+instead of depending on the AI's discipline.
+
+PROMOTED_TO
+
+RULE-0008 (in force) + evidence case for F2-11 and F6-30
+
+APPROVED_BY
+
+President Cley Duarte
+
+END

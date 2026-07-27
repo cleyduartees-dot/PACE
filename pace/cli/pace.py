@@ -219,6 +219,29 @@ def _bump_version(ver: str) -> str:
     return ".".join(parts)
 
 
+def _mark_superseded(text: str, new_name: str) -> str:
+    """Stamp a prior version file as no longer current: set its STATUS to
+    SUPERSEDED and add SUPERSEDED_BY, so each file is self-describing and
+    does not depend solely on ACTIVE_VERSIONS. This is a lifecycle metadata
+    update (like the requests STATUS exception in the contract); the file's
+    knowledge content is never rewritten."""
+    trailing_nl = text.endswith("\n")
+    out, status_done, supby_done = [], False, False
+    for line in text.splitlines():
+        stripped = line.strip().upper()
+        if stripped.startswith("SUPERSEDED_BY "):
+            supby_done = True
+        if stripped.startswith("STATUS ") and not status_done:
+            out.append("STATUS SUPERSEDED")
+            status_done = True
+            continue
+        if line.strip() == "END" and not supby_done:
+            out.append(f"SUPERSEDED_BY {new_name}")
+            supby_done = True
+        out.append(line)
+    return "\n".join(out) + ("\n" if trailing_nl else "")
+
+
 def cmd_supersede(args) -> int:
     root = locate_instance(Path(args.path) if args.path else None)
     if root is None:
@@ -261,6 +284,14 @@ def cmd_supersede(args) -> int:
     new_path.parent.mkdir(parents=True, exist_ok=True)
     new_path.write_text(body, encoding="utf-8")
 
+    try:
+        prior = current_path.read_text(encoding="utf-8")
+        stamped = _mark_superseded(prior, new_name)
+        if stamped != prior:
+            current_path.write_text(stamped, encoding="utf-8")
+    except OSError:
+        pass
+
     active[key] = f"{section}/{new_name}"
     lines = [f"{k} {active.get(k, '')}".rstrip() for k in _ACTIVE_ORDER]
     lines.append("END")
@@ -286,14 +317,18 @@ def cmd_condense(args) -> int:
 def cmd_update(args) -> int:
     """One-step self-update: the CLI's 'press here' (REQUEST-0014)."""
     import subprocess
+    base = [sys.executable, "-m", "pip", "install", "--upgrade", "pace-engine"]
     print("updating pace-engine (pip install --upgrade pace-engine)...")
-    result = subprocess.run(
-        [sys.executable, "-m", "pip", "install", "--upgrade", "pace-engine"]
-    )
+    result = subprocess.run(base)
+    if result.returncode != 0:
+        # Externally-managed environments (Debian/Ubuntu PEP 668) reject the
+        # plain install; retry once with the escape hatch instead of failing.
+        print("retrying for an externally-managed environment (--break-system-packages)...")
+        result = subprocess.run(base + ["--break-system-packages"])
     if result.returncode == 0:
         print("pace is up to date.")
     else:
-        print("update failed - try manually: pip install --upgrade pace-engine")
+        print("update failed - try manually: pip install --upgrade pace-engine --break-system-packages")
     return result.returncode
 
 

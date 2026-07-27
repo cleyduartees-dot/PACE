@@ -24,6 +24,7 @@ already settle:
 - The AI advises and audits; the ROOT_AUTHORITY decides. Propose, never override.
 - Every approved correction becomes a permanent rule; never re-ask what an approved rule settles.
 - A parent task is not complete while any subtask is open; status must reflect reality.
+- Every decision or confirmation approved in chat is written into .pace/ (decisions/, rules/ or requests/) in the same turn it is approved - never left living only in the conversation. The chat is not memory; PACE is.
 **ORGANIZATION**
 - PACE is an independent product; consumers like TuPerimetro are adopters, never dependencies. Improvements flow upstream only with the owner's authorization.
 - Documents and presentations have a defined home (repo docs/ and the ClickUp PACE folder); apply it without being reminded.
@@ -126,11 +127,11 @@ END
 ## Roadmap
 
 ```
-ROADMAP_VERSION 0.2.5
+ROADMAP_VERSION 0.2.8
 
 STATUS APPROVED
 
-SUPERSEDES ROADMAP_0.2.4.pdl
+SUPERSEDES ROADMAP_0.2.7.pdl
 
 ROADMAP Ordered by execution strategy: each phase first guarantees CONTINUITY (the
 product keeps working and does not forget) before pursuing GROWTH (reaching
@@ -160,7 +161,7 @@ PHASE_3 LAUNCH AND MONETIZATION -- enter the market (growth)
   14  Design the sellable structure / business model   [DONE]
   15  Choose and apply the license   [DONE]
   16  Make the landing sell (conversion)   [demo GIF pending]
-  17  Publish the landing on GitHub Pages
+  17  Publish the landing on GitHub Pages   [DONE - LIVE at cleyduartees-dot.github.io/PACE, DECISION-0002]
 
 PHASE_4 ADOPTION AND EXPANSION -- more users, sustained growth
   18  Upstream contribution rule with authorization
@@ -183,6 +184,8 @@ PHASE_6 ACTIVE GUARDIAN -- PACE stops being passive and starts enforcing (contin
   31  Update notice: WARN in the handoff when a newer engine exists, with the exact upgrade command   [DONE]
   32  AGENTS.md auto-pointer: any AI client loads the handoff with zero user action   [DONE]
   33  pace update: one-step self-update, the CLI's press-here   [DONE]
+  34  pace update: retry with --break-system-packages on PEP 668 environments (REQUEST-0017)   [DONE]
+  35  supersede stamps the prior version file SUPERSEDED + SUPERSEDED_BY (REQUEST-0017)   [DONE]
 
 END
 ```
@@ -190,28 +193,29 @@ END
 ## Current sprint
 
 ```
-SPRINT_VERSION 0.6
+SPRINT_VERSION 0.7
 
 STATUS APPROVED
 
-SUPERSEDES SPRINT_0.5.pdl
+SUPERSEDES SPRINT_0.6.pdl
 
 SPRINT FOCUS (session 2026-07-27, closing)
-- Released 0.2.0 "Active Guardian" to PyPI (tag v0.2.0), verified clean.
-- Shipped F6-29 (pace hook install: pre-commit guardian blocks
-  contract-breaking commits), F6-31 (update notice), F6-32 (AGENTS.md
-  auto-pointer, REQUEST-0013), F6-33 (pace update, REQUEST-0014). 42 tests
-  green. Hook installed on PACE's own repo; AGENTS.md dogfooded.
-- Phase 6 remaining: 30 (cloud/agent mode) - needs its own design.
-- Next release (0.3.0) carries 29/31/32/33 to every pace-engine user.
-- Debt: demo GIF (F3-16), landing on GitHub Pages (F3-17).
+- Releases 0.2.0 and 0.3.0 published to PyPI the same day; update notice
+  verified firing in production for outdated users.
+- THE SITE IS LIVE: repo public, GitHub Pages serving the landing and El
+  Cuento del Reino at cleyduartees-dot.github.io/PACE (F3-17 DONE;
+  DECISION-0002). Every push to main:/docs redeploys automatically.
+- Incident captured: a chat-confirmed decision and the site-live fact were
+  never written into .pace/ and got lost to context compaction. Remedy:
+  RULE-0008 (same-turn capture), REQUEST-0016 (evidence for F2-11/F6-30).
+- Phase 6 remaining: 30 (cloud/agent mode). Debt: demo GIF (F3-16).
 
 END
 ```
 
 ## Recent continuity notes
 
-The working log has 7 notes. Most recent below; read the
+The working log has 11 notes. Most recent below; read the
 full detail in .pace/memory/persistent/CONTINUITY.md:
 
 - [2026-07-27 17:32] F6 Active Guardian underway: shipped pace supersede (25) and enriched handoff with health checks (26). Dogfooded them on PACE itself to add Phase 6 to its own roadmap (0.2.0 -> 0.2.1) and refresh sprint (0.1 -> 0.2) via the tool, not by hand.
@@ -221,12 +225,16 @@ full detail in .pace/memory/persistent/CONTINUITY.md:
 - [2026-07-27 19:26] F6-31 done (REQUEST-0012): update-check service queries PyPI (fail-silent, 2s timeout); handoff health checks now WARN with the exact upgrade command when a newer pace-engine exists. Verified against live PyPI: 0.1.0 user gets the notice, 0.2.0 user gets silence. 36 tests green. Ships with the next release.
 - [2026-07-27 19:35] F6-29/31/32/33 done: pre-commit guardian (pace hook install, dogfooded on PACE's own repo), update notice, AGENTS.md auto-pointer (REQUEST-0013) and pace update (REQUEST-0014). 42 tests green. Pending: F6-30 design; release 0.3.0 to ship it all.
 - [2026-07-27 19:50] Release 0.3.0 Zero-touch Guardian prepared: hook fix (embedded interpreter, fail-open with warning when pace missing), wheel+sdist verified. REQUEST-0015: Kingdom Tale published as docs/cuento-del-reino.html, polished to sell, every character mapped to a real command; landing links it (nav + teaser). Pending user: commit, tag v0.3.0, twine upload.
+- [2026-07-27 20:02] Release 0.3.0 Zero-touch Guardian LIVE on PyPI (tag v0.3.0): hook guardian, update notice, AGENTS.md auto-pointer, pace update. Update notice verified firing in production for 0.2.0 users. Kingdom Tale live in repo (docs/cuento-del-reino.html + landing link). Phase 6: only 30 (cloud/agent) remains. Next gate: GitHub Pages (F3-17) requires making the repo public.
+- [2026-07-27 20:09] INCIDENT + LEARNING: a chat-confirmed decision (page publishes at first launch) was lost to context compaction and re-litigated. Captured now: DECISION-0002, RULE-0008 (same-turn capture of approved decisions), REQUEST-0016 (evidence case for F2-11 per-chat capsule and F6-30 agent mode). F3-17 on hold.
+- [2026-07-27 20:14] CORRECTION: the site was ALREADY live - repo public, GitHub Pages on main:/docs, landing + Kingdom Tale serving at cleyduartees-dot.github.io/PACE, verified by fetch. F3-17 DONE. DECISION-0002 corrected before entering git history. The double misreading (new decision, then future gate) shared one root cause: the site-live fact was never captured in .pace/ - RULE-0008 exists for exactly this.
+- [2026-07-27 21:58] REQUEST-0017 (2nd external feedback, tested 0.3.0 on a live project): confirmed the big gap (handoff ignoring CONTINUITY.md) is resolved. Two fixes -> 0.3.1: F6-34 pace update retries with --break-system-packages (PEP 668), F6-35 supersede stamps prior file STATUS SUPERSEDED + SUPERSEDED_BY. 43 tests green.
 
 ## Where the rest of the memory lives
 
-- Decisions: .pace/decisions/  (1 recorded)
+- Decisions: .pace/decisions/  (2 recorded)
 - History:   .pace/history/    (11 entries)
-- Requests:  .pace/requests/   (15 logged in intake)
+- Requests:  .pace/requests/   (17 logged in intake)
 
 ## Health checks
 

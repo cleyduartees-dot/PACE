@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pace-engine"
-version = "0.3.0"
+version = "0.3.1"
 description = "PACE - an engineering operating system: a versioned, installable engine that preserves and governs a project's knowledge so any AI understands it in seconds."
 readme = "README.md"
 requires-python = ">=3.10"

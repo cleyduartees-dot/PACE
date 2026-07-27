@@ -5,6 +5,16 @@ All notable changes to PACE are documented here. The format loosely follows
 version lines: the engine (`PACE_VERSION`) and the instance Contract
 (`SCHEMA_VERSION`).
 
+## [0.3.1] — 2026-07-27 — external-feedback fixes
+
+### Fixed
+- `pace update` now retries with `--break-system-packages` when the plain
+  upgrade is rejected by an externally-managed environment (Debian/Ubuntu
+  PEP 668). Reported by an adopter whose update failed on a managed Python.
+- `pace supersede` now stamps the prior version file `STATUS SUPERSEDED`
+  and adds `SUPERSEDED_BY`, so each version file is self-describing instead
+  of relying on `ACTIVE_VERSIONS.pdl` alone.
+
 ## [0.3.0] — 2026-07-27 — "Zero-touch Guardian"
 
 ### Added

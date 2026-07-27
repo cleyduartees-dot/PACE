@@ -1,0 +1,8 @@
+RELEASE_VERSION 0.3.1
+STATUS RELEASED
+TITLE PACE 0.3.1 - external-feedback fixes
+CHANNEL PyPI (pace-engine)
+DATE 2026-07-27
+SUPERSEDES RELEASE-0003-PYPI-0.3.0
+HIGHLIGHTS pace update retries with --break-system-packages on PEP 668 envs; supersede stamps the prior file SUPERSEDED + SUPERSEDED_BY (self-describing versions). From REQUEST-0017 (external adopter feedback).
+END

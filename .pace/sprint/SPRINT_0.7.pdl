@@ -1,0 +1,18 @@
+SPRINT_VERSION 0.7
+
+STATUS APPROVED
+
+SUPERSEDES SPRINT_0.6.pdl
+
+SPRINT FOCUS (session 2026-07-27, closing)
+- Releases 0.2.0 and 0.3.0 published to PyPI the same day; update notice
+  verified firing in production for outdated users.
+- THE SITE IS LIVE: repo public, GitHub Pages serving the landing and El
+  Cuento del Reino at cleyduartees-dot.github.io/PACE (F3-17 DONE;
+  DECISION-0002). Every push to main:/docs redeploys automatically.
+- Incident captured: a chat-confirmed decision and the site-live fact were
+  never written into .pace/ and got lost to context compaction. Remedy:
+  RULE-0008 (same-turn capture), REQUEST-0016 (evidence for F2-11/F6-30).
+- Phase 6 remaining: 30 (cloud/agent mode). Debt: demo GIF (F3-16).
+
+END

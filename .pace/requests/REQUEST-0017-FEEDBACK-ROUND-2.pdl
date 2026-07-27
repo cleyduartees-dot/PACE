@@ -1,0 +1,49 @@
+REQUEST_VERSION 1.0.0
+
+ID REQUEST-0017
+
+STATUS APPROVED
+
+DATE 2026-07-27
+
+WHO External adopter (independent project) relayed by President Cley Duarte
+
+SCOPE PACE
+
+TITLE
+
+Second real-world feedback after testing PACE 0.3.0 against a live
+project: two findings, both accepted and fixed in 0.3.1.
+
+RAW_TEXT
+
+(1) Cosmetic: after supersede, the old file keeps STATUS ACTIVE
+internally; only ACTIVE_VERSIONS knows it is no longer current. Cleaner
+if supersede also stamped the old file SUPERSEDED. (2) Real bug: pace
+update runs pip install --upgrade without --break-system-packages, so it
+fails on modern Debian/Ubuntu externally-managed (PEP 668) environments.
+Everything else worked exactly as described; the most important gap
+(handoff ignoring CONTINUITY.md) is genuinely resolved.
+
+PROPOSED_SCOPE PACE
+
+DESIGN_NOTE
+
+Both fixed for 0.3.1: (1) supersede now stamps the prior version file
+STATUS SUPERSEDED + SUPERSEDED_BY <new>, a lifecycle metadata update (the
+same sanctioned exception the contract already grants requests STATUS) -
+files are now self-describing, not dependent on ACTIVE_VERSIONS alone.
+(2) pace update now retries with --break-system-packages when the plain
+upgrade fails, and the final hint includes the flag. The report confirms
+0.3.0 resolved the primary reported gap - this is validation, not just
+bug-finding.
+
+PROMOTED_TO
+
+F6-34 (pace update PEP 668 fallback) + F6-35 (supersede stamps prior file)
+
+APPROVED_BY
+
+President Cley Duarte
+
+END
