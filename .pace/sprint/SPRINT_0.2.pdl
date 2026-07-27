@@ -1,0 +1,15 @@
+SPRINT_VERSION 0.2
+
+STATUS APPROVED
+
+SUPERSEDES SPRINT_0.1.pdl
+
+SPRINT FOCUS (session 2026-07-27)
+- Phase 6 "Active Guardian": PACE stops being passive and starts enforcing.
+- Shipped: pace supersede (enforces never-edit-in-place on protected
+  sections) and enriched handoff (continuity notes + health WARN on drift).
+- In progress: rules section + Contract v0.2 (27), log condensation (28),
+  git pre-commit hook (29), cloud/agent mode (30).
+- Also queued: republish 0.2.0 to PyPI, enable GitHub Pages.
+
+END

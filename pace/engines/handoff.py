@@ -1,16 +1,14 @@
 """Handoff engine - regenerates the AI-onboarding view of a .pace/ instance.
 
 Produces .pace/handoff/HANDOFF.md: the single file an AI reads first. It
-names who governs the project (whom to consult), how to work here, and the
-current mission / vision / roadmap / sprint, plus pointers to the deeper
-memory. The handoff/ section is REGENERABLE: this rebuilds it from the
-authoritative sources, never the other way around.
+names who governs the project, how to work here, the current mission /
+vision / roadmap / sprint, the recent continuity notes, and a set of
+health checks so the AI is proactively told what needs attention. The
+handoff/ section is REGENERABLE: rebuilt from the authoritative sources.
 """
 
-import sys
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from pace.services.pdl import read_pdl
 
 ACTIVE_SECTIONS = [
@@ -20,8 +18,10 @@ ACTIVE_SECTIONS = [
     ("Current sprint", "ACTIVE_SPRINT"),
 ]
 
+CONTINUITY_REL = "memory/persistent/CONTINUITY.md"
 
-def _read_section(root: Path, relative_path):
+
+def _read_section(root, relative_path):
     if not relative_path:
         return "(not set)"
     full = root / relative_path
@@ -30,14 +30,14 @@ def _read_section(root: Path, relative_path):
     return full.read_text(encoding="utf-8").strip()
 
 
-def _count_pdl(root: Path, section: str) -> int:
+def _count_pdl(root, section):
     d = root / section
     if not d.is_dir():
         return 0
     return sum(1 for p in d.iterdir() if p.is_file() and p.suffix == ".pdl")
 
 
-def _root_authority(root: Path):
+def _root_authority(root):
     actors_dir = Path(root) / "actors"
     if not actors_dir.is_dir():
         return None
@@ -49,14 +49,21 @@ def _root_authority(root: Path):
     return None
 
 
-def generate_handoff(root: Path) -> Path:
-    """Rebuild .pace/handoff/HANDOFF.md from the instance. Returns its path."""
+def _continuity_notes(root):
+    path = Path(root) / CONTINUITY_REL
+    if not path.is_file():
+        return []
+    return [l for l in path.read_text(encoding="utf-8").splitlines() if l.strip().startswith("- ")]
+
+
+def generate_handoff(root):
     root = Path(root)
     instance = read_pdl(root / "INSTANCE.pdl")
     active = read_pdl(root / "ACTIVE_VERSIONS.pdl")
     name = instance.get("NAME", "this project")
     kind = instance.get("KIND", "PROJECT")
     authority = _root_authority(root)
+    contents = {key: _read_section(root, active.get(key)) for _, key in ACTIVE_SECTIONS}
 
     out = []
     out.append(f"# PACE Handoff - {name}")
@@ -69,14 +76,13 @@ def generate_handoff(root: Path) -> Path:
     out.append("")
     if authority:
         out.append(f"- The ROOT_AUTHORITY of this project is **{authority}**.")
-        out.append("  You ADVISE and AUDIT; they decide. Propose to them, never")
-        out.append("  override. Confirm before anything becomes official.")
+        out.append("  You ADVISE and AUDIT; they decide. Propose, never override.")
     else:
         out.append("- You ADVISE and AUDIT; the project owner (ROOT_AUTHORITY) decides.")
-        out.append("  Propose, never override. Confirm with the owner first.")
-    out.append("- Every permanent correction is logged as a request and, once")
-    out.append("  approved, becomes a rule you must follow. Do not re-ask what an")
-    out.append("  approved rule already settles.")
+    out.append('- Update sections with `pace supersede <section> "..."` - never edit a')
+    out.append("  versioned file in place. Log lasting notes with `pace remember`.")
+    out.append("- Every approved correction becomes a rule you must follow. Do not")
+    out.append("  re-ask what an approved rule already settles.")
     out.append("")
     out.append("## Identity")
     out.append("")
@@ -92,9 +98,21 @@ def generate_handoff(root: Path) -> Path:
         out.append(f"## {label}")
         out.append("")
         out.append("```")
-        out.append(_read_section(root, active.get(key)))
+        out.append(contents[key])
         out.append("```")
         out.append("")
+
+    notes = _continuity_notes(root)
+    out.append("## Recent continuity notes")
+    out.append("")
+    if notes:
+        out.append(f"The working log has {len(notes)} notes. Most recent below; read the")
+        out.append(f"full detail in .pace/{CONTINUITY_REL}:")
+        out.append("")
+        out.extend(notes[-12:])
+    else:
+        out.append("(no continuity notes yet)")
+    out.append("")
 
     out.append("## Where the rest of the memory lives")
     out.append("")
@@ -102,8 +120,28 @@ def generate_handoff(root: Path) -> Path:
     out.append(f"- History:   .pace/history/    ({_count_pdl(root, 'history')} entries)")
     out.append(f"- Requests:  .pace/requests/   ({_count_pdl(root, 'requests')} logged in intake)")
     out.append("")
-    out.append("Read those for the WHY behind decisions and the reasoning that is")
-    out.append("not in the code - including paths that were tried and discarded.")
+
+    warnings = []
+    for label, key in ACTIVE_SECTIONS:
+        c = contents[key]
+        if ("Not yet defined" in c) or c in ("(not set)", "(file not found)"):
+            sec = key.replace("ACTIVE_", "").lower()
+            warnings.append(
+                f"{label} is still a placeholder or missing - fill it with "
+                f'`pace supersede {sec} "..."` or `pace init --guided`.'
+            )
+    if len(notes) > 30:
+        warnings.append(
+            f"The continuity log has {len(notes)} notes - consider condensing the "
+            "old ones (refined in place, not deleted)."
+        )
+    out.append("## Health checks")
+    out.append("")
+    if warnings:
+        for w in warnings:
+            out.append(f"- WARN: {w}")
+    else:
+        out.append("- OK: no issues detected (all core sections filled).")
     out.append("")
 
     handoff_dir = root / "handoff"
