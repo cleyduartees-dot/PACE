@@ -1,0 +1,8 @@
+RELEASE_VERSION 0.2.0
+STATUS RELEASED
+TITLE PACE 0.2.0 - Active Guardian
+CHANNEL PyPI (pace-engine)
+DATE 2026-07-27
+SUPERSEDES RELEASE-0001-PYPI-0.1.0
+HIGHLIGHTS pace supersede + pace rule (rules section, Contract v0.2) + pace condense + enriched handoff that leads with rules and health checks
+END
