@@ -1,0 +1,17 @@
+SPRINT_VERSION 0.9
+
+STATUS APPROVED
+
+SUPERSEDES SPRINT_0.8.pdl
+
+SPRINT FOCUS (session 2026-07-27, Phase 6 closed)
+- Built pace watch (F6-39): continuous background guardian that warns on
+  drift, contract break/heal, or a new engine version; excludes regenerable
+  outputs so it never self-triggers. Completes F6-30. PHASE 6 COMPLETE.
+- 55 tests green. NOT released - batched on main toward 0.5.0 with pace
+  capture (F6-38), per DECISION-0003/RULE-0009.
+- Published today: 0.2.0, 0.3.0, 0.3.1, 0.4.0. Site live. Kingdom Tale live.
+- Next release 0.5.0 = pace capture + pace watch as one deliberate bundle.
+- Open elsewhere: F3-16 demo GIF; F2-10 multi-source intake; F4/F5 items.
+
+END

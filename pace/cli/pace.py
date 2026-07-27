@@ -353,6 +353,27 @@ def cmd_hook(args) -> int:
     return 0
 
 
+def cmd_watch(args) -> int:
+    root = locate_instance(Path(args.path) if args.path else None)
+    if root is None:
+        print("no .pace/ instance found")
+        return 1
+    from pace.engines.watch import watch_once, watch_loop
+    if args.once:
+        _, msgs = watch_once(root)
+        for m in msgs:
+            print(f"[pace watch] {m}")
+        if not msgs:
+            print("[pace watch] up to date; contract VALID; nothing to report")
+        return 0
+    print(f"[pace watch] watching {root} every {args.interval}s (Ctrl-C to stop)")
+    try:
+        watch_loop(root, args.interval, printer=lambda m: print(f"[pace watch] {m}"))
+    except KeyboardInterrupt:
+        print("\n[pace watch] stopped.")
+    return 0
+
+
 def cmd_capture(args) -> int:
     """Record an approved decision immediately - the conversational-capture
     verb so a decision never lives only in the chat (RULE-0008)."""
@@ -483,6 +504,12 @@ def build_parser() -> argparse.ArgumentParser:
     hook_uninstall = hook_sub.add_parser("uninstall", help="neutralize the PACE pre-commit hook")
     hook_uninstall.add_argument("path", nargs="?", default=None)
     hook_uninstall.set_defaults(func=cmd_hook)
+
+    watch = subparsers.add_parser("watch", help="continuously watch the .pace/ instance and warn on drift, breakage or a new engine version")
+    watch.add_argument("--interval", type=int, default=5, help="seconds between checks")
+    watch.add_argument("--once", action="store_true", help="run a single check and exit")
+    watch.add_argument("path", nargs="?", default=None)
+    watch.set_defaults(func=cmd_watch)
 
     capture = subparsers.add_parser("capture", help="record an approved decision immediately (so it never lives only in the chat)")
     capture.add_argument("title")

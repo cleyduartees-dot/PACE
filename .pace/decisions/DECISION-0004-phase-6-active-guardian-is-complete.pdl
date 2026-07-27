@@ -1,0 +1,9 @@
+DECISION_VERSION 1.0.0
+ID DECISION-0004
+STATUS APPROVED
+DATE 2026-07-27
+DECIDED_BY President Cley Duarte
+TITLE Phase 6 (Active Guardian) is complete
+RATIONALE supersede, rules, condense, hook, update notice, AGENTS auto-pointer, pace update, per-message check+agent enforcement, capture, and continuous watch all shipped or built
+RAW_TEXT Phase 6 (Active Guardian) is complete
+END

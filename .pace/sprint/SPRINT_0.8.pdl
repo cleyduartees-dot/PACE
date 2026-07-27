@@ -1,6 +1,6 @@
 SPRINT_VERSION 0.8
 
-STATUS APPROVED
+STATUS SUPERSEDED
 
 SUPERSEDES SPRINT_0.7.pdl
 
@@ -14,4 +14,5 @@ SPRINT FOCUS (session 2026-07-27, late)
 - Phase 6-30 remaining: continuous background watch (true cloud/agent).
 - Also shipped today: 0.2.0, 0.3.0, 0.3.1; site live; Kingdom Tale live.
 
+SUPERSEDED_BY SPRINT_0.9.pdl
 END

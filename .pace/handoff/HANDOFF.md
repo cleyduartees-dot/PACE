@@ -129,11 +129,11 @@ END
 ## Roadmap
 
 ```
-ROADMAP_VERSION 0.2.10
+ROADMAP_VERSION 0.2.12
 
 STATUS APPROVED
 
-SUPERSEDES ROADMAP_0.2.9.pdl
+SUPERSEDES ROADMAP_0.2.11.pdl
 
 ROADMAP Ordered by execution strategy: each phase first guarantees CONTINUITY (the
 product keeps working and does not forget) before pursuing GROWTH (reaching
@@ -176,13 +176,13 @@ PHASE_5 SCALE AND ROBUSTNESS -- grow without breaking continuity
   23  Standalone binary (PyInstaller)
   24  Stack templates for pace create
 
-PHASE_6 ACTIVE GUARDIAN -- PACE stops being passive and starts enforcing (continuity)
+PHASE_6 ACTIVE GUARDIAN -- PACE stops being passive and starts enforcing (continuity)   [COMPLETE]
   25  pace supersede: enforce "never edit in place" for protected sections   [DONE]
   26  Enriched handoff: continuity notes + health checks that WARN on drift   [DONE]
   27  Rules section + Contract v0.2: a home for approved governance rules   [DONE]
   28  Log condensation: working memory does not grow unbounded (pace condense)   [DONE]
   29  Git pre-commit hook: block edits that violate the contract (pace hook install)   [DONE]
-  30  Cloud/agent mode: PACE floating over projects, warning proactively   [partly done via 36-37; remaining: continuous background watch]
+  30  Cloud/agent mode: PACE floating over projects, warning proactively   [DONE via 36-37 (per-message) + 39 (continuous watch)]
   31  Update notice: WARN in the handoff when a newer engine exists, with the exact upgrade command   [DONE]
   32  AGENTS.md auto-pointer: any AI client loads the handoff with zero user action   [DONE]
   33  pace update: one-step self-update, the CLI's press-here   [DONE]
@@ -191,6 +191,7 @@ PHASE_6 ACTIVE GUARDIAN -- PACE stops being passive and starts enforcing (contin
   36  pace check: fast cached per-message verification (REQUEST-0018)   [DONE]
   37  pace agent install: force per-message consult in every capable client - Claude Code hook, Cursor rule, AGENTS.md (REQUEST-0018)   [DONE]
   38  pace capture: record an approved decision in one command, so it never lives only in the chat (REQUEST-0016)   [DONE, unreleased - batched]
+  39  pace watch: continuous background guardian - warns on drift, breakage or a new version (completes F6-30)   [DONE, unreleased - batched]
 
 END
 ```
@@ -198,32 +199,30 @@ END
 ## Current sprint
 
 ```
-SPRINT_VERSION 0.8
+SPRINT_VERSION 0.9
 
 STATUS APPROVED
 
-SUPERSEDES SPRINT_0.7.pdl
+SUPERSEDES SPRINT_0.8.pdl
 
-SPRINT FOCUS (session 2026-07-27, late)
-- 0.4.0 "The Gatekeeper": pace check (fast, cached, per-message-safe) and
-  pace agent install (per-message enforcement wired into Claude Code hook +
-  Cursor rule + AGENTS.md). From REQUEST-0018. 49 tests green.
-- This answers the President's requirement: in any client that CAN be
-  forced (Claude Code), PACE now runs on every message via a real hook;
-  elsewhere it is the strongest instruction available. PACE dogfoods it.
-- Phase 6-30 remaining: continuous background watch (true cloud/agent).
-- Also shipped today: 0.2.0, 0.3.0, 0.3.1; site live; Kingdom Tale live.
+SPRINT FOCUS (session 2026-07-27, Phase 6 closed)
+- Built pace watch (F6-39): continuous background guardian that warns on
+  drift, contract break/heal, or a new engine version; excludes regenerable
+  outputs so it never self-triggers. Completes F6-30. PHASE 6 COMPLETE.
+- 55 tests green. NOT released - batched on main toward 0.5.0 with pace
+  capture (F6-38), per DECISION-0003/RULE-0009.
+- Published today: 0.2.0, 0.3.0, 0.3.1, 0.4.0. Site live. Kingdom Tale live.
+- Next release 0.5.0 = pace capture + pace watch as one deliberate bundle.
+- Open elsewhere: F3-16 demo GIF; F2-10 multi-source intake; F4/F5 items.
 
 END
 ```
 
 ## Recent continuity notes
 
-The working log has 14 notes. Most recent below; read the
+The working log has 16 notes. Most recent below; read the
 full detail in .pace/memory/persistent/CONTINUITY.md:
 
-- [2026-07-27 18:52] F6-28 done: pace condense archives old continuity notes (CONTINUITY_ARCHIVE.md), keeps the working log lean, loses nothing, idempotent. Handoff health check points to it. 31 tests green.
-- [2026-07-27 19:18] Release 0.2.0 Active Guardian published to PyPI (2026-07-27): supersede, rule, condense, enriched handoff now reach every pace-engine user. Verified from a clean install. Tag v0.2.0 on GitHub. Phase 6 remaining: 29 (git hook), 30 (cloud/agent).
 - [2026-07-27 19:26] F6-31 done (REQUEST-0012): update-check service queries PyPI (fail-silent, 2s timeout); handoff health checks now WARN with the exact upgrade command when a newer pace-engine exists. Verified against live PyPI: 0.1.0 user gets the notice, 0.2.0 user gets silence. 36 tests green. Ships with the next release.
 - [2026-07-27 19:35] F6-29/31/32/33 done: pre-commit guardian (pace hook install, dogfooded on PACE's own repo), update notice, AGENTS.md auto-pointer (REQUEST-0013) and pace update (REQUEST-0014). 42 tests green. Pending: F6-30 design; release 0.3.0 to ship it all.
 - [2026-07-27 19:50] Release 0.3.0 Zero-touch Guardian prepared: hook fix (embedded interpreter, fail-open with warning when pace missing), wheel+sdist verified. REQUEST-0015: Kingdom Tale published as docs/cuento-del-reino.html, polished to sell, every character mapped to a real command; landing links it (nav + teaser). Pending user: commit, tag v0.3.0, twine upload.
@@ -234,10 +233,12 @@ full detail in .pace/memory/persistent/CONTINUITY.md:
 - [2026-07-27 22:15] 0.4.0 The Gatekeeper (REQUEST-0018): pace check = fast cached per-message verification (silent without .pace/); pace agent install wires per-message enforcement into Claude Code (real UserPromptSubmit hook), Cursor rule, and AGENTS.md. Idempotent, preserves foreign settings. 49 tests green. F6-36/37 done; F6-30 remaining = continuous background watch.
 - [2026-07-27 22:23] DECISION-0003 + RULE-0009: adopted versioning/release-cadence policy (policies/VERSIONING_POLICY_0.1.0.pdl). SemVer on engine line; BATCH releases by default (not per feature); 1.0.0 reserved as a stability commitment. Todays fast cadence was justified by a live feedback loop but is not the default going forward.
 - [2026-07-27 22:26] Built pace capture (F6-38): the conversational-capture verb - records an approved decision as DECISION-NNNN in one command (RULE-0008 remedy). AGENTS/cursor/check guidance now tell AIs to capture decisions the instant they happen. 50 tests green. NOT released: batched on main toward a future 0.5.0 per DECISION-0003/RULE-0009.
+- [2026-07-27 22:33] F6-39 pace watch built: continuous guardian (polling, zero-deps), warns on drift/break/heal/new-version, excludes handoff+memory/generated so regenerating handoff does not self-trigger. Completes F6-30. PHASE 6 COMPLETE. 55 tests green. Batched (unreleased) toward 0.5.0 = pace capture + pace watch.
+- [2026-07-27 22:35] GOTCHA fixed: a stray SUPERSEDED_BY line leaked into the roadmap content. Root cause: reading the latest roadmap via sorted(glob(ROADMAP_*)) is WRONG - lexicographic sort puts 0.2.10 before 0.2.9, so it read an old (stamped) file and re-appended its SUPERSEDED_BY stamp. FIX: always read the active file via ACTIVE_VERSIONS.pdl (the source of truth), and write full clean bodies rather than read-append. cmd_supersede itself is correct (it uses ACTIVE_VERSIONS); only ad-hoc glob reads were buggy. Roadmap cleaned to 0.2.12, doctor VALID.
 
 ## Where the rest of the memory lives
 
-- Decisions: .pace/decisions/  (3 recorded)
+- Decisions: .pace/decisions/  (4 recorded)
 - History:   .pace/history/    (11 entries)
 - Requests:  .pace/requests/   (18 logged in intake)
 
