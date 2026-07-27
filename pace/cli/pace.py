@@ -15,7 +15,7 @@ from pace.services.pdl import read_pdl
 from pace.engines.project_creator import init_instance, create_project
 from pace.engines.handoff import generate_handoff, _root_authority
 from pace.engines.rules import add_rule, list_rules
-from pace.engines.memory import remember, recall
+from pace.engines.memory import remember, recall, condense
 
 ACTIVE_SECTIONS = [
     ("MISSION", "ACTIVE_MISSION"),
@@ -269,6 +269,19 @@ def cmd_supersede(args) -> int:
     return 0
 
 
+def cmd_condense(args) -> int:
+    root = locate_instance(Path(args.path) if args.path else None)
+    if root is None:
+        print("no .pace/ instance found")
+        return 1
+    n, archive = condense(root, keep=args.keep)
+    if n == 0:
+        print("nothing to condense (continuity log is within the limit)")
+    else:
+        print(f"condensed {n} old note(s) into {archive.name}; working log trimmed to the last {args.keep}")
+    return 0
+
+
 def cmd_rule(args) -> int:
     root = locate_instance(Path(args.path) if args.path else None)
     if root is None:
@@ -332,6 +345,11 @@ def build_parser() -> argparse.ArgumentParser:
     supersede.add_argument("content")
     supersede.add_argument("path", nargs="?", default=None)
     supersede.set_defaults(func=cmd_supersede)
+
+    condense = subparsers.add_parser("condense", help="archive old continuity notes so the working log stays lean (nothing discarded)")
+    condense.add_argument("--keep", type=int, default=20, help="how many recent notes to keep in the working log")
+    condense.add_argument("path", nargs="?", default=None)
+    condense.set_defaults(func=cmd_condense)
 
     rule = subparsers.add_parser("rule", help="record or list approved governance rules an AI must obey")
     rule_sub = rule.add_subparsers(dest="rule_command", required=True)

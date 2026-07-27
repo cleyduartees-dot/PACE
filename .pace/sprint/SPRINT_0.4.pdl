@@ -1,0 +1,15 @@
+SPRINT_VERSION 0.4
+
+STATUS APPROVED
+
+SUPERSEDES SPRINT_0.3.pdl
+
+SPRINT FOCUS (session 2026-07-27, cont.)
+- Shipped F6-28: `pace condense` archives old continuity notes to
+  CONTINUITY_ARCHIVE.md (nothing discarded, idempotent); the handoff health
+  check now points to it. 31 tests green.
+- Phase 6 status: 25, 26, 27, 28 done; 29 (git hook) and 30 (cloud/agent) left.
+- Debt: demo GIF (F3-16); then republish 0.2.0 to PyPI so supersede/rule/
+  condense/enriched-handoff reach existing pace-engine users.
+
+END

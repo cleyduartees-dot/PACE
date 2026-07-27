@@ -152,8 +152,8 @@ def generate_handoff(root):
             )
     if len(notes) > 30:
         warnings.append(
-            f"The continuity log has {len(notes)} notes - consider condensing the "
-            "old ones (refined in place, not deleted)."
+            f"The continuity log has {len(notes)} notes - run `pace condense` to "
+            "archive the old ones (nothing discarded)."
         )
     out.append("## Health checks")
     out.append("")

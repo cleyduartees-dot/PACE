@@ -41,3 +41,50 @@ def recall(root: Path) -> str:
     if not path.is_file():
         return '(no continuity memory yet - add notes with: pace remember "...")'
     return path.read_text(encoding="utf-8").strip()
+
+
+ARCHIVE_FILE = "memory/persistent/CONTINUITY_ARCHIVE.md"
+
+_ARCHIVE_HEADER = (
+    "# Continuity archive\n\n"
+    "Older continuity notes moved out of the working log to keep it lean.\n"
+    "Nothing is discarded - this is the full history, oldest first.\n\n"
+)
+
+
+def _archive_path(root: Path) -> Path:
+    return Path(root) / ARCHIVE_FILE
+
+
+def condense(root: Path, keep: int = 20):
+    """Keep the most recent `keep` real notes in the working log and move
+    the older ones to CONTINUITY_ARCHIVE.md. Refines in place without
+    discarding: the archive holds the full history. Condensation markers
+    are ephemeral pointers - never counted nor archived - so running this
+    again with nothing new to move is a no-op. Returns
+    (archived_count, archive_path)."""
+    path = _memory_path(root)
+    if not path.is_file():
+        return (0, _archive_path(root))
+    all_lines = [l for l in path.read_text(encoding="utf-8").splitlines()
+                 if l.strip().startswith("- ")]
+    real = [n for n in all_lines if "(condensed)" not in n]
+    if len(real) <= keep:
+        return (0, _archive_path(root))
+    old, recent = real[:-keep], real[-keep:]
+
+    archive = _archive_path(root)
+    archive.parent.mkdir(parents=True, exist_ok=True)
+    if not archive.exists():
+        archive.write_text(_ARCHIVE_HEADER, encoding="utf-8")
+    with archive.open("a", encoding="utf-8") as handle:
+        for line in old:
+            handle.write(line + "\n")
+
+    total_archived = sum(1 for l in archive.read_text(encoding="utf-8").splitlines()
+                         if l.strip().startswith("- "))
+    stamp = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    marker = (f"- [{stamp}] (condensed) {total_archived} earlier note(s) live in "
+              "CONTINUITY_ARCHIVE.md; nothing discarded.")
+    path.write_text(_HEADER + marker + "\n" + "\n".join(recent) + "\n", encoding="utf-8")
+    return (len(old), archive)

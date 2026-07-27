@@ -126,11 +126,11 @@ END
 ## Roadmap
 
 ```
-ROADMAP_VERSION 0.2.2
+ROADMAP_VERSION 0.2.3
 
 STATUS APPROVED
 
-SUPERSEDES ROADMAP_0.2.1.pdl
+SUPERSEDES ROADMAP_0.2.2.pdl
 
 ROADMAP Ordered by execution strategy: each phase first guarantees CONTINUITY (the
 product keeps working and does not forget) before pursuing GROWTH (reaching
@@ -147,7 +147,7 @@ PHASE_1 FOUNDATION -- the engine exists and governs itself   [DONE]
   05  Self-governance: PACE adopts itself
 
 PHASE_2 SOLID PRODUCT -- installable, with memory and governance (continuity)
-  06  Package the CLI as an installable `pace`   [tags + CHANGELOG pending]
+  06  Package the CLI as an installable `pace`   [DONE]
   07  Smoke test: install on a clean environment   [DONE]
   08  Define the ACTOR / ROOT_AUTHORITY in .pace/   [DONE]
   09  Bootstrap/Handoff engine -- the AI knows to consult the owner   [DONE]
@@ -177,7 +177,7 @@ PHASE_6 ACTIVE GUARDIAN -- PACE stops being passive and starts enforcing (contin
   25  pace supersede: enforce "never edit in place" for protected sections   [DONE]
   26  Enriched handoff: continuity notes + health checks that WARN on drift   [DONE]
   27  Rules section + Contract v0.2: a home for approved governance rules   [DONE]
-  28  Log condensation: working memory does not grow unbounded
+  28  Log condensation: working memory does not grow unbounded (pace condense)   [DONE]
   29  Git pre-commit hook: block edits that violate the contract
   30  Cloud/agent mode: PACE floating over projects, warning proactively
 
@@ -187,31 +187,31 @@ END
 ## Current sprint
 
 ```
-SPRINT_VERSION 0.3
+SPRINT_VERSION 0.4
 
 STATUS APPROVED
 
-SUPERSEDES SPRINT_0.2.pdl
+SUPERSEDES SPRINT_0.3.pdl
 
 SPRINT FOCUS (session 2026-07-27, cont.)
-- Shipped F6-27: rules/ section (Contract v0.2, optional & backward-compatible),
-  `pace rule add`/`list`, and rules now render at the top of the handoff.
-  Seeded PACE with 7 approved rules (5 PACE-scope, 2 ORG-scope).
-- Also: audited the ClickUp board so it stops lying (reopened 2 parents with
-  open subtasks); added CHANGELOG.md and landing OG/twitter tags.
-- Next: F6-28 log condensation, F6-29 git pre-commit hook, F6-30 cloud/agent.
-- Debt: tag v0.1.0 (F2-06) and demo GIF (F3-16); then republish 0.2.0 to PyPI.
+- Shipped F6-28: `pace condense` archives old continuity notes to
+  CONTINUITY_ARCHIVE.md (nothing discarded, idempotent); the handoff health
+  check now points to it. 31 tests green.
+- Phase 6 status: 25, 26, 27, 28 done; 29 (git hook) and 30 (cloud/agent) left.
+- Debt: demo GIF (F3-16); then republish 0.2.0 to PyPI so supersede/rule/
+  condense/enriched-handoff reach existing pace-engine users.
 
 END
 ```
 
 ## Recent continuity notes
 
-The working log has 2 notes. Most recent below; read the
+The working log has 3 notes. Most recent below; read the
 full detail in .pace/memory/persistent/CONTINUITY.md:
 
 - [2026-07-27 17:32] F6 Active Guardian underway: shipped pace supersede (25) and enriched handoff with health checks (26). Dogfooded them on PACE itself to add Phase 6 to its own roadmap (0.2.0 -> 0.2.1) and refresh sprint (0.1 -> 0.2) via the tool, not by hand.
 - [2026-07-27 18:35] F6-27 done: added an optional rules/ section (Contract v0.2), the pace rule add/list command, and rules now render at the top of the handoff. Seeded PACE with 7 approved rules (5 PACE-scope, 2 ORG-scope) capturing this session's permanent corrections.
+- [2026-07-27 18:52] F6-28 done: pace condense archives old continuity notes (CONTINUITY_ARCHIVE.md), keeps the working log lean, loses nothing, idempotent. Handoff health check points to it. 31 tests green.
 
 ## Where the rest of the memory lives
 

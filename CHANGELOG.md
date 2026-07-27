@@ -17,6 +17,9 @@ version lines: the engine (`PACE_VERSION`) and the instance Contract
   oversized continuity log).
 - `rules/` section (Contract v0.2, **optional and backward-compatible**) — a
   home for approved, permanent governance rules an AI must obey.
+- `pace condense` — archive old continuity notes to `CONTINUITY_ARCHIVE.md` so the working log stays lean; nothing is
+  discarded and re-running is a no-op. The handoff health check points
+  here once the log grows large.
 - `pace rule add` / `pace rule list` — record and list rules by scope
   (PACE / ORGANIZATION / PROJECT). Approved rules render at the top of the
   handoff so an AI reads them first.
