@@ -120,7 +120,8 @@ def generate_handoff(root):
     else:
         out.append("- You ADVISE and AUDIT; the project owner (ROOT_AUTHORITY) decides.")
     out.append('- Update sections with `pace supersede <section> "..."` - never edit a')
-    out.append("  versioned file in place. Log lasting notes with `pace remember`.")
+    out.append("  versioned file in place. Log lasting notes with `pace remember`;")
+    out.append("  capture approved decisions with `pace capture` the instant they happen.")
     out.append("- Every approved correction becomes a rule you must follow. Do not")
     out.append("  re-ask what an approved rule already settles.")
     out.append("")

@@ -81,6 +81,21 @@ def test_supersede_stamps_the_prior_version_as_superseded():
         assert "sprint/SPRINT_2.pdl" in active
 
 
+def test_capture_records_a_decision_with_next_correlative():
+    with tempfile.TemporaryDirectory() as tmp:
+        run(["init", tmp, "--name", "C", "--slug", "c", "--org-ref", "org"])
+        code, out = run(["capture", "Adopt batching", tmp])
+        assert code == 0, out
+        dec = Path(tmp) / ".pace" / "decisions"
+        files = sorted(dec.glob("DECISION-*.pdl"))
+        assert len(files) == 1 and files[0].name.startswith("DECISION-0001")
+        text = files[0].read_text()
+        assert "STATUS APPROVED" in text and "Adopt batching" in text
+        # a second capture increments
+        run(["capture", "Second one", tmp])
+        assert len(sorted(dec.glob("DECISION-*.pdl"))) == 2
+
+
 if __name__ == "__main__":
     tests = [v for k, v in sorted(globals().items()) if k.startswith("test_")]
     for test in tests:

@@ -1,8 +1,8 @@
-ROADMAP_VERSION 0.2.9
+ROADMAP_VERSION 0.2.10
 
-STATUS SUPERSEDED
+STATUS APPROVED
 
-SUPERSEDES ROADMAP_0.2.8.pdl
+SUPERSEDES ROADMAP_0.2.9.pdl
 
 ROADMAP Ordered by execution strategy: each phase first guarantees CONTINUITY (the
 product keeps working and does not forget) before pursuing GROWTH (reaching
@@ -59,6 +59,6 @@ PHASE_6 ACTIVE GUARDIAN -- PACE stops being passive and starts enforcing (contin
   35  supersede stamps the prior version file SUPERSEDED + SUPERSEDED_BY (REQUEST-0017)   [DONE]
   36  pace check: fast cached per-message verification (REQUEST-0018)   [DONE]
   37  pace agent install: force per-message consult in every capable client - Claude Code hook, Cursor rule, AGENTS.md (REQUEST-0018)   [DONE]
+  38  pace capture: record an approved decision in one command, so it never lives only in the chat (REQUEST-0016)   [DONE, unreleased - batched]
 
-SUPERSEDED_BY ROADMAP_0.2.10.pdl
 END

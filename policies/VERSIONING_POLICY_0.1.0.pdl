@@ -1,0 +1,45 @@
+POLICY_VERSION 0.1.0
+
+NAME Versioning and Release Cadence Policy
+
+STATUS APPROVED
+
+OWNER President Cley Duarte
+
+DATE 2026-07-27
+
+SCOPE PACE
+
+SCHEME
+
+Semantic Versioning 2.0.0 on the engine line (PACE_VERSION). While
+pre-1.0: MINOR (0.x.0) for new user-facing features, PATCH (0.x.y) for
+fixes and internal changes. The Instance Contract has its own independent
+line (SCHEMA_VERSION); this policy governs the engine.
+
+CADENCE
+
+BATCH by default. Accumulate related work on main and cut a release when
+there is a meaningful bundle of value, OR when a real user is blocked and
+needs a fix now. Do NOT publish a new version per feature by default.
+Every PyPI version is permanent and cannot be reused - treat each release
+as a deliberate event, not a checkpoint.
+
+RATIONALE
+
+Four releases in one afternoon (0.2.0, 0.3.0, 0.3.1, 0.4.0) shipped real
+value under a live feedback loop, which justified the speed then. But as a
+default, high release frequency inflates the version number, clutters a
+permanent history, and reads as instability to prospective buyers. Fewer,
+larger, deliberate releases read as maturity.
+
+ROAD_TO_1_0
+
+1.0.0 is a stability COMMITMENT, not a feature count: it means the
+Instance Contract and the CLI surface are stable enough that PACE promises
+not to break them without a major bump. Candidate triggers: the
+reality-comprehension / Governor milestone, or an explicit Presidential
+decision that PACE is production-stable. Staying in 0.x is the honest
+signal that the shape is still moving - that is a feature, not a defect.
+
+END

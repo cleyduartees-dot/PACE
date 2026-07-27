@@ -55,7 +55,8 @@ This project is governed by PACE (pip install pace-engine).
 
 At the start of a session run `pace handoff` and obey it. On every message,
 before acting, run `pace check`. Do not ask the owner to re-explain anything
-the handoff already answers. Update protected sections only with
+the handoff already answers. Capture approved decisions immediately with `pace capture` so they
+never live only in the chat. Update protected sections only with
 `pace supersede`, never by editing versioned files in place.
 """
 

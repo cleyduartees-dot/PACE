@@ -18,6 +18,7 @@ from pace.engines.rules import add_rule, list_rules
 from pace.engines.memory import remember, recall, condense
 from pace.engines.hooks import install_hook, uninstall_hook
 from pace.engines.agent_setup import install_all
+from pace.engines.decisions import capture_decision
 from pace.engines.handoff import generate_handoff, _root_authority, _ensure_agents_pointer
 
 ACTIVE_SECTIONS = [
@@ -352,6 +353,23 @@ def cmd_hook(args) -> int:
     return 0
 
 
+def cmd_capture(args) -> int:
+    """Record an approved decision immediately - the conversational-capture
+    verb so a decision never lives only in the chat (RULE-0008)."""
+    root = locate_instance(Path(args.path) if args.path else None)
+    if root is None:
+        print("no .pace/ instance found")
+        return 1
+    decided_by = _root_authority(root) or ""
+    try:
+        out = capture_decision(root, args.title, detail=args.why or "", decided_by=decided_by)
+    except ValueError as error:
+        print(f"capture failed: {error}")
+        return 1
+    print(f"captured {out.name} in {out.parent}")
+    return 0
+
+
 def cmd_check(args) -> int:
     """Fast, quiet per-message verification: is PACE here, is it current.
     Silent when there is no .pace/ (so it is safe as a global hook)."""
@@ -363,7 +381,7 @@ def cmd_check(args) -> int:
     instance = read_pdl(root / "INSTANCE.pdl")
     name = instance.get("NAME", "this project")
     print(f"PACE active: {name} (engine {PACE_VERSION}). Consult `pace handoff` "
-          "for the project's memory before acting; log decisions with `pace remember`.")
+          "for the project's memory before acting; capture approved decisions with `pace capture` the moment they happen.")
     latest = latest_version_cached(root)
     if latest and _parse(latest) > _parse(PACE_VERSION):
         print(f"WARN: a newer PACE engine ({latest}) is available - run `pace update`.")
@@ -465,6 +483,12 @@ def build_parser() -> argparse.ArgumentParser:
     hook_uninstall = hook_sub.add_parser("uninstall", help="neutralize the PACE pre-commit hook")
     hook_uninstall.add_argument("path", nargs="?", default=None)
     hook_uninstall.set_defaults(func=cmd_hook)
+
+    capture = subparsers.add_parser("capture", help="record an approved decision immediately (so it never lives only in the chat)")
+    capture.add_argument("title")
+    capture.add_argument("--why", default="", help="the rationale behind the decision")
+    capture.add_argument("path", nargs="?", default=None)
+    capture.set_defaults(func=cmd_capture)
 
     check = subparsers.add_parser("check", help="fast per-message verification: is PACE here and current (safe to run on every message)")
     check.add_argument("path", nargs="?", default=None)

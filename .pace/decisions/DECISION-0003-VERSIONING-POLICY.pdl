@@ -1,0 +1,33 @@
+DECISION_VERSION 1.0.0
+
+ID DECISION-0003
+
+STATUS APPROVED
+
+DATE 2026-07-27
+
+DECIDED_BY President Cley Duarte
+
+TITLE
+
+Adopt a versioning and release-cadence policy: SemVer on the engine line,
+batch releases by default, and reserve 1.0.0 as a stability commitment.
+
+RAW_TEXT
+
+Estas de acuerdo con el versionado no te parece que es muy alto -> De
+acuerdo (record a versioning policy + batch features / publish less
+frequently from now on).
+
+CONTEXT
+
+Prompted by the President noticing four releases in one afternoon
+(0.2.0 -> 0.4.0) and asking whether the version was climbing too fast.
+
+CONSEQUENCES
+
+From now on PACE batches features and publishes deliberately, not per
+feature. Full policy in policies/VERSIONING_POLICY_0.1.0.pdl. Enforced as
+RULE-0009.
+
+END

@@ -1,0 +1,9 @@
+RULE_ID RULE-0009
+SCOPE PACE
+STATUS APPROVED
+STATEMENT Release deliberately, not per feature: batch related work and cut a version when there is a meaningful bundle or a real user is blocked. SemVer on the engine line; reserve 1.0.0 as a stability commitment. See policies/VERSIONING_POLICY_0.1.0.pdl.
+RATIONALE Four releases in one afternoon inflated the number and read as churn; fewer, larger, deliberate releases read as maturity.
+PROMOTED_FROM DECISION-0003
+APPROVED_BY President Cley Duarte
+CREATED_AT 2026-07-27
+END
