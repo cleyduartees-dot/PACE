@@ -1,0 +1,42 @@
+REQUEST_VERSION 1.0.0
+
+ID REQUEST-0014
+
+STATUS APPROVED
+
+DATE 2026-07-27
+
+WHO President Cley Duarte
+
+SCOPE PACE
+
+TITLE
+
+Updating must be one step -- the CLI equivalent of "want to update now?
+press here".
+
+RAW_TEXT
+
+El pip install --upgrade pace-engine sera un link que ejecuta inmediato o
+reemplazar o agregar desea actualizarlo ahora presione aqui.
+
+PROPOSED_SCOPE PACE
+
+DESIGN_NOTE
+
+A terminal has no buttons, so the closest honest equivalents are built:
+(1) a new `pace update` command that runs the pip upgrade itself -- one
+short command, the CLI's "button"; the update WARN now suggests it first.
+(2) In AI-driven chats the AI reading the WARN can simply run the update
+for the user after their yes -- which is exactly "press here" in
+conversation form.
+
+PROMOTED_TO
+
+F6-33 (pace update command; WARN text now points to it)
+
+APPROVED_BY
+
+President Cley Duarte
+
+END

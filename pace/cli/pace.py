@@ -16,6 +16,7 @@ from pace.engines.project_creator import init_instance, create_project
 from pace.engines.handoff import generate_handoff, _root_authority
 from pace.engines.rules import add_rule, list_rules
 from pace.engines.memory import remember, recall, condense
+from pace.engines.hooks import install_hook, uninstall_hook
 
 ACTIVE_SECTIONS = [
     ("MISSION", "ACTIVE_MISSION"),
@@ -282,6 +283,38 @@ def cmd_condense(args) -> int:
     return 0
 
 
+def cmd_update(args) -> int:
+    """One-step self-update: the CLI's 'press here' (REQUEST-0014)."""
+    import subprocess
+    print("updating pace-engine (pip install --upgrade pace-engine)...")
+    result = subprocess.run(
+        [sys.executable, "-m", "pip", "install", "--upgrade", "pace-engine"]
+    )
+    if result.returncode == 0:
+        print("pace is up to date.")
+    else:
+        print("update failed - try manually: pip install --upgrade pace-engine")
+    return result.returncode
+
+
+def cmd_hook(args) -> int:
+    root = locate_instance(Path(args.path) if args.path else None)
+    if root is None:
+        print("no .pace/ instance found")
+        return 1
+    try:
+        if args.hook_command == "install":
+            hook = install_hook(root)
+            print(f"pre-commit hook installed at {hook} - commits that break the contract will be blocked")
+        else:
+            hook = uninstall_hook(root)
+            print(f"pre-commit hook neutralized at {hook}" if hook else "no hook to uninstall")
+    except (FileNotFoundError, FileExistsError) as error:
+        print(f"hook {args.hook_command} failed: {error}")
+        return 1
+    return 0
+
+
 def cmd_rule(args) -> int:
     root = locate_instance(Path(args.path) if args.path else None)
     if root is None:
@@ -350,6 +383,18 @@ def build_parser() -> argparse.ArgumentParser:
     condense.add_argument("--keep", type=int, default=20, help="how many recent notes to keep in the working log")
     condense.add_argument("path", nargs="?", default=None)
     condense.set_defaults(func=cmd_condense)
+
+    update = subparsers.add_parser("update", help="update pace-engine itself to the latest version (one step)")
+    update.set_defaults(func=cmd_update)
+
+    hook = subparsers.add_parser("hook", help="manage the git pre-commit guardian that blocks contract-breaking commits")
+    hook_sub = hook.add_subparsers(dest="hook_command", required=True)
+    hook_install = hook_sub.add_parser("install", help="install the pre-commit hook (runs pace doctor on every commit)")
+    hook_install.add_argument("path", nargs="?", default=None)
+    hook_install.set_defaults(func=cmd_hook)
+    hook_uninstall = hook_sub.add_parser("uninstall", help="neutralize the PACE pre-commit hook")
+    hook_uninstall.add_argument("path", nargs="?", default=None)
+    hook_uninstall.set_defaults(func=cmd_hook)
 
     rule = subparsers.add_parser("rule", help="record or list approved governance rules an AI must obey")
     rule_sub = rule.add_subparsers(dest="rule_command", required=True)

@@ -1,0 +1,42 @@
+REQUEST_VERSION 1.0.0
+
+ID REQUEST-0013
+
+STATUS APPROVED
+
+DATE 2026-07-27
+
+WHO President Cley Duarte
+
+SCOPE PACE
+
+TITLE
+
+Running pace handoff must be automatic in any AI chat -- the user must
+never have to trigger it by hand.
+
+RAW_TEXT
+
+Correr pace handoff es cosa normal del proceso automatico en cualquier
+chat? correcto es decir el usuario no tiene que hacerlo por cuenta propia?
+
+PROPOSED_SCOPE PACE
+
+DESIGN_NOTE
+
+AI coding clients (Claude Code, Cursor, Copilot and others) automatically
+read an AGENTS.md file at the repository root when a session starts. PACE
+now writes that file (only if absent -- never clobbering the owner's own
+AGENTS.md) instructing every AI to run pace handoff first and obey it.
+The onboarding becomes zero-touch for the user: opening the project in
+any AI tool loads PACE's memory without anyone asking for it.
+
+PROMOTED_TO
+
+F6-32 (AGENTS.md auto-onboarding pointer, written by the handoff engine)
+
+APPROVED_BY
+
+President Cley Duarte
+
+END

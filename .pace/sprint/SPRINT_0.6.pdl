@@ -1,0 +1,17 @@
+SPRINT_VERSION 0.6
+
+STATUS APPROVED
+
+SUPERSEDES SPRINT_0.5.pdl
+
+SPRINT FOCUS (session 2026-07-27, closing)
+- Released 0.2.0 "Active Guardian" to PyPI (tag v0.2.0), verified clean.
+- Shipped F6-29 (pace hook install: pre-commit guardian blocks
+  contract-breaking commits), F6-31 (update notice), F6-32 (AGENTS.md
+  auto-pointer, REQUEST-0013), F6-33 (pace update, REQUEST-0014). 42 tests
+  green. Hook installed on PACE's own repo; AGENTS.md dogfooded.
+- Phase 6 remaining: 30 (cloud/agent mode) - needs its own design.
+- Next release (0.3.0) carries 29/31/32/33 to every pace-engine user.
+- Debt: demo GIF (F3-16), landing on GitHub Pages (F3-17).
+
+END

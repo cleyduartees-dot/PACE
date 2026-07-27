@@ -8,6 +8,14 @@ version lines: the engine (`PACE_VERSION`) and the instance Contract
 ## [Unreleased]
 
 ### Added
+- `pace hook install` / `uninstall` — a git pre-commit guardian that runs
+  `pace doctor` on every commit and blocks commits that break the contract.
+  Refuses to touch hooks PACE did not write.
+- AGENTS.md auto-pointer (REQUEST-0013): the handoff engine writes an
+  `AGENTS.md` at the repository root (only if absent) so AI clients that
+  auto-read it load PACE's memory with zero user action.
+- `pace update` (REQUEST-0014) — one-step self-update; the update notice now
+  suggests it first.
 - Update notice (REQUEST-0012): the handoff's Health checks now WARN when a
   newer `pace-engine` exists on PyPI, showing the exact command
   (`pip install --upgrade pace-engine`). Fail-silent: offline or slow

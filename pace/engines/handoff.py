@@ -24,6 +24,39 @@ ACTIVE_SECTIONS = [
 CONTINUITY_REL = "memory/persistent/CONTINUITY.md"
 
 
+AGENTS_TEMPLATE = """# AI instructions for this project
+
+This project is governed by PACE (pip install pace-engine).
+
+Before doing anything else, run:
+
+    pace handoff
+
+and obey what it prints. It is the project's own memory: who decides,
+the rules you must follow, mission, vision, roadmap, current sprint,
+recent continuity notes and health warnings. Do not ask the owner to
+re-explain anything the handoff already answers.
+
+While you work: log lasting notes with `pace remember "..."`, update
+protected sections only with `pace supersede <section> "..."` (never
+edit versioned files in place), and record approved permanent rules
+with `pace rule add`. Before you finish, run `pace handoff` again and
+leave the project as healthy as you found it or better.
+"""
+
+
+def _ensure_agents_pointer(root: Path):
+    """Write AGENTS.md at the repository root if it does not exist, so AI
+    clients that auto-read it load PACE's memory with zero user action
+    (REQUEST-0013). Never overwrites an existing AGENTS.md."""
+    repo = Path(root).parent
+    agents = repo / "AGENTS.md"
+    if agents.exists():
+        return None
+    agents.write_text(AGENTS_TEMPLATE, encoding="utf-8")
+    return agents
+
+
 def _read_section(root, relative_path):
     if not relative_path:
         return "(not set)"
@@ -176,4 +209,5 @@ def generate_handoff(root):
     handoff_dir.mkdir(parents=True, exist_ok=True)
     path = handoff_dir / "HANDOFF.md"
     path.write_text("\n".join(out) + "\n", encoding="utf-8")
+    _ensure_agents_pointer(root)
     return path

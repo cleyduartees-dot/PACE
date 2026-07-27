@@ -126,11 +126,11 @@ END
 ## Roadmap
 
 ```
-ROADMAP_VERSION 0.2.4
+ROADMAP_VERSION 0.2.5
 
 STATUS APPROVED
 
-SUPERSEDES ROADMAP_0.2.3.pdl
+SUPERSEDES ROADMAP_0.2.4.pdl
 
 ROADMAP Ordered by execution strategy: each phase first guarantees CONTINUITY (the
 product keeps working and does not forget) before pursuing GROWTH (reaching
@@ -178,9 +178,11 @@ PHASE_6 ACTIVE GUARDIAN -- PACE stops being passive and starts enforcing (contin
   26  Enriched handoff: continuity notes + health checks that WARN on drift   [DONE]
   27  Rules section + Contract v0.2: a home for approved governance rules   [DONE]
   28  Log condensation: working memory does not grow unbounded (pace condense)   [DONE]
-  29  Git pre-commit hook: block edits that violate the contract
+  29  Git pre-commit hook: block edits that violate the contract (pace hook install)   [DONE]
   30  Cloud/agent mode: PACE floating over projects, warning proactively
   31  Update notice: WARN in the handoff when a newer engine exists, with the exact upgrade command   [DONE]
+  32  AGENTS.md auto-pointer: any AI client loads the handoff with zero user action   [DONE]
+  33  pace update: one-step self-update, the CLI's press-here   [DONE]
 
 END
 ```
@@ -188,27 +190,28 @@ END
 ## Current sprint
 
 ```
-SPRINT_VERSION 0.5
+SPRINT_VERSION 0.6
 
 STATUS APPROVED
 
-SUPERSEDES SPRINT_0.4.pdl
+SUPERSEDES SPRINT_0.5.pdl
 
 SPRINT FOCUS (session 2026-07-27, closing)
-- Released 0.2.0 "Active Guardian" to PyPI (tag v0.2.0): supersede, rule,
-  condense, enriched handoff - verified from a clean install.
-- Shipped F6-31 (REQUEST-0012): update notice in the handoff health checks
-  with the exact upgrade command; fail-silent offline. 36 tests green.
-- Phase 6 remaining: 29 (git pre-commit hook), 30 (cloud/agent mode).
-- Debt: demo GIF (F3-16), landing on GitHub Pages (F3-17). F6-31 ships with
-  the next release (0.2.1 or 0.3.0).
+- Released 0.2.0 "Active Guardian" to PyPI (tag v0.2.0), verified clean.
+- Shipped F6-29 (pace hook install: pre-commit guardian blocks
+  contract-breaking commits), F6-31 (update notice), F6-32 (AGENTS.md
+  auto-pointer, REQUEST-0013), F6-33 (pace update, REQUEST-0014). 42 tests
+  green. Hook installed on PACE's own repo; AGENTS.md dogfooded.
+- Phase 6 remaining: 30 (cloud/agent mode) - needs its own design.
+- Next release (0.3.0) carries 29/31/32/33 to every pace-engine user.
+- Debt: demo GIF (F3-16), landing on GitHub Pages (F3-17).
 
 END
 ```
 
 ## Recent continuity notes
 
-The working log has 5 notes. Most recent below; read the
+The working log has 6 notes. Most recent below; read the
 full detail in .pace/memory/persistent/CONTINUITY.md:
 
 - [2026-07-27 17:32] F6 Active Guardian underway: shipped pace supersede (25) and enriched handoff with health checks (26). Dogfooded them on PACE itself to add Phase 6 to its own roadmap (0.2.0 -> 0.2.1) and refresh sprint (0.1 -> 0.2) via the tool, not by hand.
@@ -216,12 +219,13 @@ full detail in .pace/memory/persistent/CONTINUITY.md:
 - [2026-07-27 18:52] F6-28 done: pace condense archives old continuity notes (CONTINUITY_ARCHIVE.md), keeps the working log lean, loses nothing, idempotent. Handoff health check points to it. 31 tests green.
 - [2026-07-27 19:18] Release 0.2.0 Active Guardian published to PyPI (2026-07-27): supersede, rule, condense, enriched handoff now reach every pace-engine user. Verified from a clean install. Tag v0.2.0 on GitHub. Phase 6 remaining: 29 (git hook), 30 (cloud/agent).
 - [2026-07-27 19:26] F6-31 done (REQUEST-0012): update-check service queries PyPI (fail-silent, 2s timeout); handoff health checks now WARN with the exact upgrade command when a newer pace-engine exists. Verified against live PyPI: 0.1.0 user gets the notice, 0.2.0 user gets silence. 36 tests green. Ships with the next release.
+- [2026-07-27 19:35] F6-29/31/32/33 done: pre-commit guardian (pace hook install, dogfooded on PACE's own repo), update notice, AGENTS.md auto-pointer (REQUEST-0013) and pace update (REQUEST-0014). 42 tests green. Pending: F6-30 design; release 0.3.0 to ship it all.
 
 ## Where the rest of the memory lives
 
 - Decisions: .pace/decisions/  (1 recorded)
 - History:   .pace/history/    (11 entries)
-- Requests:  .pace/requests/   (12 logged in intake)
+- Requests:  .pace/requests/   (14 logged in intake)
 
 ## Health checks
 

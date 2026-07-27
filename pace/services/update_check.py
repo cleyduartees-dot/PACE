@@ -11,7 +11,7 @@ import json
 from urllib.request import urlopen
 
 PYPI_URL = "https://pypi.org/pypi/pace-engine/json"
-UPGRADE_COMMAND = "pip install --upgrade pace-engine"
+UPGRADE_COMMAND = "pace update  (or: pip install --upgrade pace-engine)"
 
 
 def _parse(version: str) -> tuple:
