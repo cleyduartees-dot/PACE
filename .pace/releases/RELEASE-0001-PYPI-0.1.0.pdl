@@ -1,0 +1,34 @@
+RELEASE_VERSION 1.0.0
+
+ID RELEASE-0001
+
+DATE 2026-07-25
+
+STATUS PUBLISHED
+
+TITLE
+
+pace-engine 0.1.0 published to PyPI - PACE is publicly installable.
+
+WHAT
+
+The PACE engine, refactored under a single `pace` namespace, published to
+PyPI as the distribution `pace-engine` 0.1.0. Anyone can now
+`pip install pace-engine` and use the `pace` CLI: init (and init --guided),
+context, doctor, handoff, remember, recall, create. Verified by a clean
+install straight from PyPI on a fresh environment.
+
+RESULTS_FROM
+
+DECISION-0001 (open-core business model) and the Phase 2 packaging work
+(F2.06 - F2.13).
+
+LINK
+
+https://pypi.org/project/pace-engine/0.1.0/
+
+APPROVED_BY
+
+President Cley Duarte
+
+END

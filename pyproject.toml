@@ -9,6 +9,7 @@ description = "PACE - an engineering operating system: a versioned, installable 
 readme = "README.md"
 requires-python = ">=3.10"
 authors = [{ name = "Cley Duarte" }]
+license = "BUSL-1.1"
 keywords = ["ai", "knowledge", "engineering", "governance", "memory", "context"]
 
 [project.urls]

@@ -86,4 +86,6 @@ under its own Kernel. See `.pace/roadmap/` for the phased plan
 
 ## License
 
-To be defined.
+Business Source License 1.1 (BUSL-1.1): you may read, use and self-host
+PACE, but not offer it as a competing hosted service. It converts to Apache
+2.0 on the Change Date. See LICENSE.

@@ -198,6 +198,76 @@ def cmd_recall(args) -> int:
     return 0
 
 
+
+_SECTION_KEYS = {
+    "mission": "ACTIVE_MISSION",
+    "vision": "ACTIVE_VISION",
+    "roadmap": "ACTIVE_ROADMAP",
+    "sprint": "ACTIVE_SPRINT",
+}
+_ACTIVE_ORDER = ["ACTIVE_MISSION", "ACTIVE_VISION", "ACTIVE_ROADMAP", "ACTIVE_SPRINT"]
+
+
+def _bump_version(ver: str) -> str:
+    parts = ver.split(".")
+    try:
+        parts[-1] = str(int(parts[-1]) + 1)
+    except ValueError:
+        return ver + "1"
+    return ".".join(parts)
+
+
+def cmd_supersede(args) -> int:
+    root = locate_instance(Path(args.path) if args.path else None)
+    if root is None:
+        print("no .pace/ instance found")
+        return 1
+    section = args.section.lower()
+    key = _SECTION_KEYS.get(section)
+    if key is None:
+        print(f"supersede failed: unknown section '{args.section}'")
+        return 1
+
+    active_file = root / "ACTIVE_VERSIONS.pdl"
+    active = read_pdl(active_file)
+    current_rel = active.get(key)
+    if not current_rel:
+        print(f"supersede failed: no active {section}")
+        return 1
+    current_path = root / current_rel
+    stem = current_path.name[:-4] if current_path.name.endswith(".pdl") else current_path.name
+    prefix, _, ver = stem.rpartition("_")
+    if not prefix:
+        prefix, ver = stem, "1"
+
+    new_ver = _bump_version(ver)
+    new_name = f"{prefix}_{new_ver}.pdl"
+    while (current_path.parent / new_name).exists():
+        new_ver = _bump_version(new_ver)
+        new_name = f"{prefix}_{new_ver}.pdl"
+    new_path = current_path.parent / new_name
+
+    version_field = section.upper() + "_VERSION"
+    content_field = section.upper()
+    body = (
+        f"{version_field} {new_ver}\n\n"
+        f"STATUS APPROVED\n\n"
+        f"SUPERSEDES {current_path.name}\n\n"
+        f"{content_field} {args.content}\n\n"
+        f"END\n"
+    )
+    new_path.parent.mkdir(parents=True, exist_ok=True)
+    new_path.write_text(body, encoding="utf-8")
+
+    active[key] = f"{section}/{new_name}"
+    lines = [f"{k} {active.get(k, '')}".rstrip() for k in _ACTIVE_ORDER]
+    lines.append("END")
+    active_file.write_text("\n".join(lines) + "\n", encoding="utf-8")
+
+    print(f"superseded {section}: {current_path.name} -> {new_name} (active version updated)")
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="pace")
     subparsers = parser.add_subparsers(dest="command", required=True)
@@ -232,6 +302,12 @@ def build_parser() -> argparse.ArgumentParser:
     recall = subparsers.add_parser("recall", help="print the project's working/continuity memory")
     recall.add_argument("path", nargs="?", default=None)
     recall.set_defaults(func=cmd_recall)
+
+    supersede = subparsers.add_parser("supersede", help="update a protected section by creating a new version (never edits in place)")
+    supersede.add_argument("section", choices=["mission", "vision", "roadmap", "sprint"])
+    supersede.add_argument("content")
+    supersede.add_argument("path", nargs="?", default=None)
+    supersede.set_defaults(func=cmd_supersede)
 
     create = subparsers.add_parser("create", help="generate a brand-new project governed by PACE from scratch")
     create.add_argument("path")
