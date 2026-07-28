@@ -635,7 +635,52 @@ def build_parser() -> argparse.ArgumentParser:
     return parser
 
 
+def _menu_text(question, command):
+    text = _prompt(question).strip()
+    if not text:
+        print("(cancelado)")
+        return 0
+    return main([command, text, "."])
+
+
+def run_menu() -> int:
+    """Guided menu for anyone - `pace` with no arguments. Maps plain
+    choices to the underlying commands so a newcomer never has to memorize
+    them (REQUEST-0020)."""
+    actions = [
+        ("Empezar / configurar la memoria de este proyecto", lambda: main(["init", "--guided", "."])),
+        ("Ver el estado del proyecto", lambda: main(["handoff", "."])),
+        ("Guardar una nota", lambda: _menu_text("Que quieres anotar?", "remember")),
+        ("Ver la memoria guardada", lambda: main(["recall", "."])),
+        ("Registrar una decision aprobada", lambda: _menu_text("Que se decidio?", "capture")),
+        ("Comprobar que la memoria esta bien", lambda: main(["doctor", "."])),
+    ]
+    print("\n  PACE - que quieres hacer?\n")
+    for i, (label, _) in enumerate(actions, 1):
+        print(f"    {i}) {label}")
+    print("    0) Salir\n")
+    choice = _prompt("Elige un numero").strip()
+    if choice in ("", "0"):
+        print("Hasta luego.")
+        return 0
+    try:
+        idx = int(choice)
+    except ValueError:
+        idx = -1
+    if 1 <= idx <= len(actions):
+        return actions[idx - 1][1]()
+    print("Opcion no valida. Corre `pace` de nuevo.")
+    return 1
+
+
 def main(argv=None) -> int:
+    if argv is None:
+        argv = sys.argv[1:]
+    if not argv:
+        if sys.stdin.isatty():
+            return run_menu()
+        build_parser().print_help()
+        return 0
     parser = build_parser()
     args = parser.parse_args(argv)
     return args.func(args)

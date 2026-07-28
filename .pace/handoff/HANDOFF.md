@@ -130,11 +130,11 @@ END
 ## Roadmap
 
 ```
-ROADMAP_VERSION 0.2.18
+ROADMAP_VERSION 0.2.19
 
 STATUS APPROVED
 
-SUPERSEDES ROADMAP_0.2.17.pdl
+SUPERSEDES ROADMAP_0.2.18.pdl
 
 ROADMAP Ordered by execution strategy: each phase first guarantees CONTINUITY (the
 product keeps working and does not forget) before pursuing GROWTH (reaching
@@ -174,6 +174,7 @@ PHASE_4 ADOPTION AND EXPANSION -- more users, sustained growth
   18  Upstream contribution rule with authorization
   19  User documentation: quickstart + guide
   20  Create the first new project born from PACE
+  44  pace (no args): interactive guided menu for anyone + copyable demo commands on the landing (REQUEST-0020)   [DONE, unreleased - batched]
 
 PHASE_5 SCALE AND ROBUSTNESS -- grow without breaking continuity
   21  Semantic Doctor (deep validation)
@@ -227,10 +228,9 @@ END
 
 ## Recent continuity notes
 
-The working log has 23 notes. Most recent below; read the
+The working log has 24 notes. Most recent below; read the
 full detail in .pace/memory/persistent/CONTINUITY.md:
 
-- [2026-07-27 22:15] 0.4.0 The Gatekeeper (REQUEST-0018): pace check = fast cached per-message verification (silent without .pace/); pace agent install wires per-message enforcement into Claude Code (real UserPromptSubmit hook), Cursor rule, and AGENTS.md. Idempotent, preserves foreign settings. 49 tests green. F6-36/37 done; F6-30 remaining = continuous background watch.
 - [2026-07-27 22:23] DECISION-0003 + RULE-0009: adopted versioning/release-cadence policy (policies/VERSIONING_POLICY_0.1.0.pdl). SemVer on engine line; BATCH releases by default (not per feature); 1.0.0 reserved as a stability commitment. Todays fast cadence was justified by a live feedback loop but is not the default going forward.
 - [2026-07-27 22:26] Built pace capture (F6-38): the conversational-capture verb - records an approved decision as DECISION-NNNN in one command (RULE-0008 remedy). AGENTS/cursor/check guidance now tell AIs to capture decisions the instant they happen. 50 tests green. NOT released: batched on main toward a future 0.5.0 per DECISION-0003/RULE-0009.
 - [2026-07-27 22:33] F6-39 pace watch built: continuous guardian (polling, zero-deps), warns on drift/break/heal/new-version, excludes handoff+memory/generated so regenerating handoff does not self-trigger. Completes F6-30. PHASE 6 COMPLETE. 55 tests green. Batched (unreleased) toward 0.5.0 = pace capture + pace watch.
@@ -242,12 +242,13 @@ full detail in .pace/memory/persistent/CONTINUITY.md:
 - [2026-07-28 17:44] item 43 pace roadmap: parse the roadmap into data (--json/--open) and detect drift vs a tracker export (--against file.json). Local half of the ClickUp/GitHub connector + automated RULE-0010 remedy. Fixed done-detection (prefix [DONE / [COMPLETE, and phase-level DONE propagates to items). Surfaced+fixed a real drift: item 11 was complete in ClickUp but open in roadmap. 67 tests green. Batched toward 0.5.0. Live authenticated API pull remains future (cloud/MCP).
 - [2026-07-28 17:49] Reconciled F2-10 (Guided Intake): all 8 subtasks complete, so the parent and roadmap item 10 are now DONE (RULE-0005 + RULE-0010, same turn). Delivered by guided/flags + discover(40) + init --owner(41) + ingest(42) + roadmap connector(43). The President caught that the parent was open with all children done.
 - [2026-07-28 17:54] item 16 done: animated terminal demo added to the landing (docs/index.html, pure CSS/JS) typing a real PACE session. Closes F3-16; PHASE 3 COMPLETE. Reconciled F2-10 + F3-16 parents to complete (all subtasks done). Phases 1,2,3,6 complete; remaining Phase 4 (18,19,20) and Phase 5 (21-24). Batch still unreleased toward 0.5.0.
+- [2026-07-28 18:05] item 44 (REQUEST-0020): pace with no arguments opens an interactive guided MENU (Empezar / Ver estado / Guardar nota / Ver memoria / Registrar decision / Comprobar) mapping to existing commands - so anyone can use PACE without memorizing commands. Non-tty still prints help; technical commands unchanged (no 0.4.0 breakage). Landing demo now has copyable command chips + mentions `pace` menu. 69 tests green. Batched toward 0.5.0.
 
 ## Where the rest of the memory lives
 
 - Decisions: .pace/decisions/  (5 recorded)
 - History:   .pace/history/    (11 entries)
-- Requests:  .pace/requests/   (19 logged in intake)
+- Requests:  .pace/requests/   (20 logged in intake)
 
 ## Health checks
 

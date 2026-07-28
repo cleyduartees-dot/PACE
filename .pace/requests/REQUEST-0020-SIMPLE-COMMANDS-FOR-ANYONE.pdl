@@ -1,0 +1,41 @@
+REQUEST_VERSION 1.0.0
+
+ID REQUEST-0020
+
+STATUS APPROVED
+
+DATE 2026-07-28
+
+WHO President Cley Duarte
+
+SCOPE PACE
+
+TITLE
+
+Make the commands simple enough for anyone to use, and make the landing
+demo commands copyable.
+
+RAW_TEXT
+
+Podemos poner los comandos mas sencillos para uso de cualquiera. Y que en
+el demo se puedan copiar.
+
+PROPOSED_SCOPE PACE
+
+DESIGN_NOTE
+
+PACE grew to ~17 commands, which overwhelms a non-technical user. Decision
+(President): add an INTERACTIVE MENU - running `pace` with no arguments
+opens a guided menu that maps to the existing commands. Technical commands
+stay unchanged (no breakage with 0.4.0). Non-interactive (piped) still
+prints help. Separately, the landing demo gets copyable command chips.
+
+PROMOTED_TO
+
+item 44 (pace interactive menu) + landing copyable demo commands
+
+APPROVED_BY
+
+President Cley Duarte
+
+END

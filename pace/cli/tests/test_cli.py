@@ -109,6 +109,30 @@ def test_init_with_owner_seeds_root_authority_and_handoff_names_them():
         assert code == 0 and "Ada Lovelace" in out
 
 
+def test_menu_exit_returns_zero():
+    import io, contextlib
+    from pace.cli.pace import run_menu
+    old = sys.stdin
+    sys.stdin = io.StringIO("0\n")
+    try:
+        with contextlib.redirect_stdout(io.StringIO()):
+            assert run_menu() == 0
+    finally:
+        sys.stdin = old
+
+
+def test_menu_invalid_choice_returns_one():
+    import io, contextlib
+    from pace.cli.pace import run_menu
+    old = sys.stdin
+    sys.stdin = io.StringIO("99\n")
+    try:
+        with contextlib.redirect_stdout(io.StringIO()):
+            assert run_menu() == 1
+    finally:
+        sys.stdin = old
+
+
 if __name__ == "__main__":
     tests = [v for k, v in sorted(globals().items()) if k.startswith("test_")]
     for test in tests:

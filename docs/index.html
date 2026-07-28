@@ -143,6 +143,13 @@
     <pre class="term-body" id="paceTermBody"></pre>
   </div>
   <p class="term-cap">Instálalo una vez. Cualquier IA entiende tu proyecto en segundos — y no vuelve a olvidarlo.</p>
+  <div style="max-width:520px;margin:16px auto 0">
+    <div class="cmd"><code class="mono">pip install pace-engine</code><button class="copy" data-c="pip install pace-engine">Copiar</button></div>
+    <div class="cmd"><code class="mono">pace</code><button class="copy" data-c="pace">Copiar</button></div>
+    <div class="cmd"><code class="mono">pace init --guided</code><button class="copy" data-c="pace init --guided">Copiar</button></div>
+    <div class="cmd"><code class="mono">pace handoff</code><button class="copy" data-c="pace handoff">Copiar</button></div>
+  </div>
+  <p class="term-cap" style="margin-top:10px">¿No sabes por dónde empezar? Escribe <code class="mono">pace</code> y elige del menú.</p>
 </section>
 
 <section id="empezar" style="background:var(--bg2)"><div class="wrap">
@@ -176,7 +183,8 @@
   </div>
   <div class="tabpanel active" id="tab-cli">
     <p>Para desarrolladores. Corres los comandos tú mismo:</p>
-    <pre class="mono">pace init --guided   # te entrevista y crea la memoria
+    <pre class="mono">pace                 # abre un menú guiado (elige y listo)
+pace init --guided   # te entrevista y crea la memoria
 pace context         # imprime todo el contexto del proyecto
 pace handoff         # genera el resumen que la IA lee al empezar
 pace remember "..."  # anota un acuerdo o el estado actual
