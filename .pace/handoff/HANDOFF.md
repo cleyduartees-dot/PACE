@@ -130,11 +130,11 @@ END
 ## Roadmap
 
 ```
-ROADMAP_VERSION 0.2.19
+ROADMAP_VERSION 0.2.20
 
 STATUS APPROVED
 
-SUPERSEDES ROADMAP_0.2.18.pdl
+SUPERSEDES ROADMAP_0.2.19.pdl
 
 ROADMAP Ordered by execution strategy: each phase first guarantees CONTINUITY (the
 product keeps working and does not forget) before pursuing GROWTH (reaching
@@ -171,7 +171,7 @@ PHASE_3 LAUNCH AND MONETIZATION -- enter the market (growth)
   17  Publish the landing on GitHub Pages   [DONE - LIVE at cleyduartees-dot.github.io/PACE, DECISION-0002]
 
 PHASE_4 ADOPTION AND EXPANSION -- more users, sustained growth
-  18  Upstream contribution rule with authorization
+  18  Upstream contribution rule with authorization   [DONE - protocols/UPSTREAM_CONTRIBUTION_PROTOCOL_0.1.0.pdl; enforces RULE-0006 / REQUEST-0006]
   19  User documentation: quickstart + guide
   20  Create the first new project born from PACE
   44  pace (no args): interactive guided menu for anyone + copyable demo commands on the landing (REQUEST-0020)   [DONE, unreleased - batched]
@@ -228,10 +228,9 @@ END
 
 ## Recent continuity notes
 
-The working log has 24 notes. Most recent below; read the
+The working log has 25 notes. Most recent below; read the
 full detail in .pace/memory/persistent/CONTINUITY.md:
 
-- [2026-07-27 22:23] DECISION-0003 + RULE-0009: adopted versioning/release-cadence policy (policies/VERSIONING_POLICY_0.1.0.pdl). SemVer on engine line; BATCH releases by default (not per feature); 1.0.0 reserved as a stability commitment. Todays fast cadence was justified by a live feedback loop but is not the default going forward.
 - [2026-07-27 22:26] Built pace capture (F6-38): the conversational-capture verb - records an approved decision as DECISION-NNNN in one command (RULE-0008 remedy). AGENTS/cursor/check guidance now tell AIs to capture decisions the instant they happen. 50 tests green. NOT released: batched on main toward a future 0.5.0 per DECISION-0003/RULE-0009.
 - [2026-07-27 22:33] F6-39 pace watch built: continuous guardian (polling, zero-deps), warns on drift/break/heal/new-version, excludes handoff+memory/generated so regenerating handoff does not self-trigger. Completes F6-30. PHASE 6 COMPLETE. 55 tests green. Batched (unreleased) toward 0.5.0 = pace capture + pace watch.
 - [2026-07-27 22:35] GOTCHA fixed: a stray SUPERSEDED_BY line leaked into the roadmap content. Root cause: reading the latest roadmap via sorted(glob(ROADMAP_*)) is WRONG - lexicographic sort puts 0.2.10 before 0.2.9, so it read an old (stamped) file and re-appended its SUPERSEDED_BY stamp. FIX: always read the active file via ACTIVE_VERSIONS.pdl (the source of truth), and write full clean bodies rather than read-append. cmd_supersede itself is correct (it uses ACTIVE_VERSIONS); only ad-hoc glob reads were buggy. Roadmap cleaned to 0.2.12, doctor VALID.
@@ -243,10 +242,11 @@ full detail in .pace/memory/persistent/CONTINUITY.md:
 - [2026-07-28 17:49] Reconciled F2-10 (Guided Intake): all 8 subtasks complete, so the parent and roadmap item 10 are now DONE (RULE-0005 + RULE-0010, same turn). Delivered by guided/flags + discover(40) + init --owner(41) + ingest(42) + roadmap connector(43). The President caught that the parent was open with all children done.
 - [2026-07-28 17:54] item 16 done: animated terminal demo added to the landing (docs/index.html, pure CSS/JS) typing a real PACE session. Closes F3-16; PHASE 3 COMPLETE. Reconciled F2-10 + F3-16 parents to complete (all subtasks done). Phases 1,2,3,6 complete; remaining Phase 4 (18,19,20) and Phase 5 (21-24). Batch still unreleased toward 0.5.0.
 - [2026-07-28 18:05] item 44 (REQUEST-0020): pace with no arguments opens an interactive guided MENU (Empezar / Ver estado / Guardar nota / Ver memoria / Registrar decision / Comprobar) mapping to existing commands - so anyone can use PACE without memorizing commands. Non-tty still prints help; technical commands unchanged (no 0.4.0 breakage). Landing demo now has copyable command chips + mentions `pace` menu. 69 tests green. Batched toward 0.5.0.
+- [2026-07-28 18:34] item 18 done: protocols/UPSTREAM_CONTRIBUTION_PROTOCOL_0.1.0.pdl - the formal flow for how an improvement discovered in a consumer project reaches PACE (discovery -> proposal as a PACE REQUEST -> AI advises -> owner authorizes -> promote + attribute -> no silent upstream). Enforces RULE-0006/REQUEST-0006. Advances Phase 4. Batched toward 0.5.0.
 
 ## Where the rest of the memory lives
 
-- Decisions: .pace/decisions/  (5 recorded)
+- Decisions: .pace/decisions/  (6 recorded)
 - History:   .pace/history/    (11 entries)
 - Requests:  .pace/requests/   (20 logged in intake)
 

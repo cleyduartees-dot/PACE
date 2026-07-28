@@ -1,0 +1,67 @@
+PROTOCOL_VERSION 0.1.0
+
+NAME Upstream Contribution Protocol
+
+STATUS APPROVED
+
+OWNER President Cley Duarte
+
+DATE 2026-07-28
+
+SCOPE PACE
+
+ORIGIN REQUEST-0006 (PACE independence and upstream), enforced by RULE-0006.
+
+PURPOSE
+
+Define exactly how an improvement that is DISCOVERED inside a consumer
+project reaches PACE the engine - and how it does not. PACE is independent;
+consumer projects (e.g. TuPerimetro) are adopters, never dependencies. An
+improvement becomes part of PACE only with the ROOT_AUTHORITY's explicit
+authorization. Nothing flows upstream silently.
+
+PRINCIPLE
+
+The boundary between a consumer's .pace/ and the PACE engine is
+deliberate. A consumer never waits for PACE to keep working, and PACE
+never absorbs a change just because a consumer made it. Improvements are
+optional gifts, authorized one at a time.
+
+FLOW
+
+1  DISCOVERY
+   While using PACE, a consumer project (or its AI) finds something worth
+   upstreaming: a better .pace/ structure, a new engine capability, a rule,
+   a standard, a protocol. It stays in the consumer until proposed.
+
+2  PROPOSAL
+   The improvement is logged as a REQUEST in PACE's own intake
+   (.pace/requests/, SCOPE PACE), recording WHO, DATE, RAW_TEXT and the
+   ORIGIN consumer project. Proposing is not adopting.
+
+3  REVIEW
+   The AI ADVISES and AUDITS; it never decides (RULE-0003). It may argue for
+   or against, surface risks, and show how the change would look.
+
+4  AUTHORIZATION
+   Only on the ROOT_AUTHORITY's explicit approval does the REQUEST get
+   PROMOTED_TO an official artifact - a rule (pace rule add), a standard, a
+   protocol, or an engine change on a roadmap item. Approval is the gate.
+
+5  ATTRIBUTION
+   The origin project is credited in the promoted artifact (PROMOTED_FROM /
+   ORIGIN). Credit does not create dependency: PACE still stands alone.
+
+6  NO SILENT UPSTREAM
+   No change moves from a consumer into PACE automatically, in bulk, or by
+   default. Every upstream step is an explicit, authorized decision - and,
+   once approved, is captured in .pace/ in the same turn (RULE-0008).
+
+CONSUMER_SIDE
+
+The consumer keeps and evolves its own .pace/ freely. Upstreaming is
+optional and never blocks the consumer. Downstream, the consumer adopts
+new PACE engine versions on its own schedule (pip install --upgrade),
+with no forced migration - old instances stay valid.
+
+END
