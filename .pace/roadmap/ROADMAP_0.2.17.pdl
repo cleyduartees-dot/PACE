@@ -1,8 +1,8 @@
-ROADMAP_VERSION 0.2.16
+ROADMAP_VERSION 0.2.17
 
-STATUS SUPERSEDED
+STATUS APPROVED
 
-SUPERSEDES ROADMAP_0.2.15.pdl
+SUPERSEDES ROADMAP_0.2.16.pdl
 
 ROADMAP Ordered by execution strategy: each phase first guarantees CONTINUITY (the
 product keeps working and does not forget) before pursuing GROWTH (reaching
@@ -23,7 +23,7 @@ PHASE_2 SOLID PRODUCT -- installable, with memory and governance (continuity)
   07  Smoke test: install on a clean environment   [DONE]
   08  Define the ACTOR / ROOT_AUTHORITY in .pace/   [DONE]
   09  Bootstrap/Handoff engine -- the AI knows to consult the owner   [DONE]
-  10  Guided Intake/Onboarding (pace init --guided)
+  10  Guided Intake/Onboarding (pace init --guided)   [DONE - guided + discover(40) + init --owner(41) + ingest(42) + roadmap connector(43); all subtasks complete]
   11  Per-chat memory / continuity -- no context "dementia"   [DONE - remember/recall/condense/capture + pace check + handoff continuity]
   12  Test suite + CI (pytest + pace doctor)   [DONE]
   13  Update the README   [DONE]
@@ -66,5 +66,4 @@ PHASE_6 ACTIVE GUARDIAN -- PACE stops being passive and starts enforcing (contin
   38  pace capture: record an approved decision in one command, so it never lives only in the chat (REQUEST-0016)   [DONE, unreleased - batched]
   39  pace watch: continuous background guardian - warns on drift, breakage or a new version (completes F6-30)   [DONE, unreleased - batched]
 
-SUPERSEDED_BY ROADMAP_0.2.17.pdl
 END

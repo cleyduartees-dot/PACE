@@ -130,11 +130,11 @@ END
 ## Roadmap
 
 ```
-ROADMAP_VERSION 0.2.16
+ROADMAP_VERSION 0.2.17
 
 STATUS APPROVED
 
-SUPERSEDES ROADMAP_0.2.15.pdl
+SUPERSEDES ROADMAP_0.2.16.pdl
 
 ROADMAP Ordered by execution strategy: each phase first guarantees CONTINUITY (the
 product keeps working and does not forget) before pursuing GROWTH (reaching
@@ -155,7 +155,7 @@ PHASE_2 SOLID PRODUCT -- installable, with memory and governance (continuity)
   07  Smoke test: install on a clean environment   [DONE]
   08  Define the ACTOR / ROOT_AUTHORITY in .pace/   [DONE]
   09  Bootstrap/Handoff engine -- the AI knows to consult the owner   [DONE]
-  10  Guided Intake/Onboarding (pace init --guided)
+  10  Guided Intake/Onboarding (pace init --guided)   [DONE - guided + discover(40) + init --owner(41) + ingest(42) + roadmap connector(43); all subtasks complete]
   11  Per-chat memory / continuity -- no context "dementia"   [DONE - remember/recall/condense/capture + pace check + handoff continuity]
   12  Test suite + CI (pytest + pace doctor)   [DONE]
   13  Update the README   [DONE]
@@ -227,10 +227,9 @@ END
 
 ## Recent continuity notes
 
-The working log has 21 notes. Most recent below; read the
+The working log has 22 notes. Most recent below; read the
 full detail in .pace/memory/persistent/CONTINUITY.md:
 
-- [2026-07-27 20:14] CORRECTION: the site was ALREADY live - repo public, GitHub Pages on main:/docs, landing + Kingdom Tale serving at cleyduartees-dot.github.io/PACE, verified by fetch. F3-17 DONE. DECISION-0002 corrected before entering git history. The double misreading (new decision, then future gate) shared one root cause: the site-live fact was never captured in .pace/ - RULE-0008 exists for exactly this.
 - [2026-07-27 21:58] REQUEST-0017 (2nd external feedback, tested 0.3.0 on a live project): confirmed the big gap (handoff ignoring CONTINUITY.md) is resolved. Two fixes -> 0.3.1: F6-34 pace update retries with --break-system-packages (PEP 668), F6-35 supersede stamps prior file STATUS SUPERSEDED + SUPERSEDED_BY. 43 tests green.
 - [2026-07-27 22:15] 0.4.0 The Gatekeeper (REQUEST-0018): pace check = fast cached per-message verification (silent without .pace/); pace agent install wires per-message enforcement into Claude Code (real UserPromptSubmit hook), Cursor rule, and AGENTS.md. Idempotent, preserves foreign settings. 49 tests green. F6-36/37 done; F6-30 remaining = continuous background watch.
 - [2026-07-27 22:23] DECISION-0003 + RULE-0009: adopted versioning/release-cadence policy (policies/VERSIONING_POLICY_0.1.0.pdl). SemVer on engine line; BATCH releases by default (not per feature); 1.0.0 reserved as a stability commitment. Todays fast cadence was justified by a live feedback loop but is not the default going forward.
@@ -242,6 +241,7 @@ full detail in .pace/memory/persistent/CONTINUITY.md:
 - [2026-07-27 22:52] item 41: pace init --owner/--owner-role seeds the ROOT_AUTHORITY actor at creation (greenfield grounding - handoff names who decides). Guided mode asks for it. Backward compatible (no owner = no actor, still VALID). 60 tests green. Advances F2-10. Batched toward 0.5.0.
 - [2026-07-27 22:56] item 42: pace ingest reads client documents (text zero-dep; PDFs only if pypdf installed, skipped with a note otherwise) and PROPOSES deduced themes + headings + a context draft, read-only. Advances F2-10. 64 tests green. Batched toward 0.5.0. Multi-source intake now: discover (code), owner seeding, ingest (docs); remaining = ClickUp/GitHub connectors.
 - [2026-07-28 17:44] item 43 pace roadmap: parse the roadmap into data (--json/--open) and detect drift vs a tracker export (--against file.json). Local half of the ClickUp/GitHub connector + automated RULE-0010 remedy. Fixed done-detection (prefix [DONE / [COMPLETE, and phase-level DONE propagates to items). Surfaced+fixed a real drift: item 11 was complete in ClickUp but open in roadmap. 67 tests green. Batched toward 0.5.0. Live authenticated API pull remains future (cloud/MCP).
+- [2026-07-28 17:49] Reconciled F2-10 (Guided Intake): all 8 subtasks complete, so the parent and roadmap item 10 are now DONE (RULE-0005 + RULE-0010, same turn). Delivered by guided/flags + discover(40) + init --owner(41) + ingest(42) + roadmap connector(43). The President caught that the parent was open with all children done.
 
 ## Where the rest of the memory lives
 
