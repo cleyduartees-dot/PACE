@@ -1,0 +1,19 @@
+SPRINT_VERSION 0.13
+
+STATUS APPROVED
+
+SUPERSEDES SPRINT_0.12.pdl
+
+SPRINT FOCUS (session 2026-07-27, in order)
+- Closed the multi-source intake (F2-10) with item 43 pace roadmap: exposes
+  the roadmap as DATA (pace roadmap / --json / --open) and detects drift
+  against a tracker export (pace roadmap --against file.json). This is the
+  local half of the ClickUp/GitHub connector and the automated RULE-0010
+  remedy - PACE detects tracker drift instead of trusting the AI to remember.
+- Reconciled a real drift the tool surfaced: item 11 was complete in ClickUp
+  but open in the roadmap -> now [DONE].
+- 67 tests green. Batched (unreleased) toward 0.5.0 (capture, watch,
+  discover, --owner, ingest, roadmap).
+- Live authenticated ClickUp/GitHub API pull remains future (cloud/MCP).
+
+END

@@ -363,6 +363,41 @@ def cmd_hook(args) -> int:
     return 0
 
 
+def cmd_roadmap(args) -> int:
+    root = locate_instance(Path(args.path) if args.path else None)
+    if root is None:
+        print("no .pace/ instance found")
+        return 1
+    from pace.engines.roadmap import parse_roadmap, drift
+    import json as _json
+    items = parse_roadmap(root)
+    if args.against:
+        try:
+            tracker = _json.loads(Path(args.against).read_text(encoding="utf-8"))
+        except Exception as error:
+            print(f"could not read tracker export: {error}")
+            return 1
+        d = drift(items, tracker)
+        if not d["missing"] and not d["status_mismatch"]:
+            print("tracker is in sync with the roadmap.")
+            return 0
+        if d["missing"]:
+            print("Roadmap items missing from the tracker: " + ", ".join(d["missing"]))
+        for m in d["status_mismatch"]:
+            state = "DONE" if m["roadmap_done"] else "open"
+            print(f"  item {m['number']}: roadmap says {state}, tracker says '{m['tracker_status']}'")
+        return 1
+    if args.json:
+        print(_json.dumps(items, indent=2))
+        return 0
+    for i in items:
+        if args.open and i["done"]:
+            continue
+        mark = "[x]" if i["done"] else "[ ]"
+        print(f"{mark} {i['number']}  {i['title']}")
+    return 0
+
+
 def cmd_ingest(args) -> int:
     """Read documents and PROPOSE what PACE deduced (read-only)."""
     from pace.engines.ingest import ingest, format_proposal
@@ -538,6 +573,13 @@ def build_parser() -> argparse.ArgumentParser:
     hook_uninstall = hook_sub.add_parser("uninstall", help="neutralize the PACE pre-commit hook")
     hook_uninstall.add_argument("path", nargs="?", default=None)
     hook_uninstall.set_defaults(func=cmd_hook)
+
+    roadmap = subparsers.add_parser("roadmap", help="show the roadmap as data, or detect drift vs a tracker export (--against file.json)")
+    roadmap.add_argument("--json", action="store_true", help="emit the roadmap items as JSON")
+    roadmap.add_argument("--open", action="store_true", help="show only unfinished items")
+    roadmap.add_argument("--against", default=None, help="a JSON export of tracker tasks to check for drift")
+    roadmap.add_argument("path", nargs="?", default=None)
+    roadmap.set_defaults(func=cmd_roadmap)
 
     ingest = subparsers.add_parser("ingest", help="read documents (README, notes, specs, PDFs) and PROPOSE what PACE deduced (writes nothing)")
     ingest.add_argument("path", nargs="?", default=None)

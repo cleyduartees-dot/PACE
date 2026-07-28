@@ -130,11 +130,11 @@ END
 ## Roadmap
 
 ```
-ROADMAP_VERSION 0.2.15
+ROADMAP_VERSION 0.2.16
 
 STATUS APPROVED
 
-SUPERSEDES ROADMAP_0.2.14.pdl
+SUPERSEDES ROADMAP_0.2.15.pdl
 
 ROADMAP Ordered by execution strategy: each phase first guarantees CONTINUITY (the
 product keeps working and does not forget) before pursuing GROWTH (reaching
@@ -156,12 +156,13 @@ PHASE_2 SOLID PRODUCT -- installable, with memory and governance (continuity)
   08  Define the ACTOR / ROOT_AUTHORITY in .pace/   [DONE]
   09  Bootstrap/Handoff engine -- the AI knows to consult the owner   [DONE]
   10  Guided Intake/Onboarding (pace init --guided)
-  11  Per-chat memory / continuity -- no context "dementia"
+  11  Per-chat memory / continuity -- no context "dementia"   [DONE - remember/recall/condense/capture + pace check + handoff continuity]
   12  Test suite + CI (pytest + pace doctor)   [DONE]
   13  Update the README   [DONE]
   40  pace discover: auto-read a project (README, code, git) and PROPOSE a draft .pace/ - first path of the multi-source intake (REQUEST-0011, advances F2-10)   [DONE, unreleased - batched]
   41  pace init --owner: seed the ROOT_AUTHORITY actor at creation (greenfield grounding - a new project knows who decides from minute one, advances F2-10)   [DONE, unreleased - batched]
   42  pace ingest: read client documents (text now, PDFs if pypdf present) and PROPOSE deduced themes/context - third path of the multi-source intake (REQUEST-0011, advances F2-10)   [DONE, unreleased - batched]
+  43  pace roadmap: expose the roadmap as data and detect drift vs a tracker export - local half of the ClickUp/GitHub connector and the automated RULE-0010 remedy (REQUEST-0011, advances F2-10)   [DONE, unreleased - batched]
 
 PHASE_3 LAUNCH AND MONETIZATION -- enter the market (growth)
   14  Design the sellable structure / business model   [DONE]
@@ -203,30 +204,32 @@ END
 ## Current sprint
 
 ```
-SPRINT_VERSION 0.12
+SPRINT_VERSION 0.13
 
 STATUS APPROVED
 
-SUPERSEDES SPRINT_0.11.pdl
+SUPERSEDES SPRINT_0.12.pdl
 
 SPRINT FOCUS (session 2026-07-27, in order)
-- Advancing F2-10 (multi-source intake) in correlative order.
-- item 40 pace discover (read project -> propose draft), item 41 pace init
-  --owner (seed ROOT_AUTHORITY), item 42 pace ingest (read docs -> propose
-  deduced themes/context; text zero-dep, PDFs optional via pypdf). 64 tests.
-- All read-only / proposing; owner confirms (Governance rule 1).
-- Batched (unreleased) toward 0.5.0 with capture + watch.
-- Next in order (F2-10): connect ClickUp/GitHub (also the RULE-0010 remedy).
+- Closed the multi-source intake (F2-10) with item 43 pace roadmap: exposes
+  the roadmap as DATA (pace roadmap / --json / --open) and detects drift
+  against a tracker export (pace roadmap --against file.json). This is the
+  local half of the ClickUp/GitHub connector and the automated RULE-0010
+  remedy - PACE detects tracker drift instead of trusting the AI to remember.
+- Reconciled a real drift the tool surfaced: item 11 was complete in ClickUp
+  but open in the roadmap -> now [DONE].
+- 67 tests green. Batched (unreleased) toward 0.5.0 (capture, watch,
+  discover, --owner, ingest, roadmap).
+- Live authenticated ClickUp/GitHub API pull remains future (cloud/MCP).
 
 END
 ```
 
 ## Recent continuity notes
 
-The working log has 20 notes. Most recent below; read the
+The working log has 21 notes. Most recent below; read the
 full detail in .pace/memory/persistent/CONTINUITY.md:
 
-- [2026-07-27 20:09] INCIDENT + LEARNING: a chat-confirmed decision (page publishes at first launch) was lost to context compaction and re-litigated. Captured now: DECISION-0002, RULE-0008 (same-turn capture of approved decisions), REQUEST-0016 (evidence case for F2-11 per-chat capsule and F6-30 agent mode). F3-17 on hold.
 - [2026-07-27 20:14] CORRECTION: the site was ALREADY live - repo public, GitHub Pages on main:/docs, landing + Kingdom Tale serving at cleyduartees-dot.github.io/PACE, verified by fetch. F3-17 DONE. DECISION-0002 corrected before entering git history. The double misreading (new decision, then future gate) shared one root cause: the site-live fact was never captured in .pace/ - RULE-0008 exists for exactly this.
 - [2026-07-27 21:58] REQUEST-0017 (2nd external feedback, tested 0.3.0 on a live project): confirmed the big gap (handoff ignoring CONTINUITY.md) is resolved. Two fixes -> 0.3.1: F6-34 pace update retries with --break-system-packages (PEP 668), F6-35 supersede stamps prior file STATUS SUPERSEDED + SUPERSEDED_BY. 43 tests green.
 - [2026-07-27 22:15] 0.4.0 The Gatekeeper (REQUEST-0018): pace check = fast cached per-message verification (silent without .pace/); pace agent install wires per-message enforcement into Claude Code (real UserPromptSubmit hook), Cursor rule, and AGENTS.md. Idempotent, preserves foreign settings. 49 tests green. F6-36/37 done; F6-30 remaining = continuous background watch.
@@ -238,6 +241,7 @@ full detail in .pace/memory/persistent/CONTINUITY.md:
 - [2026-07-27 22:47] Built pace discover (item 40, REQUEST-0011 path 1): auto-reads README/stack/languages/git and PROPOSES a draft .pace/, read-only. Advances F2-10. Marked F2-11 complete (per-chat memory delivered). 59 tests green. Batched toward 0.5.0. Working in correlative order now (RULE-0002).
 - [2026-07-27 22:52] item 41: pace init --owner/--owner-role seeds the ROOT_AUTHORITY actor at creation (greenfield grounding - handoff names who decides). Guided mode asks for it. Backward compatible (no owner = no actor, still VALID). 60 tests green. Advances F2-10. Batched toward 0.5.0.
 - [2026-07-27 22:56] item 42: pace ingest reads client documents (text zero-dep; PDFs only if pypdf installed, skipped with a note otherwise) and PROPOSES deduced themes + headings + a context draft, read-only. Advances F2-10. 64 tests green. Batched toward 0.5.0. Multi-source intake now: discover (code), owner seeding, ingest (docs); remaining = ClickUp/GitHub connectors.
+- [2026-07-28 17:44] item 43 pace roadmap: parse the roadmap into data (--json/--open) and detect drift vs a tracker export (--against file.json). Local half of the ClickUp/GitHub connector + automated RULE-0010 remedy. Fixed done-detection (prefix [DONE / [COMPLETE, and phase-level DONE propagates to items). Surfaced+fixed a real drift: item 11 was complete in ClickUp but open in roadmap. 67 tests green. Batched toward 0.5.0. Live authenticated API pull remains future (cloud/MCP).
 
 ## Where the rest of the memory lives
 

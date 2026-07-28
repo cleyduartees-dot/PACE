@@ -1,6 +1,6 @@
 SPRINT_VERSION 0.12
 
-STATUS APPROVED
+STATUS SUPERSEDED
 
 SUPERSEDES SPRINT_0.11.pdl
 
@@ -13,4 +13,5 @@ SPRINT FOCUS (session 2026-07-27, in order)
 - Batched (unreleased) toward 0.5.0 with capture + watch.
 - Next in order (F2-10): connect ClickUp/GitHub (also the RULE-0010 remedy).
 
+SUPERSEDED_BY SPRINT_0.13.pdl
 END
