@@ -28,6 +28,7 @@ already settle:
 - Every decision or confirmation approved in chat is written into .pace/ (decisions/, rules/ or requests/) in the same turn it is approved - never left living only in the conversation. The chat is not memory; PACE is.
 - Release deliberately, not per feature: batch related work and cut a version when there is a meaningful bundle or a real user is blocked. SemVer on the engine line; reserve 1.0.0 as a stability commitment. See policies/VERSIONING_POLICY_0.1.0.pdl.
 - When a project uses an external task tracker (ClickUp, Jira, etc.), it must stay in sync with the .pace/ roadmap: every roadmap change is mirrored to the tracker in the SAME turn it happens. The user establishes this expectation and it must be complied with - never left to the AI to remember.
+- La creacion y operacion de un proyecto PACE puede guiarla cualquier IA, siempre bajo instruccion del usuario y siguiendo el perfil que PACE define. La IA guia; el usuario instruye y decide; la herramienta corre local. Ninguna IA concreta es un requisito: son intercambiables. PACE no depende de Claude, Anthropic ni de ningun proveedor de IA.
 **ORGANIZATION**
 - PACE is an independent product; consumers like TuPerimetro are adopters, never dependencies. Improvements flow upstream only with the owner's authorization.
 - Documents and presentations have a defined home (repo docs/ and the ClickUp PACE folder); apply it without being reminded.
@@ -130,11 +131,11 @@ END
 ## Roadmap
 
 ```
-ROADMAP_VERSION 0.2.21
+ROADMAP_VERSION 0.2.24
 
 STATUS APPROVED
 
-SUPERSEDES ROADMAP_0.2.20.pdl
+SUPERSEDES ROADMAP_0.2.23.pdl
 
 ROADMAP Ordered by execution strategy: each phase first guarantees CONTINUITY (the
 product keeps working and does not forget) before pursuing GROWTH (reaching
@@ -172,9 +173,15 @@ PHASE_3 LAUNCH AND MONETIZATION -- enter the market (growth)
 
 PHASE_4 ADOPTION AND EXPANSION -- more users, sustained growth
   18  Upstream contribution rule with authorization   [DONE - protocols/UPSTREAM_CONTRIBUTION_PROTOCOL_0.1.0.pdl; enforces RULE-0006 / REQUEST-0006]
-  19  User documentation: quickstart + guide
-  20  Create the first new project born from PACE
+  19  User documentation: quickstart + guide   [DONE - docs/QUICKSTART.md (menu-first) + docs/GUIA.md, Spanish, for anyone]
+  20  Create the first new project born from PACE   [DONE - Maria Davila: guardarropa + alquiler con armario digital, born from PACE 0.5.0, ROOT_AUTHORITY Cley Duarte]
   44  pace (no args): interactive guided menu for anyone + copyable demo commands on the landing (REQUEST-0020)   [DONE in 0.5.0]
+  45  pace create --guided: interactive guided creation (name, LOCAL location, org, context) that guides the user to create the project on their own machine, like pace init --guided for existing projects. Follows the Guided Creation Profile; AI-agnostic (RULE-0011, DECISION-0008)
+  46  Extended genesis - remote repo: guided creation can provision the GitHub repo (or other) with the user's own credentials and do the first push. Depends on the live authenticated connector
+  47  Extended genesis - tracker: create the ClickUp space/board (or other) with the initial roadmap already synced. Depends on the live authenticated connector
+  48  Extended genesis - stack and environment: propose and scaffold language, framework, database and dev environment per the project profile (extends F5-24 stack templates)
+  49  Extended genesis - deployment: configure hosting/deploy (Vercel or whichever provider fits the project)
+  50  Extended genesis - in-order orchestration: one guided flow that runs 45-49 in the correct order, AI-agnostic and under user instruction, using the user's own accounts (sovereignty preserved) (DECISION-0009)
 
 PHASE_5 SCALE AND ROBUSTNESS -- grow without breaking continuity
   21  Semantic Doctor (deep validation)
@@ -224,13 +231,9 @@ END
 
 ## Recent continuity notes
 
-The working log has 26 notes. Most recent below; read the
+The working log has 30 notes. Most recent below; read the
 full detail in .pace/memory/persistent/CONTINUITY.md:
 
-- [2026-07-27 22:33] F6-39 pace watch built: continuous guardian (polling, zero-deps), warns on drift/break/heal/new-version, excludes handoff+memory/generated so regenerating handoff does not self-trigger. Completes F6-30. PHASE 6 COMPLETE. 55 tests green. Batched (unreleased) toward 0.5.0 = pace capture + pace watch.
-- [2026-07-27 22:35] GOTCHA fixed: a stray SUPERSEDED_BY line leaked into the roadmap content. Root cause: reading the latest roadmap via sorted(glob(ROADMAP_*)) is WRONG - lexicographic sort puts 0.2.10 before 0.2.9, so it read an old (stamped) file and re-appended its SUPERSEDED_BY stamp. FIX: always read the active file via ACTIVE_VERSIONS.pdl (the source of truth), and write full clean bodies rather than read-append. cmd_supersede itself is correct (it uses ACTIVE_VERSIONS); only ad-hoc glob reads were buggy. Roadmap cleaned to 0.2.12, doctor VALID.
-- [2026-07-27 22:42] RULE-0010 + REQUEST-0019 + DECISION-0005: keeping ClickUp in sync with the roadmap must be an enforced rule, not the AIs memory. Captured after the AI had to be reminded to update ClickUp. Board reconciled this turn: F6-38, F6-39 created+complete, F6-30 honestly scoped to the local guardian, PACE Cloud (paid) split out as future.
-- [2026-07-27 22:47] Built pace discover (item 40, REQUEST-0011 path 1): auto-reads README/stack/languages/git and PROPOSES a draft .pace/, read-only. Advances F2-10. Marked F2-11 complete (per-chat memory delivered). 59 tests green. Batched toward 0.5.0. Working in correlative order now (RULE-0002).
 - [2026-07-27 22:52] item 41: pace init --owner/--owner-role seeds the ROOT_AUTHORITY actor at creation (greenfield grounding - handoff names who decides). Guided mode asks for it. Backward compatible (no owner = no actor, still VALID). 60 tests green. Advances F2-10. Batched toward 0.5.0.
 - [2026-07-27 22:56] item 42: pace ingest reads client documents (text zero-dep; PDFs only if pypdf installed, skipped with a note otherwise) and PROPOSES deduced themes + headings + a context draft, read-only. Advances F2-10. 64 tests green. Batched toward 0.5.0. Multi-source intake now: discover (code), owner seeding, ingest (docs); remaining = ClickUp/GitHub connectors.
 - [2026-07-28 17:44] item 43 pace roadmap: parse the roadmap into data (--json/--open) and detect drift vs a tracker export (--against file.json). Local half of the ClickUp/GitHub connector + automated RULE-0010 remedy. Fixed done-detection (prefix [DONE / [COMPLETE, and phase-level DONE propagates to items). Surfaced+fixed a real drift: item 11 was complete in ClickUp but open in roadmap. 67 tests green. Batched toward 0.5.0. Live authenticated API pull remains future (cloud/MCP).
@@ -239,10 +242,14 @@ full detail in .pace/memory/persistent/CONTINUITY.md:
 - [2026-07-28 18:05] item 44 (REQUEST-0020): pace with no arguments opens an interactive guided MENU (Empezar / Ver estado / Guardar nota / Ver memoria / Registrar decision / Comprobar) mapping to existing commands - so anyone can use PACE without memorizing commands. Non-tty still prints help; technical commands unchanged (no 0.4.0 breakage). Landing demo now has copyable command chips + mentions `pace` menu. 69 tests green. Batched toward 0.5.0.
 - [2026-07-28 18:34] item 18 done: protocols/UPSTREAM_CONTRIBUTION_PROTOCOL_0.1.0.pdl - the formal flow for how an improvement discovered in a consumer project reaches PACE (discovery -> proposal as a PACE REQUEST -> AI advises -> owner authorizes -> promote + attribute -> no silent upstream). Enforces RULE-0006/REQUEST-0006. Advances Phase 4. Batched toward 0.5.0.
 - [2026-07-28 19:41] RELEASE 0.5.0 Onboarding prepared: bump + CHANGELOG + RELEASE-0006 + roadmap items marked [DONE in 0.5.0]. Contents: menu, capture, discover, ingest, init --owner, roadmap, watch, upstream protocol, landing demo with menu.
+- [2026-07-28 19:51] 0.5.0 LIVE en PyPI (Onboarding): menu interactivo (pace sin args), init --owner nombra ROOT_AUTHORITY, discover/ingest de multiples fuentes, roadmap connector. Verificado desde instalacion limpia de PyPI. Landing con demo copiable mostrando el menu.
+- [2026-07-28 20:10] item 19 hecho: documentacion de usuario - docs/QUICKSTART.md (menu-first, 2 min) + docs/GUIA.md (guia completa en espanol, por-tareas, para cualquiera). Roadmap 0.2.22. Falta cerrar F4-19 en ClickUp (mismo turno, RULE-0010) y push del usuario.
+- [2026-07-28 22:45] F4-20 hecho: primer proyecto nacido desde PACE = Maria Davila (guardarropa + alquiler de ropa, armario digital, entrega a domicilio, apoyado en tintorerias/lavanderias locales). Creado con pace-engine 0.5.0 publicado; Cley Duarte ROOT_AUTHORITY; mision/vision/roadmap fundacionales; doctor VALID. Entregado como zip. Nombre por confirmar. Roadmap PACE 0.2.23.
+- [2026-07-28 23:44] Vision de creacion guiada ampliada (DECISION-0008/0009, RULE-0011, GUIDED_CREATION_PROFILE): pace create debe ser --guided interactivo como init --guided; y la genesis extendida orquesta EN ORDEN repo GitHub, tablero ClickUp, stack (lenguaje+DB+entorno) y despliegue (Vercel u otro) con cuentas del usuario, agnostico a la IA. Roadmap items 45-50 anadidos. Falta implementar en el motor.
 
 ## Where the rest of the memory lives
 
-- Decisions: .pace/decisions/  (7 recorded)
+- Decisions: .pace/decisions/  (9 recorded)
 - History:   .pace/history/    (11 entries)
 - Requests:  .pace/requests/   (20 logged in intake)
 

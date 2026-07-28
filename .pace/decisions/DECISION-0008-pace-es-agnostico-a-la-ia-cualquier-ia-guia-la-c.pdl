@@ -1,0 +1,9 @@
+DECISION_VERSION 1.0.0
+ID DECISION-0008
+STATUS APPROVED
+DATE 2026-07-28
+DECIDED_BY President Cley Duarte
+TITLE PACE es agnostico a la IA: cualquier IA guia la creacion local guiada bajo instruccion del usuario y segun el perfil de PACE; pace create debe tener modo --guided como pace init --guided
+RATIONALE Evitar dependencia de un proveedor de IA; la soberania esta en la herramienta local y en el usuario. La creacion debe ser guiada e interactiva, no por banderas escritas.
+RAW_TEXT PACE es agnostico a la IA: cualquier IA guia la creacion local guiada bajo instruccion del usuario y segun el perfil de PACE; pace create debe tener modo --guided como pace init --guided
+END

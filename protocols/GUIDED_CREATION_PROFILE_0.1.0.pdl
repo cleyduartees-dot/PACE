@@ -1,0 +1,24 @@
+PROTOCOL_VERSION 0.1.0
+NAME Guided Creation Profile
+STATUS APPROVED
+SCOPE PACE
+
+PURPOSE Define como CUALQUIER IA guia a un usuario para crear un proyecto PACE, bajo instruccion del usuario y sin depender de ninguna IA concreta. La IA guia; el usuario instruye y decide; la herramienta corre local. Este perfil hace que PACE sepa por si mismo como debe nacer un proyecto.
+
+PRINCIPLE PACE es agnostico a la IA. Ninguna IA (Claude, Anthropic u otra) es un requisito. Lo que manda es este perfil y la instruccion del usuario. Son intercambiables.
+
+STEP_1 PREGUNTAR IDENTIDAD -- la IA pregunta al usuario el nombre del producto, un slug corto y la organizacion de referencia (org-ref). Nunca los inventa.
+
+STEP_2 PREGUNTAR UBICACION -- la IA pregunta EN QUE CARPETA LOCAL del equipo del usuario se creara el proyecto. Paso obligatorio: el proyecto vive en el disco del usuario, no en la nube de ninguna IA.
+
+STEP_3 CREAR LOCAL -- la IA guia al usuario a correr pace create --name ... --slug ... --org-ref ... <ruta> EN SU PROPIA MAQUINA (o lo ejecuta el usuario). pace create inicializa el repositorio git local.
+
+STEP_4 SEMBRAR AUTORIDAD -- registrar al ROOT_AUTHORITY (quien decide) desde el minuto uno.
+
+STEP_5 PERFILAR CONTEXTO -- con las respuestas del usuario, proponer mision, vision y roadmap iniciales para que el usuario los APRUEBE. La IA propone; el usuario decide.
+
+STEP_6 VALIDAR -- correr pace doctor hasta VALID y generar el handoff, para que la proxima IA (la que sea) continue sin perder contexto.
+
+RULE La IA nunca crea el proyecto en su propio entorno como sustituto del equipo del usuario. Siempre local, siempre bajo instruccion del usuario, siempre agnostico a la IA.
+
+END

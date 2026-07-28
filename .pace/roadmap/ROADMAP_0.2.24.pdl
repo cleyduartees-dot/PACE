@@ -1,8 +1,8 @@
-ROADMAP_VERSION 0.2.21
+ROADMAP_VERSION 0.2.24
 
-STATUS SUPERSEDED
+STATUS APPROVED
 
-SUPERSEDES ROADMAP_0.2.20.pdl
+SUPERSEDES ROADMAP_0.2.23.pdl
 
 ROADMAP Ordered by execution strategy: each phase first guarantees CONTINUITY (the
 product keeps working and does not forget) before pursuing GROWTH (reaching
@@ -40,9 +40,15 @@ PHASE_3 LAUNCH AND MONETIZATION -- enter the market (growth)
 
 PHASE_4 ADOPTION AND EXPANSION -- more users, sustained growth
   18  Upstream contribution rule with authorization   [DONE - protocols/UPSTREAM_CONTRIBUTION_PROTOCOL_0.1.0.pdl; enforces RULE-0006 / REQUEST-0006]
-  19  User documentation: quickstart + guide
-  20  Create the first new project born from PACE
+  19  User documentation: quickstart + guide   [DONE - docs/QUICKSTART.md (menu-first) + docs/GUIA.md, Spanish, for anyone]
+  20  Create the first new project born from PACE   [DONE - Maria Davila: guardarropa + alquiler con armario digital, born from PACE 0.5.0, ROOT_AUTHORITY Cley Duarte]
   44  pace (no args): interactive guided menu for anyone + copyable demo commands on the landing (REQUEST-0020)   [DONE in 0.5.0]
+  45  pace create --guided: interactive guided creation (name, LOCAL location, org, context) that guides the user to create the project on their own machine, like pace init --guided for existing projects. Follows the Guided Creation Profile; AI-agnostic (RULE-0011, DECISION-0008)
+  46  Extended genesis - remote repo: guided creation can provision the GitHub repo (or other) with the user's own credentials and do the first push. Depends on the live authenticated connector
+  47  Extended genesis - tracker: create the ClickUp space/board (or other) with the initial roadmap already synced. Depends on the live authenticated connector
+  48  Extended genesis - stack and environment: propose and scaffold language, framework, database and dev environment per the project profile (extends F5-24 stack templates)
+  49  Extended genesis - deployment: configure hosting/deploy (Vercel or whichever provider fits the project)
+  50  Extended genesis - in-order orchestration: one guided flow that runs 45-49 in the correct order, AI-agnostic and under user instruction, using the user's own accounts (sovereignty preserved) (DECISION-0009)
 
 PHASE_5 SCALE AND ROBUSTNESS -- grow without breaking continuity
   21  Semantic Doctor (deep validation)
@@ -67,5 +73,4 @@ PHASE_6 ACTIVE GUARDIAN -- PACE stops being passive and starts enforcing (contin
   38  pace capture: record an approved decision in one command, so it never lives only in the chat (REQUEST-0016)   [DONE in 0.5.0]
   39  pace watch: continuous background guardian - warns on drift, breakage or a new version (completes F6-30)   [DONE in 0.5.0]
 
-SUPERSEDED_BY ROADMAP_0.2.22.pdl
 END

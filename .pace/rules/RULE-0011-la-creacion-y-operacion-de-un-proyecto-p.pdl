@@ -1,0 +1,8 @@
+RULE_ID RULE-0011
+SCOPE PACE
+STATUS APPROVED
+STATEMENT La creacion y operacion de un proyecto PACE puede guiarla cualquier IA, siempre bajo instruccion del usuario y siguiendo el perfil que PACE define. La IA guia; el usuario instruye y decide; la herramienta corre local. Ninguna IA concreta es un requisito: son intercambiables. PACE no depende de Claude, Anthropic ni de ningun proveedor de IA.
+RATIONALE El Presidente advirtio que crear proyectos solo via un asistente en la nube generaria dependencia; la independencia se logra siendo agnostico a la IA. PACE debe saberlo por defecto.
+APPROVED_BY President Cley Duarte
+CREATED_AT 2026-07-28
+END
