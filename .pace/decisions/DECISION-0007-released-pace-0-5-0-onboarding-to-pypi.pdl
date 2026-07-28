@@ -1,0 +1,9 @@
+DECISION_VERSION 1.0.0
+ID DECISION-0007
+STATUS APPROVED
+DATE 2026-07-28
+DECIDED_BY President Cley Duarte
+TITLE Released PACE 0.5.0 Onboarding to PyPI
+RATIONALE first deliberate batch under the versioning policy - opens PACE to anyone (menu) and lets it start from any existing project (multi-source intake)
+RAW_TEXT Released PACE 0.5.0 Onboarding to PyPI
+END

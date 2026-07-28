@@ -1,0 +1,15 @@
+SPRINT_VERSION 0.15
+
+STATUS APPROVED
+
+SUPERSEDES SPRINT_0.14.pdl
+
+SPRINT FOCUS (session 2026-07-28) - RELEASE 0.5.0 "Onboarding"
+- Cut the batched release 0.5.0: interactive menu (pace, no args), pace
+  capture, multi-source intake (discover/ingest/init --owner/roadmap),
+  pace watch, Upstream Contribution Protocol, landing demo with the menu.
+  First deliberate batch under the versioning policy (DECISION-0003).
+- Phases 1, 2, 3, 6 COMPLETE. Remaining: Phase 4 (19, 20) and Phase 5 (21-24).
+- 69 tests green.
+
+END

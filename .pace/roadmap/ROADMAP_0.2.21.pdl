@@ -1,8 +1,8 @@
-ROADMAP_VERSION 0.2.20
+ROADMAP_VERSION 0.2.21
 
-STATUS SUPERSEDED
+STATUS APPROVED
 
-SUPERSEDES ROADMAP_0.2.19.pdl
+SUPERSEDES ROADMAP_0.2.20.pdl
 
 ROADMAP Ordered by execution strategy: each phase first guarantees CONTINUITY (the
 product keeps working and does not forget) before pursuing GROWTH (reaching
@@ -27,10 +27,10 @@ PHASE_2 SOLID PRODUCT -- installable, with memory and governance (continuity)
   11  Per-chat memory / continuity -- no context "dementia"   [DONE - remember/recall/condense/capture + pace check + handoff continuity]
   12  Test suite + CI (pytest + pace doctor)   [DONE]
   13  Update the README   [DONE]
-  40  pace discover: auto-read a project (README, code, git) and PROPOSE a draft .pace/ - first path of the multi-source intake (REQUEST-0011, advances F2-10)   [DONE, unreleased - batched]
-  41  pace init --owner: seed the ROOT_AUTHORITY actor at creation (greenfield grounding - a new project knows who decides from minute one, advances F2-10)   [DONE, unreleased - batched]
-  42  pace ingest: read client documents (text now, PDFs if pypdf present) and PROPOSE deduced themes/context - third path of the multi-source intake (REQUEST-0011, advances F2-10)   [DONE, unreleased - batched]
-  43  pace roadmap: expose the roadmap as data and detect drift vs a tracker export - local half of the ClickUp/GitHub connector and the automated RULE-0010 remedy (REQUEST-0011, advances F2-10)   [DONE, unreleased - batched]
+  40  pace discover: auto-read a project (README, code, git) and PROPOSE a draft .pace/ - first path of the multi-source intake (REQUEST-0011, advances F2-10)   [DONE in 0.5.0]
+  41  pace init --owner: seed the ROOT_AUTHORITY actor at creation (greenfield grounding - a new project knows who decides from minute one, advances F2-10)   [DONE in 0.5.0]
+  42  pace ingest: read client documents (text now, PDFs if pypdf present) and PROPOSE deduced themes/context - third path of the multi-source intake (REQUEST-0011, advances F2-10)   [DONE in 0.5.0]
+  43  pace roadmap: expose the roadmap as data and detect drift vs a tracker export - local half of the ClickUp/GitHub connector and the automated RULE-0010 remedy (REQUEST-0011, advances F2-10)   [DONE in 0.5.0]
 
 PHASE_3 LAUNCH AND MONETIZATION -- enter the market (growth)
   14  Design the sellable structure / business model   [DONE]
@@ -42,7 +42,7 @@ PHASE_4 ADOPTION AND EXPANSION -- more users, sustained growth
   18  Upstream contribution rule with authorization   [DONE - protocols/UPSTREAM_CONTRIBUTION_PROTOCOL_0.1.0.pdl; enforces RULE-0006 / REQUEST-0006]
   19  User documentation: quickstart + guide
   20  Create the first new project born from PACE
-  44  pace (no args): interactive guided menu for anyone + copyable demo commands on the landing (REQUEST-0020)   [DONE, unreleased - batched]
+  44  pace (no args): interactive guided menu for anyone + copyable demo commands on the landing (REQUEST-0020)   [DONE in 0.5.0]
 
 PHASE_5 SCALE AND ROBUSTNESS -- grow without breaking continuity
   21  Semantic Doctor (deep validation)
@@ -64,8 +64,7 @@ PHASE_6 ACTIVE GUARDIAN -- PACE stops being passive and starts enforcing (contin
   35  supersede stamps the prior version file SUPERSEDED + SUPERSEDED_BY (REQUEST-0017)   [DONE]
   36  pace check: fast cached per-message verification (REQUEST-0018)   [DONE]
   37  pace agent install: force per-message consult in every capable client - Claude Code hook, Cursor rule, AGENTS.md (REQUEST-0018)   [DONE]
-  38  pace capture: record an approved decision in one command, so it never lives only in the chat (REQUEST-0016)   [DONE, unreleased - batched]
-  39  pace watch: continuous background guardian - warns on drift, breakage or a new version (completes F6-30)   [DONE, unreleased - batched]
+  38  pace capture: record an approved decision in one command, so it never lives only in the chat (REQUEST-0016)   [DONE in 0.5.0]
+  39  pace watch: continuous background guardian - warns on drift, breakage or a new version (completes F6-30)   [DONE in 0.5.0]
 
-SUPERSEDED_BY ROADMAP_0.2.21.pdl
 END

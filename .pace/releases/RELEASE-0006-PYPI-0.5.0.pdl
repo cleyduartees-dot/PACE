@@ -1,0 +1,8 @@
+RELEASE_VERSION 0.5.0
+STATUS RELEASED
+TITLE PACE 0.5.0 - Onboarding
+CHANNEL PyPI (pace-engine)
+DATE 2026-07-28
+SUPERSEDES RELEASE-0005-PYPI-0.4.0
+HIGHLIGHTS interactive menu (pace, no args) + pace capture + multi-source intake (discover/ingest/init --owner/roadmap) + pace watch + Upstream Contribution Protocol + landing demo with the menu. First deliberate batch under DECISION-0003/RULE-0009.
+END

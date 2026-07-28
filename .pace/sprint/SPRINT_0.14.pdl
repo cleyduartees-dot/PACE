@@ -1,6 +1,6 @@
 SPRINT_VERSION 0.14
 
-STATUS APPROVED
+STATUS SUPERSEDED
 
 SUPERSEDES SPRINT_0.13.pdl
 
@@ -16,4 +16,5 @@ SPRINT FOCUS (session 2026-07-28)
 - Big batch still unreleased on main -> 0.5.0 (capture, watch, discover,
   --owner, ingest, roadmap) + the landing demo.
 
+SUPERSEDED_BY SPRINT_0.15.pdl
 END

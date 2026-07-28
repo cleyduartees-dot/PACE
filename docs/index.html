@@ -327,38 +327,43 @@ document.querySelectorAll('.copy').forEach(function(b){b.addEventListener('click
     {t:'cmd', x:'pip install pace-engine'},
     {t:'out', x:'Successfully installed pace-engine'},
     {t:'gap'},
-    {t:'cmd', x:'pace init --owner "Cley Duarte" --owner-role President'},
-    {t:'out', x:'created .pace/  ·  ROOT_AUTHORITY: President Cley Duarte'},
+    {t:'cmd', x:'pace'},
+    {t:'out', x:'  PACE — ¿qué quieres hacer?', d:120},
+    {t:'out', x:'    1) Empezar / configurar la memoria del proyecto', d:110},
+    {t:'out', x:'    2) Ver el estado del proyecto', d:110},
+    {t:'out', x:'    3) Guardar una nota', d:110},
+    {t:'out', x:'    4) Registrar una decisión aprobada', d:110},
+    {t:'out', x:'    5) Comprobar que la memoria está bien', d:110},
+    {t:'out', x:'    0) Salir', d:110},
     {t:'gap'},
-    {t:'cmd', x:'pace handoff'},
-    {t:'out', x:'# La memoria que toda IA lee primero'},
-    {t:'out', x:'Autoridad: President Cley Duarte — tú decides.'},
-    {t:'out', x:'Reglas: nunca editar en sitio · registrar cada decisión.'},
-    {t:'out', x:'Misión: hacer por el conocimiento lo que Git por el código.'},
-    {t:'gap'},
-    {t:'cmd', x:'pace check'},
-    {t:'out', x:'PACE activo · cualquier IA entiende el proyecto en segundos.'}
+    {t:'cmd', x:'2', p:'Elige un número › '},
+    {t:'out', x:'# La memoria que toda IA lee primero', d:200},
+    {t:'out', x:'Autoridad: President Cley Duarte — tú decides.', d:200},
+    {t:'out', x:'Reglas: nunca editar en sitio · registrar cada decisión.', d:200},
+    {t:'out', x:'Misión: hacer por el conocimiento lo que Git por el código.', d:200}
   ];
-  var TYPE=40, OUT=280, GAP=150, HOLD=4600, committed='', i=0;
+  var TYPE=44, OUT=240, GAP=130, HOLD=5400, committed='', i=0;
   function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;');}
-  function render(live, cur){ body.innerHTML = committed + (live||'') + (cur?'<span class="term-cur"></span>':''); }
+  function render(live, cur){
+    body.innerHTML = committed + (live||'') + (cur?'<span class="term-cur"></span>':'');
+    body.scrollTop = body.scrollHeight;
+  }
   function step(){
     if(i>=seq.length){ setTimeout(function(){committed='';i=0;render('',true);step();}, HOLD); return; }
     var it=seq[i++];
     if(it.t==='gap'){ committed+='\n'; render('',false); setTimeout(step,GAP); return; }
-    if(it.t==='out'){ committed+='<span class="o">'+esc(it.x)+'</span>\n'; render('',false); setTimeout(step,OUT); return; }
-    var txt=it.x, j=0;
+    if(it.t==='out'){ committed+='<span class="o">'+esc(it.x)+'</span>\n'; render('',false); setTimeout(step, it.d||OUT); return; }
+    var prompt=it.p||'$ ', ptxt=it.x, j=0;
     (function typ(){
-      var typed='<span class="p">$ </span><span class="c">'+esc(txt.slice(0,j))+'</span>';
-      render(typed, true);
-      if(j<txt.length){ j++; setTimeout(typ, TYPE); }
-      else { committed+='<span class="p">$ </span><span class="c">'+esc(txt)+'</span>\n'; setTimeout(step, OUT); }
+      render('<span class="p">'+esc(prompt)+'</span><span class="c">'+esc(ptxt.slice(0,j))+'</span>', true);
+      if(j<ptxt.length){ j++; setTimeout(typ, TYPE); }
+      else { committed+='<span class="p">'+esc(prompt)+'</span><span class="c">'+esc(ptxt)+'</span>\n'; setTimeout(step, OUT); }
     })();
   }
   var started=false;
   function start(){ if(started) return; started=true; render('',true); step(); }
   if('IntersectionObserver' in window){
-    var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting) start(); }); }, {threshold:.3});
+    var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting) start(); }); }, {threshold:.25});
     io.observe(body);
   } else { start(); }
 })();

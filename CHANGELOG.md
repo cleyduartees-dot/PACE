@@ -5,6 +5,35 @@ All notable changes to PACE are documented here. The format loosely follows
 version lines: the engine (`PACE_VERSION`) and the instance Contract
 (`SCHEMA_VERSION`).
 
+## [0.5.0] — 2026-07-28 — "Onboarding"
+
+The release that opens PACE to anyone, and lets PACE start from any existing
+project.
+
+### Added — anyone can use it
+- **`pace` with no arguments** opens an interactive guided menu (Empezar /
+  Ver estado / Guardar nota / Ver memoria / Registrar decisión / Comprobar).
+  No commands to memorize. Non-interactive use still prints help.
+- **`pace capture "..."`** — record an approved decision in one command.
+
+### Added — multi-source intake (start PACE from what already exists)
+- **`pace discover`** — auto-read a project (README, code, git) and PROPOSE a
+  draft `.pace/`. Read-only.
+- **`pace ingest`** — read documents (text; PDFs if `pypdf` is present) and
+  PROPOSE the deduced themes and a context draft. Read-only.
+- **`pace init --owner/--owner-role`** — seed the ROOT_AUTHORITY at creation.
+- **`pace roadmap`** — roadmap as data (`--json`, `--open`) + drift detection
+  against a tracker export (`--against file.json`).
+
+### Added — continuous guardian
+- **`pace watch`** — dependency-free background guardian: warns on drift,
+  contract break/heal, or a new engine version.
+
+### Governance & docs
+- Upstream Contribution Protocol; Versioning & release-cadence policy;
+  landing animated terminal demo showing the interactive menu, with copyable
+  commands.
+
 ## [0.4.0] — 2026-07-27 — "The Gatekeeper" (per-message enforcement)
 
 ### Added
