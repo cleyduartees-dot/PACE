@@ -1,8 +1,8 @@
-ROADMAP_VERSION 0.2.17
+ROADMAP_VERSION 0.2.18
 
-STATUS SUPERSEDED
+STATUS APPROVED
 
-SUPERSEDES ROADMAP_0.2.16.pdl
+SUPERSEDES ROADMAP_0.2.17.pdl
 
 ROADMAP Ordered by execution strategy: each phase first guarantees CONTINUITY (the
 product keeps working and does not forget) before pursuing GROWTH (reaching
@@ -35,7 +35,7 @@ PHASE_2 SOLID PRODUCT -- installable, with memory and governance (continuity)
 PHASE_3 LAUNCH AND MONETIZATION -- enter the market (growth)
   14  Design the sellable structure / business model   [DONE]
   15  Choose and apply the license   [DONE]
-  16  Make the landing sell (conversion)   [demo GIF pending]
+  16  Make the landing sell (conversion)   [DONE - animated terminal demo on the landing; all subtasks complete; Phase 3 complete]
   17  Publish the landing on GitHub Pages   [DONE - LIVE at cleyduartees-dot.github.io/PACE, DECISION-0002]
 
 PHASE_4 ADOPTION AND EXPANSION -- more users, sustained growth
@@ -66,5 +66,4 @@ PHASE_6 ACTIVE GUARDIAN -- PACE stops being passive and starts enforcing (contin
   38  pace capture: record an approved decision in one command, so it never lives only in the chat (REQUEST-0016)   [DONE, unreleased - batched]
   39  pace watch: continuous background guardian - warns on drift, breakage or a new version (completes F6-30)   [DONE, unreleased - batched]
 
-SUPERSEDED_BY ROADMAP_0.2.18.pdl
 END

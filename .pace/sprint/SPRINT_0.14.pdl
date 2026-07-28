@@ -1,0 +1,19 @@
+SPRINT_VERSION 0.14
+
+STATUS APPROVED
+
+SUPERSEDES SPRINT_0.13.pdl
+
+SPRINT FOCUS (session 2026-07-28)
+- item 16: replaced the pending demo GIF with an in-page ANIMATED TERMINAL
+  on the landing (pure CSS/JS, zero deps) that types a real PACE session
+  (install -> init --owner -> handoff -> check). Closes F3-16 -> PHASE 3
+  COMPLETE. Lives in docs/index.html; GitHub Pages redeploys on push.
+- Board reconciled same turn (RULE-0010): F2-10 and F3-16 parents marked
+  complete now that all their subtasks are done (the President caught F2-10).
+- Phases 1, 2, 3, 6 COMPLETE. Remaining: Phase 4 (18 upstream rule, 19 user
+  docs, 20 first project born of PACE) and Phase 5 (21-24).
+- Big batch still unreleased on main -> 0.5.0 (capture, watch, discover,
+  --owner, ingest, roadmap) + the landing demo.
+
+END

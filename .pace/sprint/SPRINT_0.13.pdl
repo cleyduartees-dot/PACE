@@ -1,6 +1,6 @@
 SPRINT_VERSION 0.13
 
-STATUS APPROVED
+STATUS SUPERSEDED
 
 SUPERSEDES SPRINT_0.12.pdl
 
@@ -16,4 +16,5 @@ SPRINT FOCUS (session 2026-07-27, in order)
   discover, --owner, ingest, roadmap).
 - Live authenticated ClickUp/GitHub API pull remains future (cloud/MCP).
 
+SUPERSEDED_BY SPRINT_0.14.pdl
 END

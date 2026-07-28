@@ -130,11 +130,11 @@ END
 ## Roadmap
 
 ```
-ROADMAP_VERSION 0.2.17
+ROADMAP_VERSION 0.2.18
 
 STATUS APPROVED
 
-SUPERSEDES ROADMAP_0.2.16.pdl
+SUPERSEDES ROADMAP_0.2.17.pdl
 
 ROADMAP Ordered by execution strategy: each phase first guarantees CONTINUITY (the
 product keeps working and does not forget) before pursuing GROWTH (reaching
@@ -167,7 +167,7 @@ PHASE_2 SOLID PRODUCT -- installable, with memory and governance (continuity)
 PHASE_3 LAUNCH AND MONETIZATION -- enter the market (growth)
   14  Design the sellable structure / business model   [DONE]
   15  Choose and apply the license   [DONE]
-  16  Make the landing sell (conversion)   [demo GIF pending]
+  16  Make the landing sell (conversion)   [DONE - animated terminal demo on the landing; all subtasks complete; Phase 3 complete]
   17  Publish the landing on GitHub Pages   [DONE - LIVE at cleyduartees-dot.github.io/PACE, DECISION-0002]
 
 PHASE_4 ADOPTION AND EXPANSION -- more users, sustained growth
@@ -204,33 +204,32 @@ END
 ## Current sprint
 
 ```
-SPRINT_VERSION 0.13
+SPRINT_VERSION 0.14
 
 STATUS APPROVED
 
-SUPERSEDES SPRINT_0.12.pdl
+SUPERSEDES SPRINT_0.13.pdl
 
-SPRINT FOCUS (session 2026-07-27, in order)
-- Closed the multi-source intake (F2-10) with item 43 pace roadmap: exposes
-  the roadmap as DATA (pace roadmap / --json / --open) and detects drift
-  against a tracker export (pace roadmap --against file.json). This is the
-  local half of the ClickUp/GitHub connector and the automated RULE-0010
-  remedy - PACE detects tracker drift instead of trusting the AI to remember.
-- Reconciled a real drift the tool surfaced: item 11 was complete in ClickUp
-  but open in the roadmap -> now [DONE].
-- 67 tests green. Batched (unreleased) toward 0.5.0 (capture, watch,
-  discover, --owner, ingest, roadmap).
-- Live authenticated ClickUp/GitHub API pull remains future (cloud/MCP).
+SPRINT FOCUS (session 2026-07-28)
+- item 16: replaced the pending demo GIF with an in-page ANIMATED TERMINAL
+  on the landing (pure CSS/JS, zero deps) that types a real PACE session
+  (install -> init --owner -> handoff -> check). Closes F3-16 -> PHASE 3
+  COMPLETE. Lives in docs/index.html; GitHub Pages redeploys on push.
+- Board reconciled same turn (RULE-0010): F2-10 and F3-16 parents marked
+  complete now that all their subtasks are done (the President caught F2-10).
+- Phases 1, 2, 3, 6 COMPLETE. Remaining: Phase 4 (18 upstream rule, 19 user
+  docs, 20 first project born of PACE) and Phase 5 (21-24).
+- Big batch still unreleased on main -> 0.5.0 (capture, watch, discover,
+  --owner, ingest, roadmap) + the landing demo.
 
 END
 ```
 
 ## Recent continuity notes
 
-The working log has 22 notes. Most recent below; read the
+The working log has 23 notes. Most recent below; read the
 full detail in .pace/memory/persistent/CONTINUITY.md:
 
-- [2026-07-27 21:58] REQUEST-0017 (2nd external feedback, tested 0.3.0 on a live project): confirmed the big gap (handoff ignoring CONTINUITY.md) is resolved. Two fixes -> 0.3.1: F6-34 pace update retries with --break-system-packages (PEP 668), F6-35 supersede stamps prior file STATUS SUPERSEDED + SUPERSEDED_BY. 43 tests green.
 - [2026-07-27 22:15] 0.4.0 The Gatekeeper (REQUEST-0018): pace check = fast cached per-message verification (silent without .pace/); pace agent install wires per-message enforcement into Claude Code (real UserPromptSubmit hook), Cursor rule, and AGENTS.md. Idempotent, preserves foreign settings. 49 tests green. F6-36/37 done; F6-30 remaining = continuous background watch.
 - [2026-07-27 22:23] DECISION-0003 + RULE-0009: adopted versioning/release-cadence policy (policies/VERSIONING_POLICY_0.1.0.pdl). SemVer on engine line; BATCH releases by default (not per feature); 1.0.0 reserved as a stability commitment. Todays fast cadence was justified by a live feedback loop but is not the default going forward.
 - [2026-07-27 22:26] Built pace capture (F6-38): the conversational-capture verb - records an approved decision as DECISION-NNNN in one command (RULE-0008 remedy). AGENTS/cursor/check guidance now tell AIs to capture decisions the instant they happen. 50 tests green. NOT released: batched on main toward a future 0.5.0 per DECISION-0003/RULE-0009.
@@ -242,6 +241,7 @@ full detail in .pace/memory/persistent/CONTINUITY.md:
 - [2026-07-27 22:56] item 42: pace ingest reads client documents (text zero-dep; PDFs only if pypdf installed, skipped with a note otherwise) and PROPOSES deduced themes + headings + a context draft, read-only. Advances F2-10. 64 tests green. Batched toward 0.5.0. Multi-source intake now: discover (code), owner seeding, ingest (docs); remaining = ClickUp/GitHub connectors.
 - [2026-07-28 17:44] item 43 pace roadmap: parse the roadmap into data (--json/--open) and detect drift vs a tracker export (--against file.json). Local half of the ClickUp/GitHub connector + automated RULE-0010 remedy. Fixed done-detection (prefix [DONE / [COMPLETE, and phase-level DONE propagates to items). Surfaced+fixed a real drift: item 11 was complete in ClickUp but open in roadmap. 67 tests green. Batched toward 0.5.0. Live authenticated API pull remains future (cloud/MCP).
 - [2026-07-28 17:49] Reconciled F2-10 (Guided Intake): all 8 subtasks complete, so the parent and roadmap item 10 are now DONE (RULE-0005 + RULE-0010, same turn). Delivered by guided/flags + discover(40) + init --owner(41) + ingest(42) + roadmap connector(43). The President caught that the parent was open with all children done.
+- [2026-07-28 17:54] item 16 done: animated terminal demo added to the landing (docs/index.html, pure CSS/JS) typing a real PACE session. Closes F3-16; PHASE 3 COMPLETE. Reconciled F2-10 + F3-16 parents to complete (all subtasks done). Phases 1,2,3,6 complete; remaining Phase 4 (18,19,20) and Phase 5 (21-24). Batch still unreleased toward 0.5.0.
 
 ## Where the rest of the memory lives
 
