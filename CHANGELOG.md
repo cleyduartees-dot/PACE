@@ -8,6 +8,7 @@ version lines: the engine (`PACE_VERSION`) and the instance Contract
 ## [Unreleased]
 
 ### Added
+- `pace doctor --deep`: semantic validation on top of structural — checks that active pointers resolve, supersede chains are intact, mission/vision/roadmap are not placeholders, cited RULE-/DECISION- references exist, and a ROOT_AUTHORITY is named. (roadmap item 21)
 - `pace create --guided`: interactive guided creation of a brand-new project — asks name, **local location**, org and seeds mission/vision/roadmap, mirroring `pace init --guided`. New menu option "Crear un proyecto nuevo desde cero (guiado)". (roadmap item 45)
 - `protocols/GUIDED_CREATION_PROFILE_0.1.0.pdl`: the AI-agnostic profile any AI follows to guide a user to create a project locally, under user instruction. (RULE-0011, DECISION-0008/0009)
 - Roadmap items 46–50: extended genesis (remote repo, tracker, stack/env, deployment, in-order orchestration) using the user's own accounts. (DECISION-0009)

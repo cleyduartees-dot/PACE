@@ -19,6 +19,7 @@ from pace.engines.memory import remember, recall, condense
 from pace.engines.hooks import install_hook, uninstall_hook
 from pace.engines.agent_setup import install_all
 from pace.engines.decisions import capture_decision
+from pace.engines.semantic_doctor import semantic_check
 from pace.engines.handoff import generate_handoff, _root_authority, _ensure_agents_pointer
 
 ACTIVE_SECTIONS = [
@@ -40,6 +41,15 @@ def cmd_doctor(args) -> int:
         for v in violations:
             print(f"  - {v}")
         return 1
+    if getattr(args, "deep", False):
+        issues = semantic_check(root)
+        if issues:
+            print(f"STRUCTURALLY VALID, but the semantic Doctor found {len(issues)} issue(s):")
+            for i in issues:
+                print(f"  - {i}")
+            return 1
+        print(f"VALID (deep) - {root}")
+        return 0
     print(f"VALID - {root}")
     return 0
 
@@ -571,8 +581,10 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="pace")
     subparsers = parser.add_subparsers(dest="command", required=True)
 
-    doctor = subparsers.add_parser("doctor", help="validate a .pace/ instance structurally")
+    doctor = subparsers.add_parser("doctor", help="validate a .pace/ instance (structural; --deep adds semantic checks)")
     doctor.add_argument("path", nargs="?", default=None)
+    doctor.add_argument("--deep", action="store_true",
+                        help="semantic validation: active pointers resolve, supersede chains intact, no placeholders, cited rules/decisions exist, ROOT_AUTHORITY named")
     doctor.set_defaults(func=cmd_doctor)
 
     context = subparsers.add_parser("context", help="print a .pace/ instance's current context")

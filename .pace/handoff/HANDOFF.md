@@ -131,11 +131,11 @@ END
 ## Roadmap
 
 ```
-ROADMAP_VERSION 0.2.26
+ROADMAP_VERSION 0.2.27
 
 STATUS APPROVED
 
-SUPERSEDES ROADMAP_0.2.25.pdl
+SUPERSEDES ROADMAP_0.2.26.pdl
 
 ROADMAP Ordered by execution strategy: each phase first guarantees CONTINUITY (the
 product keeps working and does not forget) before pursuing GROWTH (reaching
@@ -184,7 +184,7 @@ PHASE_4 ADOPTION AND EXPANSION -- more users, sustained growth
   50  Extended genesis - in-order orchestration: one guided flow that runs 45-49 in the correct order, AI-agnostic and under user instruction, using the user's own accounts (sovereignty preserved) (DECISION-0009)
 
 PHASE_5 SCALE AND ROBUSTNESS -- grow without breaking continuity
-  21  Semantic Doctor (deep validation)
+  21  Semantic Doctor (deep validation)   [DONE - pace doctor --deep: active pointers, supersede chains, placeholders, cited RULE/DECISION refs, ROOT_AUTHORITY named; 74 tests green; batched for next release]
   22  pace migrate (schema-version migrations)
   23  Standalone binary (PyInstaller)
   24  Stack templates for pace create
@@ -232,10 +232,9 @@ END
 
 ## Recent continuity notes
 
-The working log has 32 notes. Most recent below; read the
+The working log has 33 notes. Most recent below; read the
 full detail in .pace/memory/persistent/CONTINUITY.md:
 
-- [2026-07-28 17:44] item 43 pace roadmap: parse the roadmap into data (--json/--open) and detect drift vs a tracker export (--against file.json). Local half of the ClickUp/GitHub connector + automated RULE-0010 remedy. Fixed done-detection (prefix [DONE / [COMPLETE, and phase-level DONE propagates to items). Surfaced+fixed a real drift: item 11 was complete in ClickUp but open in roadmap. 67 tests green. Batched toward 0.5.0. Live authenticated API pull remains future (cloud/MCP).
 - [2026-07-28 17:49] Reconciled F2-10 (Guided Intake): all 8 subtasks complete, so the parent and roadmap item 10 are now DONE (RULE-0005 + RULE-0010, same turn). Delivered by guided/flags + discover(40) + init --owner(41) + ingest(42) + roadmap connector(43). The President caught that the parent was open with all children done.
 - [2026-07-28 17:54] item 16 done: animated terminal demo added to the landing (docs/index.html, pure CSS/JS) typing a real PACE session. Closes F3-16; PHASE 3 COMPLETE. Reconciled F2-10 + F3-16 parents to complete (all subtasks done). Phases 1,2,3,6 complete; remaining Phase 4 (18,19,20) and Phase 5 (21-24). Batch still unreleased toward 0.5.0.
 - [2026-07-28 18:05] item 44 (REQUEST-0020): pace with no arguments opens an interactive guided MENU (Empezar / Ver estado / Guardar nota / Ver memoria / Registrar decision / Comprobar) mapping to existing commands - so anyone can use PACE without memorizing commands. Non-tty still prints help; technical commands unchanged (no 0.4.0 breakage). Landing demo now has copyable command chips + mentions `pace` menu. 69 tests green. Batched toward 0.5.0.
@@ -247,6 +246,7 @@ full detail in .pace/memory/persistent/CONTINUITY.md:
 - [2026-07-28 23:44] Vision de creacion guiada ampliada (DECISION-0008/0009, RULE-0011, GUIDED_CREATION_PROFILE): pace create debe ser --guided interactivo como init --guided; y la genesis extendida orquesta EN ORDEN repo GitHub, tablero ClickUp, stack (lenguaje+DB+entorno) y despliegue (Vercel u otro) con cuentas del usuario, agnostico a la IA. Roadmap items 45-50 anadidos. Falta implementar en el motor.
 - [2026-07-28 23:53] Item 45 CONSTRUIDO: pace create --guided (creacion guiada interactiva) implementado y probado (70 tests verdes). Pregunta nombre, UBICACION LOCAL, org y siembra mision/vision/roadmap, como init --guided. Nueva opcion de menu. CHANGELOG en Unreleased. Sin publicar aun (politica de lotes). Roadmap 0.2.25.
 - [2026-07-29 22:28] Decision-0010 + roadmap item 51: PACE aun exige terminal+Python para arrancar; --guided suaviza preguntas pero no la puerta de entrada. Anadido item 51 (lanzador sin terminal, se apoya en binario F5-23). Reflejado en ClickUp F5-51 (869ebb1tt). Camino: binario -> doble clic -> app/nube.
+- [2026-07-29 22:51] Item 21 CONSTRUIDO: pace doctor --deep (motor semantico) implementado y probado (74 tests verdes). Checa punteros activos, cadenas supersede, placeholders (por texto literal, no parser), refs RULE/DECISION citadas, y ROOT_AUTHORITY. Nuevo motor pace/engines/semantic_doctor.py. Descubrimiento: la deteccion de placeholder debe leer texto crudo porque el contenido real es multilinea. Roadmap 0.2.27. Sin publicar (lotes).
 
 ## Where the rest of the memory lives
 
@@ -256,5 +256,5 @@ full detail in .pace/memory/persistent/CONTINUITY.md:
 
 ## Health checks
 
-- WARN: The continuity log has 32 notes - run `pace condense` to archive the old ones (nothing discarded).
+- WARN: The continuity log has 33 notes - run `pace condense` to archive the old ones (nothing discarded).
 

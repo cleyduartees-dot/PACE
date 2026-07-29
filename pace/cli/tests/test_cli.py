@@ -163,6 +163,17 @@ def test_create_guided_seeds_identity_and_mission():
         assert actors, "the ROOT_AUTHORITY actor should be seeded"
 
 
+def test_doctor_deep_flags_placeholders_on_a_fresh_project():
+    with tempfile.TemporaryDirectory() as tmp:
+        target = Path(tmp) / "fresh"
+        run(["create", str(target), "--name", "Fresh", "--slug", "fresh", "--org-ref", "org"])
+        code, out = run(["doctor", "--deep", str(target)])
+        assert code == 1
+        assert "placeholder" in out
+        s_code, s_out = run(["doctor", str(target)])
+        assert s_code == 0 and "VALID" in s_out
+
+
 if __name__ == "__main__":
     tests = [v for k, v in sorted(globals().items()) if k.startswith("test_")]
     for test in tests:
