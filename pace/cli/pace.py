@@ -162,13 +162,66 @@ def cmd_init(args) -> int:
     return 0
 
 
+def run_guided_create(name=None, slug=None, org_ref=None, path=None):
+    """Interactive guided creation of a brand-new project - the create-time
+    twin of run_guided_intake. Any AI or the owner answers; nothing is
+    invented. Asks WHERE (the local path) explicitly, then seeds identity
+    and mission/vision/roadmap. Returns a dict of resolved values including
+    `path`. AI-agnostic and under user instruction (RULE-0011)."""
+    print("\nPACE - crear un proyecto nuevo (creacion guiada).")
+    print("Responde, o pulsa Enter para aceptar un [valor por defecto].\n")
+    if not name:
+        name = _prompt("Nombre del producto / proyecto") or "Unnamed project"
+    if not slug:
+        slug = _prompt("Slug (identificador corto)", _slugify(name))
+    if not org_ref:
+        org_ref = _prompt("Organizacion a la que pertenece (org ref)") or "org"
+    if not path:
+        default_path = f"./{slug}"
+        path = _prompt("En que CARPETA LOCAL de tu equipo se creara", default_path)
+    fields = {"name": name, "slug": slug, "org_ref": org_ref, "path": path}
+    owner = _prompt("Quien decide? (ROOT_AUTHORITY)")
+    if owner:
+        fields["owner"] = owner
+        role = _prompt("Su rol (ej. Presidente, Fundador, Lead)")
+        if role:
+            fields["owner_role"] = role
+    mission = _prompt("Por que existe este proyecto? (mision)")
+    if mission:
+        fields["mission"] = mission
+    vision = _prompt("A donde va? (vision)")
+    if vision:
+        fields["vision"] = vision
+    roadmap = _prompt("Que esta pendiente? (roadmap - puntos principales)")
+    if roadmap:
+        fields["roadmap"] = roadmap
+    return fields
+
+
 def cmd_create(args) -> int:
+    name, slug, org_ref, path = args.name, args.slug, args.org_ref, args.path
+    extra = {}
+    if getattr(args, "guided", False):
+        fields = run_guided_create(name, slug, org_ref, path)
+        name = fields.pop("name")
+        slug = fields.pop("slug")
+        org_ref = fields.pop("org_ref")
+        path = fields.pop("path")
+        extra = fields
+    if not name:
+        print("create failed: --name is required (or use --guided)")
+        return 1
+    if not slug:
+        slug = _slugify(name)
+    if not org_ref:
+        print("create failed: --org-ref is required (or use --guided)")
+        return 1
+    if not path:
+        print("create failed: a target path is required (or use --guided)")
+        return 1
     try:
         root = create_project(
-            Path(args.path),
-            name=args.name,
-            slug=args.slug,
-            org_ref=args.org_ref,
+            Path(path), name=name, slug=slug, org_ref=org_ref, **extra
         )
     except FileExistsError as error:
         print(f"create failed: {error}")
@@ -626,10 +679,13 @@ def build_parser() -> argparse.ArgumentParser:
     rule_list.set_defaults(func=cmd_rule)
 
     create = subparsers.add_parser("create", help="generate a brand-new project governed by PACE from scratch")
-    create.add_argument("path")
-    create.add_argument("--name", required=True)
-    create.add_argument("--slug", required=True)
-    create.add_argument("--org-ref", dest="org_ref", required=True)
+    create.add_argument("path", nargs="?", default=None,
+                        help="target folder (asked interactively with --guided)")
+    create.add_argument("--name", default=None)
+    create.add_argument("--slug", default=None)
+    create.add_argument("--org-ref", dest="org_ref", default=None)
+    create.add_argument("--guided", action="store_true",
+                        help="interactive guided creation: asks name, LOCAL location, org and seeds mission/vision/roadmap")
     create.set_defaults(func=cmd_create)
 
     return parser
@@ -649,6 +705,7 @@ def run_menu() -> int:
     them (REQUEST-0020)."""
     actions = [
         ("Empezar / configurar la memoria de este proyecto", lambda: main(["init", "--guided", "."])),
+        ("Crear un proyecto nuevo desde cero (guiado)", lambda: main(["create", "--guided"])),
         ("Ver el estado del proyecto", lambda: main(["handoff", "."])),
         ("Guardar una nota", lambda: _menu_text("Que quieres anotar?", "remember")),
         ("Ver la memoria guardada", lambda: main(["recall", "."])),

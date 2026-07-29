@@ -133,6 +133,36 @@ def test_menu_invalid_choice_returns_one():
         sys.stdin = old
 
 
+def test_create_guided_seeds_identity_and_mission():
+    with tempfile.TemporaryDirectory() as tmp:
+        target = Path(tmp) / "guided-co"
+        answers = "\n".join([
+            "Guided Co",                 # name
+            "",                          # slug -> default
+            "PANNOTIA",                  # org ref
+            str(target),                 # LOCAL location (the key question)
+            "Ada Lovelace",              # owner / ROOT_AUTHORITY
+            "Founder",                   # role
+            "To test guided creation",   # mission
+            "Onward",                    # vision
+            "01 first step",             # roadmap
+        ]) + "\n"
+        old = sys.stdin
+        sys.stdin = io.StringIO(answers)
+        try:
+            code, out = run(["create", "--guided"])
+        finally:
+            sys.stdin = old
+        assert code == 0, out
+        assert (target / ".git").is_dir()
+        _, doctor_out = run(["doctor", str(target)])
+        assert "VALID" in doctor_out
+        mission = (target / ".pace" / "mission" / "MISSION_1.0.0.pdl").read_text(encoding="utf-8")
+        assert "To test guided creation" in mission
+        actors = list((target / ".pace" / "actors").glob("ACTOR-*.pdl"))
+        assert actors, "the ROOT_AUTHORITY actor should be seeded"
+
+
 if __name__ == "__main__":
     tests = [v for k, v in sorted(globals().items()) if k.startswith("test_")]
     for test in tests:

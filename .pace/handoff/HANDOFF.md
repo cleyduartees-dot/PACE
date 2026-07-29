@@ -131,11 +131,11 @@ END
 ## Roadmap
 
 ```
-ROADMAP_VERSION 0.2.24
+ROADMAP_VERSION 0.2.25
 
 STATUS APPROVED
 
-SUPERSEDES ROADMAP_0.2.23.pdl
+SUPERSEDES ROADMAP_0.2.24.pdl
 
 ROADMAP Ordered by execution strategy: each phase first guarantees CONTINUITY (the
 product keeps working and does not forget) before pursuing GROWTH (reaching
@@ -176,7 +176,7 @@ PHASE_4 ADOPTION AND EXPANSION -- more users, sustained growth
   19  User documentation: quickstart + guide   [DONE - docs/QUICKSTART.md (menu-first) + docs/GUIA.md, Spanish, for anyone]
   20  Create the first new project born from PACE   [DONE - Maria Davila: guardarropa + alquiler con armario digital, born from PACE 0.5.0, ROOT_AUTHORITY Cley Duarte]
   44  pace (no args): interactive guided menu for anyone + copyable demo commands on the landing (REQUEST-0020)   [DONE in 0.5.0]
-  45  pace create --guided: interactive guided creation (name, LOCAL location, org, context) that guides the user to create the project on their own machine, like pace init --guided for existing projects. Follows the Guided Creation Profile; AI-agnostic (RULE-0011, DECISION-0008)
+  45  pace create --guided: interactive guided creation (name, LOCAL location, org, context) that guides the user to create the project on their own machine, like pace init --guided for existing projects. Follows the Guided Creation Profile; AI-agnostic (RULE-0011, DECISION-0008)   [DONE - implemented + tested (70 tests green), menu option added; batched for next release]
   46  Extended genesis - remote repo: guided creation can provision the GitHub repo (or other) with the user's own credentials and do the first push. Depends on the live authenticated connector
   47  Extended genesis - tracker: create the ClickUp space/board (or other) with the initial roadmap already synced. Depends on the live authenticated connector
   48  Extended genesis - stack and environment: propose and scaffold language, framework, database and dev environment per the project profile (extends F5-24 stack templates)
@@ -231,10 +231,9 @@ END
 
 ## Recent continuity notes
 
-The working log has 30 notes. Most recent below; read the
+The working log has 31 notes. Most recent below; read the
 full detail in .pace/memory/persistent/CONTINUITY.md:
 
-- [2026-07-27 22:52] item 41: pace init --owner/--owner-role seeds the ROOT_AUTHORITY actor at creation (greenfield grounding - handoff names who decides). Guided mode asks for it. Backward compatible (no owner = no actor, still VALID). 60 tests green. Advances F2-10. Batched toward 0.5.0.
 - [2026-07-27 22:56] item 42: pace ingest reads client documents (text zero-dep; PDFs only if pypdf installed, skipped with a note otherwise) and PROPOSES deduced themes + headings + a context draft, read-only. Advances F2-10. 64 tests green. Batched toward 0.5.0. Multi-source intake now: discover (code), owner seeding, ingest (docs); remaining = ClickUp/GitHub connectors.
 - [2026-07-28 17:44] item 43 pace roadmap: parse the roadmap into data (--json/--open) and detect drift vs a tracker export (--against file.json). Local half of the ClickUp/GitHub connector + automated RULE-0010 remedy. Fixed done-detection (prefix [DONE / [COMPLETE, and phase-level DONE propagates to items). Surfaced+fixed a real drift: item 11 was complete in ClickUp but open in roadmap. 67 tests green. Batched toward 0.5.0. Live authenticated API pull remains future (cloud/MCP).
 - [2026-07-28 17:49] Reconciled F2-10 (Guided Intake): all 8 subtasks complete, so the parent and roadmap item 10 are now DONE (RULE-0005 + RULE-0010, same turn). Delivered by guided/flags + discover(40) + init --owner(41) + ingest(42) + roadmap connector(43). The President caught that the parent was open with all children done.
@@ -246,6 +245,7 @@ full detail in .pace/memory/persistent/CONTINUITY.md:
 - [2026-07-28 20:10] item 19 hecho: documentacion de usuario - docs/QUICKSTART.md (menu-first, 2 min) + docs/GUIA.md (guia completa en espanol, por-tareas, para cualquiera). Roadmap 0.2.22. Falta cerrar F4-19 en ClickUp (mismo turno, RULE-0010) y push del usuario.
 - [2026-07-28 22:45] F4-20 hecho: primer proyecto nacido desde PACE = Maria Davila (guardarropa + alquiler de ropa, armario digital, entrega a domicilio, apoyado en tintorerias/lavanderias locales). Creado con pace-engine 0.5.0 publicado; Cley Duarte ROOT_AUTHORITY; mision/vision/roadmap fundacionales; doctor VALID. Entregado como zip. Nombre por confirmar. Roadmap PACE 0.2.23.
 - [2026-07-28 23:44] Vision de creacion guiada ampliada (DECISION-0008/0009, RULE-0011, GUIDED_CREATION_PROFILE): pace create debe ser --guided interactivo como init --guided; y la genesis extendida orquesta EN ORDEN repo GitHub, tablero ClickUp, stack (lenguaje+DB+entorno) y despliegue (Vercel u otro) con cuentas del usuario, agnostico a la IA. Roadmap items 45-50 anadidos. Falta implementar en el motor.
+- [2026-07-28 23:53] Item 45 CONSTRUIDO: pace create --guided (creacion guiada interactiva) implementado y probado (70 tests verdes). Pregunta nombre, UBICACION LOCAL, org y siembra mision/vision/roadmap, como init --guided. Nueva opcion de menu. CHANGELOG en Unreleased. Sin publicar aun (politica de lotes). Roadmap 0.2.25.
 
 ## Where the rest of the memory lives
 
@@ -255,5 +255,5 @@ full detail in .pace/memory/persistent/CONTINUITY.md:
 
 ## Health checks
 
-- OK: no issues detected (all core sections filled).
+- WARN: The continuity log has 31 notes - run `pace condense` to archive the old ones (nothing discarded).
 
