@@ -1,8 +1,8 @@
-ROADMAP_VERSION 0.2.27
+ROADMAP_VERSION 0.2.30
 
 STATUS SUPERSEDED
 
-SUPERSEDES ROADMAP_0.2.26.pdl
+SUPERSEDES ROADMAP_0.2.29.pdl
 
 ROADMAP Ordered by execution strategy: each phase first guarantees CONTINUITY (the
 product keeps working and does not forget) before pursuing GROWTH (reaching
@@ -52,10 +52,10 @@ PHASE_4 ADOPTION AND EXPANSION -- more users, sustained growth
 
 PHASE_5 SCALE AND ROBUSTNESS -- grow without breaking continuity
   21  Semantic Doctor (deep validation)   [DONE - pace doctor --deep: active pointers, supersede chains, placeholders, cited RULE/DECISION refs, ROOT_AUTHORITY named; 74 tests green; batched for next release]
-  22  pace migrate (schema-version migrations)
+  22  pace migrate (schema-version migrations)   [DONE - pace migrate: 0.1.0->0.2.0 (creates optional rules/, bumps SCHEMA_VERSION, logs history); idempotent; 78 tests green; batched]
   23  Standalone binary (PyInstaller)
-  24  Stack templates for pace create
-  51  Experiencia sin terminal: lanzador de doble clic (icono en el escritorio) que abre el menu de pace sin escribir comandos, para usuarios no tecnicos. Se apoya en el binario standalone (F5-23). Es el paso decisivo hacia cualquiera-lo-usa (DECISION-0010)
+  24  Stack templates for pace create   [DONE - pace create --template python|node scaffolds stack starter files; guided mode asks the stack; 82 tests green; batched]
+  51  Experiencia sin terminal: lanzador de doble clic (icono en el escritorio) que abre el menu de pace sin escribir comandos, para usuarios no tecnicos. Se apoya en el binario standalone (F5-23). Es el paso decisivo hacia cualquiera-lo-usa (DECISION-0010)   [DONE - launchers/ PACE.bat (Win), pace.command (mac), pace.sh (Linux): double-click opens the menu, no commands. Requires pace-engine installed; the fully Python-free path arrives with the standalone binary (F5-23)]
 
 PHASE_6 ACTIVE GUARDIAN -- PACE stops being passive and starts enforcing (continuity)   [COMPLETE]
   25  pace supersede: enforce "never edit in place" for protected sections   [DONE]
@@ -74,5 +74,5 @@ PHASE_6 ACTIVE GUARDIAN -- PACE stops being passive and starts enforcing (contin
   38  pace capture: record an approved decision in one command, so it never lives only in the chat (REQUEST-0016)   [DONE in 0.5.0]
   39  pace watch: continuous background guardian - warns on drift, breakage or a new version (completes F6-30)   [DONE in 0.5.0]
 
-SUPERSEDED_BY ROADMAP_0.2.28.pdl
+SUPERSEDED_BY ROADMAP_0.2.31.pdl
 END

@@ -174,6 +174,28 @@ def test_doctor_deep_flags_placeholders_on_a_fresh_project():
         assert s_code == 0 and "VALID" in s_out
 
 
+def test_migrate_upgrades_a_downgraded_instance():
+    with tempfile.TemporaryDirectory() as tmp:
+        target = Path(tmp) / "proj"
+        run(["create", str(target), "--name", "P", "--slug", "p", "--org-ref", "org"])
+        inst = target / ".pace" / "INSTANCE.pdl"
+        inst.write_text(inst.read_text(encoding="utf-8").replace("SCHEMA_VERSION 0.2.0", "SCHEMA_VERSION 0.1.0"), encoding="utf-8")
+        code, out = run(["migrate", str(target)])
+        assert code == 0, out
+        assert "migrated 0.1.0 -> 0.2.0" in out
+
+
+def test_create_with_template_scaffolds_stack_files():
+    with tempfile.TemporaryDirectory() as tmp:
+        target = Path(tmp) / "proj"
+        code, out = run(["create", str(target), "--name", "P", "--slug", "p", "--org-ref", "org", "--template", "python"])
+        assert code == 0, out
+        assert (target / "pyproject.toml").is_file()
+        assert (target / "main.py").is_file()
+        d, dout = run(["doctor", str(target)])
+        assert d == 0 and "VALID" in dout
+
+
 if __name__ == "__main__":
     tests = [v for k, v in sorted(globals().items()) if k.startswith("test_")]
     for test in tests:

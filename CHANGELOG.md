@@ -8,6 +8,9 @@ version lines: the engine (`PACE_VERSION`) and the instance Contract
 ## [Unreleased]
 
 ### Added
+- Double-click launchers (`launchers/`): PACE.bat (Windows), pace.command (macOS), pace.sh (Linux) open the guided menu with no typed commands. Requires pace-engine installed; the fully Python-free path arrives with the standalone binary. (roadmap item 51)
+- Stack templates for `pace create`: `--template python|node` scaffolds stack starter files (pyproject/package.json, entry file, .gitignore); the guided flow asks which stack. Templates live in `pace/templates/`. (roadmap item 24)
+- `pace migrate`: migrate a `.pace/` instance to the current schema version (0.1.0 -> 0.2.0 creates the optional rules/ section and bumps SCHEMA_VERSION); idempotent, logs a history entry. (roadmap item 22)
 - `pace doctor --deep`: semantic validation on top of structural — checks that active pointers resolve, supersede chains are intact, mission/vision/roadmap are not placeholders, cited RULE-/DECISION- references exist, and a ROOT_AUTHORITY is named. (roadmap item 21)
 - `pace create --guided`: interactive guided creation of a brand-new project — asks name, **local location**, org and seeds mission/vision/roadmap, mirroring `pace init --guided`. New menu option "Crear un proyecto nuevo desde cero (guiado)". (roadmap item 45)
 - `protocols/GUIDED_CREATION_PROFILE_0.1.0.pdl`: the AI-agnostic profile any AI follows to guide a user to create a project locally, under user instruction. (RULE-0011, DECISION-0008/0009)

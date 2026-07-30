@@ -131,11 +131,11 @@ END
 ## Roadmap
 
 ```
-ROADMAP_VERSION 0.2.27
+ROADMAP_VERSION 0.2.31
 
 STATUS APPROVED
 
-SUPERSEDES ROADMAP_0.2.26.pdl
+SUPERSEDES ROADMAP_0.2.30.pdl
 
 ROADMAP Ordered by execution strategy: each phase first guarantees CONTINUITY (the
 product keeps working and does not forget) before pursuing GROWTH (reaching
@@ -185,10 +185,10 @@ PHASE_4 ADOPTION AND EXPANSION -- more users, sustained growth
 
 PHASE_5 SCALE AND ROBUSTNESS -- grow without breaking continuity
   21  Semantic Doctor (deep validation)   [DONE - pace doctor --deep: active pointers, supersede chains, placeholders, cited RULE/DECISION refs, ROOT_AUTHORITY named; 74 tests green; batched for next release]
-  22  pace migrate (schema-version migrations)
-  23  Standalone binary (PyInstaller)
-  24  Stack templates for pace create
-  51  Experiencia sin terminal: lanzador de doble clic (icono en el escritorio) que abre el menu de pace sin escribir comandos, para usuarios no tecnicos. Se apoya en el binario standalone (F5-23). Es el paso decisivo hacia cualquiera-lo-usa (DECISION-0010)
+  22  pace migrate (schema-version migrations)   [DONE - pace migrate: 0.1.0->0.2.0 (creates optional rules/, bumps SCHEMA_VERSION, logs history); idempotent; 78 tests green; batched]
+  23  Standalone binary (PyInstaller)   [RECIPE READY, NOT built: scripts/pace_entry.py + docs/BUILD_BINARY.md produce dist/pace.exe with one command; the actual Windows .exe must be built and verified ON Windows - cannot cross-compile from this Linux env]
+  24  Stack templates for pace create   [DONE - pace create --template python|node scaffolds stack starter files; guided mode asks the stack; 82 tests green; batched]
+  51  Experiencia sin terminal: lanzador de doble clic (icono en el escritorio) que abre el menu de pace sin escribir comandos, para usuarios no tecnicos. Se apoya en el binario standalone (F5-23). Es el paso decisivo hacia cualquiera-lo-usa (DECISION-0010)   [DONE - launchers/ PACE.bat (Win), pace.command (mac), pace.sh (Linux): double-click opens the menu, no commands. Requires pace-engine installed; the fully Python-free path arrives with the standalone binary (F5-23)]
 
 PHASE_6 ACTIVE GUARDIAN -- PACE stops being passive and starts enforcing (continuity)   [COMPLETE]
   25  pace supersede: enforce "never edit in place" for protected sections   [DONE]
@@ -232,13 +232,9 @@ END
 
 ## Recent continuity notes
 
-The working log has 33 notes. Most recent below; read the
+The working log has 37 notes. Most recent below; read the
 full detail in .pace/memory/persistent/CONTINUITY.md:
 
-- [2026-07-28 17:49] Reconciled F2-10 (Guided Intake): all 8 subtasks complete, so the parent and roadmap item 10 are now DONE (RULE-0005 + RULE-0010, same turn). Delivered by guided/flags + discover(40) + init --owner(41) + ingest(42) + roadmap connector(43). The President caught that the parent was open with all children done.
-- [2026-07-28 17:54] item 16 done: animated terminal demo added to the landing (docs/index.html, pure CSS/JS) typing a real PACE session. Closes F3-16; PHASE 3 COMPLETE. Reconciled F2-10 + F3-16 parents to complete (all subtasks done). Phases 1,2,3,6 complete; remaining Phase 4 (18,19,20) and Phase 5 (21-24). Batch still unreleased toward 0.5.0.
-- [2026-07-28 18:05] item 44 (REQUEST-0020): pace with no arguments opens an interactive guided MENU (Empezar / Ver estado / Guardar nota / Ver memoria / Registrar decision / Comprobar) mapping to existing commands - so anyone can use PACE without memorizing commands. Non-tty still prints help; technical commands unchanged (no 0.4.0 breakage). Landing demo now has copyable command chips + mentions `pace` menu. 69 tests green. Batched toward 0.5.0.
-- [2026-07-28 18:34] item 18 done: protocols/UPSTREAM_CONTRIBUTION_PROTOCOL_0.1.0.pdl - the formal flow for how an improvement discovered in a consumer project reaches PACE (discovery -> proposal as a PACE REQUEST -> AI advises -> owner authorizes -> promote + attribute -> no silent upstream). Enforces RULE-0006/REQUEST-0006. Advances Phase 4. Batched toward 0.5.0.
 - [2026-07-28 19:41] RELEASE 0.5.0 Onboarding prepared: bump + CHANGELOG + RELEASE-0006 + roadmap items marked [DONE in 0.5.0]. Contents: menu, capture, discover, ingest, init --owner, roadmap, watch, upstream protocol, landing demo with menu.
 - [2026-07-28 19:51] 0.5.0 LIVE en PyPI (Onboarding): menu interactivo (pace sin args), init --owner nombra ROOT_AUTHORITY, discover/ingest de multiples fuentes, roadmap connector. Verificado desde instalacion limpia de PyPI. Landing con demo copiable mostrando el menu.
 - [2026-07-28 20:10] item 19 hecho: documentacion de usuario - docs/QUICKSTART.md (menu-first, 2 min) + docs/GUIA.md (guia completa en espanol, por-tareas, para cualquiera). Roadmap 0.2.22. Falta cerrar F4-19 en ClickUp (mismo turno, RULE-0010) y push del usuario.
@@ -247,6 +243,10 @@ full detail in .pace/memory/persistent/CONTINUITY.md:
 - [2026-07-28 23:53] Item 45 CONSTRUIDO: pace create --guided (creacion guiada interactiva) implementado y probado (70 tests verdes). Pregunta nombre, UBICACION LOCAL, org y siembra mision/vision/roadmap, como init --guided. Nueva opcion de menu. CHANGELOG en Unreleased. Sin publicar aun (politica de lotes). Roadmap 0.2.25.
 - [2026-07-29 22:28] Decision-0010 + roadmap item 51: PACE aun exige terminal+Python para arrancar; --guided suaviza preguntas pero no la puerta de entrada. Anadido item 51 (lanzador sin terminal, se apoya en binario F5-23). Reflejado en ClickUp F5-51 (869ebb1tt). Camino: binario -> doble clic -> app/nube.
 - [2026-07-29 22:51] Item 21 CONSTRUIDO: pace doctor --deep (motor semantico) implementado y probado (74 tests verdes). Checa punteros activos, cadenas supersede, placeholders (por texto literal, no parser), refs RULE/DECISION citadas, y ROOT_AUTHORITY. Nuevo motor pace/engines/semantic_doctor.py. Descubrimiento: la deteccion de placeholder debe leer texto crudo porque el contenido real es multilinea. Roadmap 0.2.27. Sin publicar (lotes).
+- [2026-07-29 23:01] F5-22 hecho: pace migrate (migraciones de schema). 0.1.0->2.0.0 crea rules/ opcional + bumpea SCHEMA_VERSION + registra history; idempotente. Motor pace/engines/migrate.py. 78 tests verdes. Roadmap 0.2.28. Lote sin publicar.
+- [2026-07-29 23:05] F5-24 hecho: plantillas de stack. pace create --template python|node andamia archivos base; modo guiado pregunta el stack. templates/ + pace/engines/templates.py + package-data en pyproject. 82 tests verdes. Roadmap 0.2.29. Lote sin publicar.
+- [2026-07-29 23:07] F5-51 hecho: lanzadores de doble clic (launchers/ PACE.bat, pace.command, pace.sh) abren el menu sin comandos. Requiere pace-engine instalado; el sin-Python del todo depende del binario F5-23. Entregado PACE.bat al usuario. Roadmap 0.2.30. Lote sin publicar.
+- [2026-07-29 23:09] F5-23 receta lista (NO compilado): scripts/pace_entry.py + docs/BUILD_BINARY.md; un comando produce dist/pace.exe. Bloqueo: el .exe de Windows debe compilarse/verificarse en Windows, no se puede cross-compile desde este Linux. Tarea ClickUp queda ABIERTA. Roadmap 0.2.31.
 
 ## Where the rest of the memory lives
 
@@ -256,5 +256,5 @@ full detail in .pace/memory/persistent/CONTINUITY.md:
 
 ## Health checks
 
-- WARN: The continuity log has 33 notes - run `pace condense` to archive the old ones (nothing discarded).
+- WARN: The continuity log has 37 notes - run `pace condense` to archive the old ones (nothing discarded).
 

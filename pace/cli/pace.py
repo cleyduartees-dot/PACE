@@ -20,6 +20,7 @@ from pace.engines.hooks import install_hook, uninstall_hook
 from pace.engines.agent_setup import install_all
 from pace.engines.decisions import capture_decision
 from pace.engines.semantic_doctor import semantic_check
+from pace.engines.templates import list_templates, apply_template
 from pace.engines.handoff import generate_handoff, _root_authority, _ensure_agents_pointer
 
 ACTIVE_SECTIONS = [
@@ -205,11 +206,17 @@ def run_guided_create(name=None, slug=None, org_ref=None, path=None):
     roadmap = _prompt("Que esta pendiente? (roadmap - puntos principales)")
     if roadmap:
         fields["roadmap"] = roadmap
+    avail = list_templates()
+    if avail:
+        stack = _prompt(f"Stack inicial ({'/'.join(avail)}/none)", "none").strip().lower()
+        if stack in avail:
+            fields["template"] = stack
     return fields
 
 
 def cmd_create(args) -> int:
     name, slug, org_ref, path = args.name, args.slug, args.org_ref, args.path
+    template = getattr(args, "template", None)
     extra = {}
     if getattr(args, "guided", False):
         fields = run_guided_create(name, slug, org_ref, path)
@@ -217,6 +224,7 @@ def cmd_create(args) -> int:
         slug = fields.pop("slug")
         org_ref = fields.pop("org_ref")
         path = fields.pop("path")
+        template = fields.pop("template", None) or template
         extra = fields
     if not name:
         print("create failed: --name is required (or use --guided)")
@@ -229,6 +237,10 @@ def cmd_create(args) -> int:
     if not path:
         print("create failed: a target path is required (or use --guided)")
         return 1
+    if template and template not in list_templates():
+        available = ", ".join(list_templates()) or "(none)"
+        print(f"create failed: unknown template {template!r}; available: {available}")
+        return 1
     try:
         root = create_project(
             Path(path), name=name, slug=slug, org_ref=org_ref, **extra
@@ -237,9 +249,38 @@ def cmd_create(args) -> int:
         print(f"create failed: {error}")
         return 1
     print(f"created project at {root.parent}")
+    if template:
+        copied = apply_template(root.parent, template)
+        print(f"scaffolded '{template}' template ({len(copied)} file(s))")
     violations = validate_instance(root)
     if violations:
         print("WARNING - the new instance is not structurally valid:")
+        for v in violations:
+            print(f"  - {v}")
+        return 1
+    return 0
+
+
+def cmd_migrate(args) -> int:
+    root = locate_instance(Path(args.path) if args.path else None)
+    if root is None:
+        print("no .pace/ instance found")
+        return 1
+    from pace.engines.migrate import migrate_instance
+    try:
+        frm, to, changes = migrate_instance(root)
+    except ValueError as error:
+        print(f"migrate failed: {error}")
+        return 1
+    if frm == to:
+        print(f"already current - SCHEMA_VERSION {to}, nothing to migrate")
+        return 0
+    print(f"migrated {frm} -> {to}:")
+    for c in changes:
+        print(f"  - {c}")
+    violations = validate_instance(root)
+    if violations:
+        print("WARNING - not structurally valid after migration:")
         for v in violations:
             print(f"  - {v}")
         return 1
@@ -698,7 +739,13 @@ def build_parser() -> argparse.ArgumentParser:
     create.add_argument("--org-ref", dest="org_ref", default=None)
     create.add_argument("--guided", action="store_true",
                         help="interactive guided creation: asks name, LOCAL location, org and seeds mission/vision/roadmap")
+    create.add_argument("--template", default=None,
+                        help="stack starter template to scaffold (e.g. python, node)")
     create.set_defaults(func=cmd_create)
+
+    migrate = subparsers.add_parser("migrate", help="migrate a .pace/ instance to the current schema version")
+    migrate.add_argument("path", nargs="?", default=None)
+    migrate.set_defaults(func=cmd_migrate)
 
     return parser
 
