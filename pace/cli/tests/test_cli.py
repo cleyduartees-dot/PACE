@@ -196,6 +196,17 @@ def test_create_with_template_scaffolds_stack_files():
         assert d == 0 and "VALID" in dout
 
 
+def test_doctor_deep_warn_is_advisory_but_strict_still_fails():
+    with tempfile.TemporaryDirectory() as tmp:
+        target = Path(tmp) / "fresh"
+        run(["create", str(target), "--name", "F", "--slug", "f", "--org-ref", "org"])
+        code, out = run(["doctor", "--deep", "--warn", str(target)])
+        assert code == 0, out
+        assert "advisory" in out
+        strict_code, _ = run(["doctor", "--deep", str(target)])
+        assert strict_code == 1
+
+
 if __name__ == "__main__":
     tests = [v for k, v in sorted(globals().items()) if k.startswith("test_")]
     for test in tests:

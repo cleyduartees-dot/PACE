@@ -119,6 +119,26 @@ def init_instance(
     return root
 
 
+def _seed_founding_rule(root: Path) -> None:
+    """Every project born from PACE inherits its founding governance
+    principle from minute one, so any AI that reads the project learns it
+    without being told (the principle lives in the handoff via rules).
+    Deliberately free of RULE-/DECISION- tokens so the child project's own
+    semantic Doctor does not read them as dangling references."""
+    from pace.engines.rules import add_rule
+    add_rule(
+        root,
+        "PROJECT",
+        "La creacion y operacion de este proyecto puede guiarla cualquier IA, "
+        "siempre bajo instruccion del usuario y siguiendo el perfil que PACE "
+        "define. La IA guia; el usuario instruye y decide; la herramienta corre "
+        "local. Ninguna IA concreta es un requisito: son intercambiables. Este "
+        "proyecto no depende de ningun proveedor de IA.",
+        rationale="Principio fundacional heredado de PACE: la herramienta es "
+        "agnostica a la IA; la soberania esta en el usuario y en el proyecto local.",
+    )
+
+
 def create_project(
     target_dir: Path,
     name: str,
@@ -150,8 +170,10 @@ def create_project(
         encoding="utf-8",
     )
 
-    return init_instance(
+    root = init_instance(
         target_dir, kind="PROJECT", name=name, slug=slug, org_ref=org_ref,
         mission=mission, vision=vision, roadmap=roadmap, sprint=sprint,
         owner=owner, owner_role=owner_role,
     )
+    _seed_founding_rule(root)
+    return root

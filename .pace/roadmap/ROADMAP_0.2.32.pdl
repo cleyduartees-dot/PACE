@@ -1,8 +1,8 @@
-ROADMAP_VERSION 0.2.31
+ROADMAP_VERSION 0.2.32
 
-STATUS SUPERSEDED
+STATUS APPROVED
 
-SUPERSEDES ROADMAP_0.2.30.pdl
+SUPERSEDES ROADMAP_0.2.31.pdl
 
 ROADMAP Ordered by execution strategy: each phase first guarantees CONTINUITY (the
 product keeps working and does not forget) before pursuing GROWTH (reaching
@@ -49,6 +49,7 @@ PHASE_4 ADOPTION AND EXPANSION -- more users, sustained growth
   48  Extended genesis - stack and environment: propose and scaffold language, framework, database and dev environment per the project profile (extends F5-24 stack templates)
   49  Extended genesis - deployment: configure hosting/deploy (Vercel or whichever provider fits the project)
   50  Extended genesis - in-order orchestration: one guided flow that runs 45-49 in the correct order, AI-agnostic and under user instruction, using the user's own accounts (sovereignty preserved) (DECISION-0009)
+  52  pace create seeds the founding independence rule into every new project, so it is AI-agnostic from birth and any AI reads the principle in the handoff (implements DECISION-0008)   [DONE - PROJECT-scope rule seeded on create; 84 tests green; batched]
 
 PHASE_5 SCALE AND ROBUSTNESS -- grow without breaking continuity
   21  Semantic Doctor (deep validation)   [DONE - pace doctor --deep: active pointers, supersede chains, placeholders, cited RULE/DECISION refs, ROOT_AUTHORITY named; 74 tests green; batched for next release]
@@ -74,5 +75,4 @@ PHASE_6 ACTIVE GUARDIAN -- PACE stops being passive and starts enforcing (contin
   38  pace capture: record an approved decision in one command, so it never lives only in the chat (REQUEST-0016)   [DONE in 0.5.0]
   39  pace watch: continuous background guardian - warns on drift, breakage or a new version (completes F6-30)   [DONE in 0.5.0]
 
-SUPERSEDED_BY ROADMAP_0.2.32.pdl
 END

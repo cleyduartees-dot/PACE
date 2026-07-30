@@ -8,6 +8,8 @@ version lines: the engine (`PACE_VERSION`) and the instance Contract
 ## [Unreleased]
 
 ### Added
+- `pace create` now seeds a founding governance rule into every new project (PROJECT scope): it is AI-agnostic from birth and any AI reads the independence principle in the handoff, without being told. Implements DECISION-0008 ("PACE should know it by default"). (roadmap item 52)
+- `pace doctor --deep --warn`: advisory mode that reports semantic issues without failing (structural problems still fail). The pre-commit hook now runs `pace doctor --deep --warn` — catching contract breakage and surfacing semantic drift on every commit, without blocking a not-yet-filled new project. (fulfills the original intent of item F6-29)
 - Double-click launchers (`launchers/`): PACE.bat (Windows), pace.command (macOS), pace.sh (Linux) open the guided menu with no typed commands. Requires pace-engine installed; the fully Python-free path arrives with the standalone binary. (roadmap item 51)
 - Stack templates for `pace create`: `--template python|node` scaffolds stack starter files (pyproject/package.json, entry file, .gitignore); the guided flow asks which stack. Templates live in `pace/templates/`. (roadmap item 24)
 - `pace migrate`: migrate a `.pace/` instance to the current schema version (0.1.0 -> 0.2.0 creates the optional rules/ section and bumps SCHEMA_VERSION); idempotent, logs a history entry. (roadmap item 22)

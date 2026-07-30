@@ -1,6 +1,6 @@
 """Hooks engine - the Active Guardian standing at the git gate.
 
-`pace hook install` writes a pre-commit hook that runs `pace doctor` and
+`pace hook install` writes a pre-commit hook that runs `pace doctor --deep --warn` and
 blocks the commit when the .pace/ instance violates its contract, so an
 AI (or a human) physically cannot commit a broken instance.
 
@@ -21,16 +21,16 @@ HOOK_TEMPLATE = """#!/bin/sh
 {marker}
 echo "[pace] pre-commit: validating .pace/ against its contract..."
 if command -v pace >/dev/null 2>&1; then
-  exec pace doctor
+  exec pace doctor --deep --warn
 fi
 if [ -x "{python}" ] && "{python}" -c "import pace" >/dev/null 2>&1; then
-  exec "{python}" -m pace.cli.pace doctor
+  exec "{python}" -m pace.cli.pace doctor --deep --warn
 fi
 if command -v python >/dev/null 2>&1 && python -c "import pace" >/dev/null 2>&1; then
-  exec python -m pace.cli.pace doctor
+  exec python -m pace.cli.pace doctor --deep --warn
 fi
 if command -v python3 >/dev/null 2>&1 && python3 -c "import pace" >/dev/null 2>&1; then
-  exec python3 -m pace.cli.pace doctor
+  exec python3 -m pace.cli.pace doctor --deep --warn
 fi
 echo "[pace] WARNING: pace not found on this machine - skipping validation."
 echo "[pace] Install it (pip install pace-engine) or re-run: pace hook install"

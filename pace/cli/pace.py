@@ -45,6 +45,11 @@ def cmd_doctor(args) -> int:
     if getattr(args, "deep", False):
         issues = semantic_check(root)
         if issues:
+            if getattr(args, "warn", False):
+                print(f"STRUCTURALLY VALID - {len(issues)} semantic warning(s) (advisory):")
+                for i in issues:
+                    print(f"  - {i}")
+                return 0
             print(f"STRUCTURALLY VALID, but the semantic Doctor found {len(issues)} issue(s):")
             for i in issues:
                 print(f"  - {i}")
@@ -626,6 +631,8 @@ def build_parser() -> argparse.ArgumentParser:
     doctor.add_argument("path", nargs="?", default=None)
     doctor.add_argument("--deep", action="store_true",
                         help="semantic validation: active pointers resolve, supersede chains intact, no placeholders, cited rules/decisions exist, ROOT_AUTHORITY named")
+    doctor.add_argument("--warn", action="store_true",
+                        help="with --deep, report semantic issues as advisory warnings (exit 0); structural problems still fail")
     doctor.set_defaults(func=cmd_doctor)
 
     context = subparsers.add_parser("context", help="print a .pace/ instance's current context")

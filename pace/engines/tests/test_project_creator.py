@@ -80,3 +80,19 @@ if __name__ == "__main__":
         test()
         print(f"PASS {test.__name__}")
     print(f"\n{len(tests)} tests passed")
+
+
+def test_create_project_seeds_the_founding_independence_rule():
+    import tempfile
+    from pathlib import Path as _P
+    from pace.engines.project_creator import create_project
+    from pace.engines.semantic_doctor import semantic_check
+    with tempfile.TemporaryDirectory() as tmp:
+        root = create_project(_P(tmp) / "p", name="P", slug="p", org_ref="org")
+        rules = list((root / "rules").glob("RULE-*.pdl"))
+        assert rules, "a founding rule should be seeded on create"
+        text = " ".join(r.read_text(encoding="utf-8") for r in rules)
+        assert "cualquier IA" in text
+        # The seeded rule must not introduce dangling external references.
+        issues = " ".join(semantic_check(root))
+        assert "cited but has no matching file" not in issues
