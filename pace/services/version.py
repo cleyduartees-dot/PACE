@@ -4,4 +4,4 @@ about instance compatibility). Independent of SCHEMA_VERSION: the engine
 can evolve without the Instance Contract changing, and vice versa.
 """
 
-PACE_VERSION = "0.5.0"
+PACE_VERSION = "0.6.0"

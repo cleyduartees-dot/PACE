@@ -233,11 +233,9 @@ END
 
 ## Recent continuity notes
 
-The working log has 39 notes. Most recent below; read the
+The working log has 41 notes. Most recent below; read the
 full detail in .pace/memory/persistent/CONTINUITY.md:
 
-- [2026-07-28 20:10] item 19 hecho: documentacion de usuario - docs/QUICKSTART.md (menu-first, 2 min) + docs/GUIA.md (guia completa en espanol, por-tareas, para cualquiera). Roadmap 0.2.22. Falta cerrar F4-19 en ClickUp (mismo turno, RULE-0010) y push del usuario.
-- [2026-07-28 22:45] F4-20 hecho: primer proyecto nacido desde PACE = Maria Davila (guardarropa + alquiler de ropa, armario digital, entrega a domicilio, apoyado en tintorerias/lavanderias locales). Creado con pace-engine 0.5.0 publicado; Cley Duarte ROOT_AUTHORITY; mision/vision/roadmap fundacionales; doctor VALID. Entregado como zip. Nombre por confirmar. Roadmap PACE 0.2.23.
 - [2026-07-28 23:44] Vision de creacion guiada ampliada (DECISION-0008/0009, RULE-0011, GUIDED_CREATION_PROFILE): pace create debe ser --guided interactivo como init --guided; y la genesis extendida orquesta EN ORDEN repo GitHub, tablero ClickUp, stack (lenguaje+DB+entorno) y despliegue (Vercel u otro) con cuentas del usuario, agnostico a la IA. Roadmap items 45-50 anadidos. Falta implementar en el motor.
 - [2026-07-28 23:53] Item 45 CONSTRUIDO: pace create --guided (creacion guiada interactiva) implementado y probado (70 tests verdes). Pregunta nombre, UBICACION LOCAL, org y siembra mision/vision/roadmap, como init --guided. Nueva opcion de menu. CHANGELOG en Unreleased. Sin publicar aun (politica de lotes). Roadmap 0.2.25.
 - [2026-07-29 22:28] Decision-0010 + roadmap item 51: PACE aun exige terminal+Python para arrancar; --guided suaviza preguntas pero no la puerta de entrada. Anadido item 51 (lanzador sin terminal, se apoya en binario F5-23). Reflejado en ClickUp F5-51 (869ebb1tt). Camino: binario -> doble clic -> app/nube.
@@ -248,6 +246,8 @@ full detail in .pace/memory/persistent/CONTINUITY.md:
 - [2026-07-29 23:09] F5-23 receta lista (NO compilado): scripts/pace_entry.py + docs/BUILD_BINARY.md; un comando produce dist/pace.exe. Bloqueo: el .exe de Windows debe compilarse/verificarse en Windows, no se puede cross-compile desde este Linux. Tarea ClickUp queda ABIERTA. Roadmap 0.2.31.
 - [2026-07-30 17:00] Hueco cerrado: el git hook (F6-29) prometia doctor --deep pero corria doctor normal (se construyo antes de --deep). Ahora corre 'doctor --deep --warn': nuevo modo advisory que avisa de lo semantico sin bloquear (lo estructural si bloquea), para no trabar el primer commit de un proyecto nuevo con placeholders. 83 tests verdes.
 - [2026-07-30 17:03] Siembra fundacional (DECISION-0008): pace create ahora siembra una regla de PROYECTO con el principio de independencia (agnostico a la IA) en cada proyecto nuevo; aparece en el handoff. Sin tokens RULE-/DECISION- para no crear refs colgantes en el hijo. Roadmap item 52. 84 tests verdes.
+- [2026-07-30 17:08] Release 0.6.0 Genesis preparado: version.py + pyproject a 0.6.0, CHANGELOG cerrado, RELEASE-0007. Contenido: create --guided, doctor --deep (+--warn en el hook), migrate, plantillas, lanzadores, siembra de la regla, receta de binario.
+- [2026-07-30 17:23] 0.6.0 Genesis LIVE en PyPI (https://pypi.org/project/pace-engine/0.6.0/). Verificado desde instalacion limpia: migrate, doctor --deep/--warn, create --guided (pide ruta + siembra regla + template python). Falta que el Presidente haga commit + tag v0.6.0 + push en git.
 
 ## Where the rest of the memory lives
 
@@ -257,5 +257,5 @@ full detail in .pace/memory/persistent/CONTINUITY.md:
 
 ## Health checks
 
-- WARN: The continuity log has 39 notes - run `pace condense` to archive the old ones (nothing discarded).
+- WARN: The continuity log has 41 notes - run `pace condense` to archive the old ones (nothing discarded).
 

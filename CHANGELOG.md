@@ -5,7 +5,7 @@ All notable changes to PACE are documented here. The format loosely follows
 version lines: the engine (`PACE_VERSION`) and the instance Contract
 (`SCHEMA_VERSION`).
 
-## [Unreleased]
+## [0.6.0] — 2026-07-30 — "Genesis"
 
 ### Added
 - `pace create` now seeds a founding governance rule into every new project (PROJECT scope): it is AI-agnostic from birth and any AI reads the independence principle in the handoff, without being told. Implements DECISION-0008 ("PACE should know it by default"). (roadmap item 52)

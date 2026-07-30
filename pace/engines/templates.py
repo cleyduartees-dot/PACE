@@ -27,7 +27,7 @@ def apply_template(target_dir, name) -> list:
         raise ValueError(f"unknown template {name!r}; available: {list_templates()}")
     copied = []
     for item in sorted(src.rglob("*")):
-        if item.is_file():
+        if item.is_file() and "__pycache__" not in item.parts and item.suffix != ".pyc":
             rel = item.relative_to(src)
             dest = Path(target_dir) / rel
             dest.parent.mkdir(parents=True, exist_ok=True)

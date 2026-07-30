@@ -1,0 +1,8 @@
+RELEASE_VERSION 0.6.0
+STATUS RELEASED
+TITLE PACE 0.6.0 - Genesis
+CHANNEL PyPI (pace-engine)
+DATE 2026-07-30
+SUPERSEDES RELEASE-0006-PYPI-0.5.0
+HIGHLIGHTS pace create --guided (interactive guided creation asking the LOCAL location) + Guided Creation Profile (AI-agnostic, RULE-0011) + pace doctor --deep (semantic validation) with advisory --warn used by the pre-commit hook + pace migrate (schema migrations) + stack templates (python/node) + double-click launchers + create seeds the founding independence rule in every new project (DECISION-0008) + standalone binary recipe. Second deliberate batch under DECISION-0003/RULE-0009.
+END
